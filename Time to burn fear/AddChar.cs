@@ -22,17 +22,24 @@ namespace Time_to_burn_fear
 
         }
 
-        private void btnAddFullNamePart_Click(object sender, EventArgs e)
+        private void btnAddChar_Click(object sender, EventArgs e)
         {
-            try
+            if (tBxName.Text == "")
             {
-                Char newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(Race), cBxRace.Text, true), textBox1.Text);
+                MessageBox.Show("Не выбрано имя!");
+                return;
             }
-            catch
+            Char newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
+            DAO.AddStringToFile(newChar.Name + "\t" + newChar.Race, "Chars.txt");
+        }
+
+        private void AddChar_Load(object sender, EventArgs e)
+        {
+            foreach (RaceInRussian race in Enum.GetValues(typeof(Race)))
             {
-                MessageBox.Show("Некорректно указана раса");
+                cBxRace.Items.Add(race );
             }
-          
+            cBxRace.Text = cBxRace.Items[0].ToString();
         }
     }
 } 

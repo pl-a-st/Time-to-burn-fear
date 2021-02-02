@@ -25,6 +25,7 @@ namespace Time_to_burn_fear
         private void button1_Click(object sender, EventArgs e)
         {
             AddChar addChar = new AddChar();
+        
             addChar.ShowDialog();
         }
 

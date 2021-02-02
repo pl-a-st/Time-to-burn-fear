@@ -16,9 +16,18 @@ namespace Time_to_burn_fear
         Gnome,
         Orc,
         Witcher,
-        Elemental
+        Elemental,
     }
-   
+    public enum RaceInRussian
+    {
+        Человек = Race.Human,
+        Эльф = Race.Elf,
+        Гном = Race.Gnome,
+        Орк = Race.Orc,
+        Ведьмак = Race.Witcher,
+        Элементаль = Race.Elemental
+    }
+
     public class Human : Char
     {
         public Human(string name)

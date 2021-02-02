@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAddFullNamePart = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnAddChar = new System.Windows.Forms.Button();
+            this.tBxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cBxRace = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,22 +45,22 @@
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnAddFullNamePart
+            // btnAddChar
             // 
-            this.btnAddFullNamePart.Location = new System.Drawing.Point(148, 28);
-            this.btnAddFullNamePart.Name = "btnAddFullNamePart";
-            this.btnAddFullNamePart.Size = new System.Drawing.Size(75, 23);
-            this.btnAddFullNamePart.TabIndex = 6;
-            this.btnAddFullNamePart.Text = "Добавить";
-            this.btnAddFullNamePart.UseVisualStyleBackColor = true;
-            this.btnAddFullNamePart.Click += new System.EventHandler(this.btnAddFullNamePart_Click);
+            this.btnAddChar.Location = new System.Drawing.Point(148, 28);
+            this.btnAddChar.Name = "btnAddChar";
+            this.btnAddChar.Size = new System.Drawing.Size(75, 23);
+            this.btnAddChar.TabIndex = 6;
+            this.btnAddChar.Text = "Добавить";
+            this.btnAddChar.UseVisualStyleBackColor = true;
+            this.btnAddChar.Click += new System.EventHandler(this.btnAddChar_Click);
             // 
-            // textBox1
+            // tBxName
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(130, 20);
-            this.textBox1.TabIndex = 4;
+            this.tBxName.Location = new System.Drawing.Point(12, 28);
+            this.tBxName.Name = "tBxName";
+            this.tBxName.Size = new System.Drawing.Size(130, 20);
+            this.tBxName.TabIndex = 4;
             // 
             // label1
             // 
@@ -74,6 +74,7 @@
             // 
             // cBxRace
             // 
+            this.cBxRace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRace.FormattingEnabled = true;
             this.cBxRace.Location = new System.Drawing.Point(12, 67);
             this.cBxRace.Name = "cBxRace";
@@ -97,11 +98,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cBxRace);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAddFullNamePart);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnAddChar);
+            this.Controls.Add(this.tBxName);
             this.Controls.Add(this.label1);
             this.Name = "AddChar";
             this.Text = "Мастерская душь";
+            this.Load += new System.EventHandler(this.AddChar_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,10 +112,10 @@
         #endregion
 
         public System.Windows.Forms.Button btnCancel;
-        public System.Windows.Forms.Button btnAddFullNamePart;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Button btnAddChar;
+        public System.Windows.Forms.TextBox tBxName;
         public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cBxRace;
         public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.ComboBox cBxRace;
     }
 }

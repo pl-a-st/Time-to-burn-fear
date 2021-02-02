@@ -18,25 +18,50 @@ namespace Time_to_burn_fear
         Witcher,
         Elemental
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    class RaceParameters
+    {
+        public RaceParameters(Race race, int[] damage, int health, int speed, int luck)
+        {
+            Race = race;
+            Damage = damage;
+            Health = health;
+            Speed = speed;
+            Luck = luck;
+        }
+
+        public Race Race
+        { get; private set; }
+        public int[] Damage
+        { get; private set; }
+        public int Health
+        { get; private set; }
+        public int Speed
+        { get; private set; }
+        public int Luck
+        { get; private set; }
+    }
     class Char
     {
         /// <summary>
         /// Раса персонажа
         /// </summary>
         public Race Race
-        { get; private set;}
+        { get; private set; }
         /// <summary>
         /// Выбрать расу
         /// </summary>
         /// <param name="race"></param>
-        public void  SetRace(Race race)
+        public void SetRace(Race race)
         {
             Race = race;
         }
         /// <summary>
         /// Урон
         /// </summary>
-        public int Damage 
+        public int Damage
         { get; private set; }
         /// <summary>
         /// Устаноть урон
@@ -75,6 +100,23 @@ namespace Time_to_burn_fear
         public void SetName(string name)
         {
             Name = name;
+        }
+        public Char(string name, Race race)
+        {
+            Name = name;
+            Race = race;
+            SetParameters(race);
+        }
+       public static RaceParameters[] RaceParameters=
+        {
+            new RaceParameters(Race.Elf,)
+        }
+        public void SetParameters(Race race)
+        {
+            if (race ==Race.Elf)
+            {
+
+            }
         }
     }
 }

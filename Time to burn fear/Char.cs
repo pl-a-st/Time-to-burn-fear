@@ -18,32 +18,74 @@ namespace Time_to_burn_fear
         Witcher,
         Elemental
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    class RaceParameters
+   
+    public class Human : Char
     {
-        public RaceParameters(Race race, int[] damage, int health, int speed, int luck)
+        public Human(string name)
         {
-            Race = race;
-            Damage = damage;
-            Health = health;
-            Speed = speed;
-            Luck = luck;
+            SetName(name);
+            SetHelth(100);
+            SetDamage(new[] { 5, 6 });
+            SetLuck(10);
+            SetSpeed(5);
         }
-
-        public Race Race
-        { get; private set; }
-        public int[] Damage
-        { get; private set; }
-        public int Health
-        { get; private set; }
-        public int Speed
-        { get; private set; }
-        public int Luck
-        { get; private set; }
     }
-    class Char
+    public class Elf : Char
+    {
+        public Elf(string name)
+        {
+            SetName(name);
+            SetHelth(70);
+            SetDamage(new[] { 2, 4 });
+            SetLuck(30);
+            SetSpeed(9);
+        }
+    }
+    public class Gnome : Char
+    {
+        public Gnome(string name)
+        {
+            SetName(name);
+            SetHelth(150);
+            SetDamage(new[] { 6, 7 });
+            SetLuck(10);
+            SetSpeed(3);
+        }
+    }
+    public class Orc : Char
+    {
+        public Orc(string name)
+        {
+            SetName(name);
+            SetHelth(180);
+            SetDamage(new[] { 7, 10 });
+            SetLuck(5);
+            SetSpeed(2);
+        }
+    }
+    public class Witcher : Char
+    {
+        public Witcher(string name)
+        {
+            SetName(name);
+            SetHelth(120);
+            SetDamage(new[] { 7,7 });
+            SetLuck(5);
+            SetSpeed(10);
+        }
+    }
+    public class Elemental : Char
+    {
+        public Elemental(string name)
+        {
+            SetName(name);
+            SetHelth(200);
+            SetDamage(new[] { 10, 10 });
+            SetLuck(0);
+            SetSpeed(5);
+        }
+    }
+    public class Char
     {
         /// <summary>
         /// Раса персонажа
@@ -61,13 +103,13 @@ namespace Time_to_burn_fear
         /// <summary>
         /// Урон
         /// </summary>
-        public int Damage
+        public int[] Damage
         { get; private set; }
         /// <summary>
         /// Устаноть урон
         /// </summary>
         /// <param name="damage"></param>
-        public void SetDamage(int damage)
+        public void SetDamage(int[] damage)
         {
             Damage = damage;
         }
@@ -101,22 +143,22 @@ namespace Time_to_burn_fear
         {
             Name = name;
         }
-        public Char(string name, Race race)
-        {
-            Name = name;
-            Race = race;
-            SetParameters(race);
-        }
-       public static RaceParameters[] RaceParameters=
-        {
-            new RaceParameters(Race.Elf,)
-        }
-        public void SetParameters(Race race)
-        {
-            if (race ==Race.Elf)
-            {
+        //public Char(string name, Race race)
+        //{
+        //    Name = name;
+        //    Race = race;
+        //    SetParameters(race);
+        //}
 
-            }
-        }
+        //public static Dictionary<Race, RaceParameters> DictionaryRaceParameters = new Dictionary<Race, RaceParameters>()
+        //{
+        //    { Race.Elf, new RaceParameters(new[] { 1, 2 }, 3, 4, 5) },
+        //    { Race.Elemental, new RaceParameters(new[] { 1, 2 }, 3, 4, 5) },
+        // };
+        
+        //public void SetParameters(Race race)
+        //{
+        //    Health = DictionaryRaceParameters[race].Health;
+        //}
     }
 }

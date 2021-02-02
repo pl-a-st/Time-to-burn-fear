@@ -24,7 +24,7 @@ namespace Time_to_burn_fear
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Char Newchar = new Char("Дагобер", Race.Elf);
         }
 
         private void button2_Click(object sender, EventArgs e)

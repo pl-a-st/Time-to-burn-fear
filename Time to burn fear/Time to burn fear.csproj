@@ -52,6 +52,7 @@
     <Compile Include="AddChar.Designer.cs">
       <DependentUpon>AddChar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Calculate.cs" />
     <Compile Include="Char.cs" />
     <Compile Include="FmMain.cs">
       <SubType>Form</SubType>

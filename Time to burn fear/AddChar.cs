@@ -21,5 +21,18 @@ namespace Time_to_burn_fear
         {
 
         }
+
+        private void btnAddFullNamePart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Char newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(Race), cBxRace.Text, true), textBox1.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Некорректно указана раса");
+            }
+          
+        }
     }
-}
+} 

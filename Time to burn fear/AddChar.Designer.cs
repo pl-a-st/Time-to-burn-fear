@@ -32,7 +32,7 @@
             this.btnAddFullNamePart = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cBxRace = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -53,6 +53,7 @@
             this.btnAddFullNamePart.TabIndex = 6;
             this.btnAddFullNamePart.Text = "Добавить";
             this.btnAddFullNamePart.UseVisualStyleBackColor = true;
+            this.btnAddFullNamePart.Click += new System.EventHandler(this.btnAddFullNamePart_Click);
             // 
             // textBox1
             // 
@@ -71,13 +72,13 @@
             this.label1.Text = "Имя";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // comboBox1
+            // cBxRace
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(130, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cBxRace.FormattingEnabled = true;
+            this.cBxRace.Location = new System.Drawing.Point(12, 67);
+            this.cBxRace.Name = "cBxRace";
+            this.cBxRace.Size = new System.Drawing.Size(130, 21);
+            this.cBxRace.TabIndex = 7;
             // 
             // label2
             // 
@@ -94,7 +95,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(252, 107);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cBxRace);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAddFullNamePart);
             this.Controls.Add(this.textBox1);
@@ -112,7 +113,7 @@
         public System.Windows.Forms.Button btnAddFullNamePart;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cBxRace;
         public System.Windows.Forms.Label label2;
     }
 }

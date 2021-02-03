@@ -296,6 +296,7 @@
             // 
             // cBxCharFirst
             // 
+            this.cBxCharFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxCharFirst.FormattingEnabled = true;
             this.cBxCharFirst.Location = new System.Drawing.Point(6, 42);
             this.cBxCharFirst.Name = "cBxCharFirst";
@@ -526,11 +527,13 @@
             // 
             // cBxCharSecond
             // 
+            this.cBxCharSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxCharSecond.FormattingEnabled = true;
             this.cBxCharSecond.Location = new System.Drawing.Point(6, 42);
             this.cBxCharSecond.Name = "cBxCharSecond";
             this.cBxCharSecond.Size = new System.Drawing.Size(169, 21);
             this.cBxCharSecond.TabIndex = 0;
+            this.cBxCharSecond.Tag = "";
             // 
             // btnFait
             // 

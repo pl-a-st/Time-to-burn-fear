@@ -32,6 +32,7 @@ namespace Time_to_burn_fear
             Char newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
             FmMain.ListChar.AddInChars(newChar);
             DAO.AddStringToFile(newChar.Name + "\t" + newChar.Race, Constants.CHARS_FILE_NAME);
+           Close();
         }
 
         private void AddChar_Load(object sender, EventArgs e)

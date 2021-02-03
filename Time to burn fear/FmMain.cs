@@ -33,5 +33,11 @@ namespace Time_to_burn_fear
         {
 
         }
+       static public ListChar ListChar = new ListChar();
+       
+        private void FmMain_Load(object sender, EventArgs e)
+        {
+            ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));
+        }
     }
 }

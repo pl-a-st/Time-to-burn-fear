@@ -552,6 +552,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FmMain";
             this.Text = "Время сразиться";
+            this.Load += new System.EventHandler(this.FmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

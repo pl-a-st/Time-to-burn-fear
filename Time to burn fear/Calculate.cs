@@ -9,6 +9,10 @@ namespace Time_to_burn_fear
 {
     static class Calculate
     {
+        //public static Enum Translation(Enum firstEnum, Enum secondEnum, string strFforTranslation)
+        //{
+        //   return (firstEnum.)Enum.Parse(typeof(secondEnum), strFforTranslation, true)
+        //}
         public static Char ChangeRaceAndCreate(Race race, string name)
         {
             Char newChar = new Char();

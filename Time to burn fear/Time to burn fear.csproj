@@ -53,7 +53,7 @@
       <DependentUpon>AddChar.cs</DependentUpon>
     </Compile>
     <Compile Include="Calculate.cs" />
-    <Compile Include="Char.cs" />
+    <Compile Include="Parameters.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DAO.cs" />
     <Compile Include="FmMain.cs">

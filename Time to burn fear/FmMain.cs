@@ -48,6 +48,10 @@ namespace Time_to_burn_fear
             
             LoadCharToComboBox(cBxCharSecond, ListChar);
             ChooseFirstItemInCBx(this);
+            Headdress headdress = new Headdress(3,2, "Деревянный шлем");
+            Human human = new Human("Дагоберт");
+            //Hero hero = new Hero(human, headdress);
+
         }
         private void ChooseFirstItemInCBx(Control control)
         {
@@ -66,7 +70,7 @@ namespace Time_to_burn_fear
 
         public void LoadCharToComboBox(ComboBox comboBox, ListChar chars)
         {
-            foreach (Char character in chars.Chars)
+            foreach (Parameters character in chars.Chars)
             {
                 LoadCharToComboBox(comboBox, character.Name);
             }

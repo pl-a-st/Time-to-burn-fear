@@ -8,7 +8,7 @@ namespace Time_to_burn_fear
 {
     public class ListChar
     {
-        public List<Char> Chars = new List<Char>();
+        public List<Parameters> Chars = new List<Parameters>();
         
         /// <summary>
         /// Создает и записвыает в лист персонажа по имени и расе
@@ -23,7 +23,7 @@ namespace Time_to_burn_fear
         /// Записвыает в лист созданого персонажа
         /// </summary>
         /// <param name="newChar"> созданный персонаж </param>
-        public void AddInChars(Char newChar)
+        public void AddInChars(Parameters newChar)
         {
             Chars.Add(newChar);
         }

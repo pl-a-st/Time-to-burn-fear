@@ -13,9 +13,9 @@ namespace Time_to_burn_fear
         //{
         //   return (firstEnum.)Enum.Parse(typeof(secondEnum), strFforTranslation, true)
         //}
-        public static Char ChangeRaceAndCreate(Race race, string name)
+        public static Parameters ChangeRaceAndCreate(Race race, string name)
         {
-            Char newChar = new Char();
+            Parameters newChar = new Parameters();
             switch (race)
             {
                 case Race.Human:

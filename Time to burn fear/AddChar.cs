@@ -29,7 +29,7 @@ namespace Time_to_burn_fear
                 MessageBox.Show("Не выбрано имя!");
                 return;
             }
-            Char newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
+            Parameters newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
             FmMain.ListChar.AddInChars(newChar);
             DAO.AddStringToFile(newChar.Name + "\t" + newChar.Race, Constants.CHARS_FILE_NAME);
            Close();

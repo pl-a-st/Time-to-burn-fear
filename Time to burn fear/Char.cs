@@ -27,7 +27,31 @@ namespace Time_to_burn_fear
         Ведьмак = Race.Witcher,
         Элементаль = Race.Elemental
     }
+    public class Dress : Char
+    {
+        public new int Health
+        { get; private set; } = 0;
+        /// <summary>
+        /// Раса персонажа
+        /// </summary>
+        private new Race Race;
+        /// <summary>
+        /// Урон
+        /// </summary>
+        public new int[] Damage
+        { get; private set; } = { 0, 0 };
+        /// <summary>
+        /// Устаноть урон
+        /// </summary>
+        /// <param name="damage"></param>
+        public new int Speed
+        { get; private set; } = 0;
 
+        public new int Luck 
+        { get; private set; } = 0;
+        public new int Protection
+        { get; private set; } = 0;
+    }
     public class Human : Char
     {
         public Human(string name)
@@ -152,22 +176,5 @@ namespace Time_to_burn_fear
         {
             Name = name;
         }
-        //public Char(string name, Race race)
-        //{
-        //    Name = name;
-        //    Race = race;
-        //    SetParameters(race);
-        //}
-
-        //public static Dictionary<Race, RaceParameters> DictionaryRaceParameters = new Dictionary<Race, RaceParameters>()
-        //{
-        //    { Race.Elf, new RaceParameters(new[] { 1, 2 }, 3, 4, 5) },
-        //    { Race.Elemental, new RaceParameters(new[] { 1, 2 }, 3, 4, 5) },
-        // };
-        
-        //public void SetParameters(Race race)
-        //{
-        //    Health = DictionaryRaceParameters[race].Health;
-        //}
     }
 }

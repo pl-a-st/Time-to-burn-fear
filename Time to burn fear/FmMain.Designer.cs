@@ -30,7 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.addChar = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.lBxCharParametersFirst = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.lBxArena = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.addCharSeond = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.lBxCharParametersSecond = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -76,6 +76,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.cBxCharSecond = new System.Windows.Forms.ComboBox();
             this.btnFait = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +84,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.addChar);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.lBxCharParametersFirst);
             this.groupBox1.Controls.Add(this.label9);
@@ -121,15 +122,15 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // addChar
             // 
-            this.button1.Location = new System.Drawing.Point(186, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(19, 23);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "+";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addChar.Location = new System.Drawing.Point(186, 41);
+            this.addChar.Name = "addChar";
+            this.addChar.Size = new System.Drawing.Size(19, 23);
+            this.addChar.TabIndex = 20;
+            this.addChar.Text = "+";
+            this.addChar.UseVisualStyleBackColor = true;
+            this.addChar.Click += new System.EventHandler(this.addChar_Click);
             // 
             // label10
             // 
@@ -159,6 +160,7 @@
             // 
             // cBxRingBFirst
             // 
+            this.cBxRingBFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRingBFirst.FormattingEnabled = true;
             this.cBxRingBFirst.Location = new System.Drawing.Point(6, 407);
             this.cBxRingBFirst.Name = "cBxRingBFirst";
@@ -176,6 +178,7 @@
             // 
             // cBxRingAFirst
             // 
+            this.cBxRingAFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRingAFirst.FormattingEnabled = true;
             this.cBxRingAFirst.Location = new System.Drawing.Point(6, 365);
             this.cBxRingAFirst.Name = "cBxRingAFirst";
@@ -193,6 +196,7 @@
             // 
             // cBxWeaponFirst
             // 
+            this.cBxWeaponFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxWeaponFirst.FormattingEnabled = true;
             this.cBxWeaponFirst.Location = new System.Drawing.Point(6, 323);
             this.cBxWeaponFirst.Name = "cBxWeaponFirst";
@@ -210,6 +214,7 @@
             // 
             // cBxGlovesFirst
             // 
+            this.cBxGlovesFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxGlovesFirst.FormattingEnabled = true;
             this.cBxGlovesFirst.Location = new System.Drawing.Point(6, 281);
             this.cBxGlovesFirst.Name = "cBxGlovesFirst";
@@ -227,6 +232,7 @@
             // 
             // cBxBootsFirst
             // 
+            this.cBxBootsFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxBootsFirst.FormattingEnabled = true;
             this.cBxBootsFirst.Location = new System.Drawing.Point(6, 239);
             this.cBxBootsFirst.Name = "cBxBootsFirst";
@@ -244,6 +250,7 @@
             // 
             // cBxLeggingsFirst
             // 
+            this.cBxLeggingsFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxLeggingsFirst.FormattingEnabled = true;
             this.cBxLeggingsFirst.Location = new System.Drawing.Point(6, 197);
             this.cBxLeggingsFirst.Name = "cBxLeggingsFirst";
@@ -262,6 +269,7 @@
             // 
             // cBxArmorFirst
             // 
+            this.cBxArmorFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxArmorFirst.FormattingEnabled = true;
             this.cBxArmorFirst.Location = new System.Drawing.Point(6, 155);
             this.cBxArmorFirst.Name = "cBxArmorFirst";
@@ -279,6 +287,7 @@
             // 
             // cBxHelmetFirst
             // 
+            this.cBxHelmetFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxHelmetFirst.FormattingEnabled = true;
             this.cBxHelmetFirst.Location = new System.Drawing.Point(6, 113);
             this.cBxHelmetFirst.Name = "cBxHelmetFirst";
@@ -314,7 +323,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.addCharSeond);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.lBxCharParametersSecond);
             this.groupBox2.Controls.Add(this.label12);
@@ -341,6 +350,7 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Сжигающий слабость";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // button3
             // 
@@ -352,15 +362,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button4
+            // addCharSeond
             // 
-            this.button4.Location = new System.Drawing.Point(186, 41);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(19, 23);
-            this.button4.TabIndex = 20;
-            this.button4.Text = "+";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button1_Click);
+            this.addCharSeond.Location = new System.Drawing.Point(186, 41);
+            this.addCharSeond.Name = "addCharSeond";
+            this.addCharSeond.Size = new System.Drawing.Size(19, 23);
+            this.addCharSeond.TabIndex = 20;
+            this.addCharSeond.Text = "+";
+            this.addCharSeond.UseVisualStyleBackColor = true;
+            this.addCharSeond.Click += new System.EventHandler(this.addCharSecond_Click);
             // 
             // label11
             // 
@@ -390,6 +400,7 @@
             // 
             // cBxRingBSecond
             // 
+            this.cBxRingBSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRingBSecond.FormattingEnabled = true;
             this.cBxRingBSecond.Location = new System.Drawing.Point(6, 407);
             this.cBxRingBSecond.Name = "cBxRingBSecond";
@@ -407,6 +418,7 @@
             // 
             // cBxRingASecond
             // 
+            this.cBxRingASecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRingASecond.FormattingEnabled = true;
             this.cBxRingASecond.Location = new System.Drawing.Point(6, 365);
             this.cBxRingASecond.Name = "cBxRingASecond";
@@ -424,6 +436,7 @@
             // 
             // cBxWeaponSecond
             // 
+            this.cBxWeaponSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxWeaponSecond.FormattingEnabled = true;
             this.cBxWeaponSecond.Location = new System.Drawing.Point(6, 323);
             this.cBxWeaponSecond.Name = "cBxWeaponSecond";
@@ -441,6 +454,7 @@
             // 
             // cBxGlovesSecond
             // 
+            this.cBxGlovesSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxGlovesSecond.FormattingEnabled = true;
             this.cBxGlovesSecond.Location = new System.Drawing.Point(6, 281);
             this.cBxGlovesSecond.Name = "cBxGlovesSecond";
@@ -458,6 +472,7 @@
             // 
             // cBxBootsSecond
             // 
+            this.cBxBootsSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxBootsSecond.FormattingEnabled = true;
             this.cBxBootsSecond.Location = new System.Drawing.Point(6, 239);
             this.cBxBootsSecond.Name = "cBxBootsSecond";
@@ -475,6 +490,7 @@
             // 
             // cBxLeggingsSecond
             // 
+            this.cBxLeggingsSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxLeggingsSecond.FormattingEnabled = true;
             this.cBxLeggingsSecond.Location = new System.Drawing.Point(6, 197);
             this.cBxLeggingsSecond.Name = "cBxLeggingsSecond";
@@ -493,6 +509,7 @@
             // 
             // cBxArmorSecond
             // 
+            this.cBxArmorSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxArmorSecond.FormattingEnabled = true;
             this.cBxArmorSecond.Location = new System.Drawing.Point(6, 155);
             this.cBxArmorSecond.Name = "cBxArmorSecond";
@@ -510,6 +527,7 @@
             // 
             // cBxHelmetSecond
             // 
+            this.cBxHelmetSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxHelmetSecond.FormattingEnabled = true;
             this.cBxHelmetSecond.Location = new System.Drawing.Point(6, 113);
             this.cBxHelmetSecond.Name = "cBxHelmetSecond";
@@ -544,11 +562,20 @@
             this.btnFait.Text = "Бой";
             this.btnFait.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(303, 572);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 3;
+            // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.btnFait);
             this.Controls.Add(this.lBxArena);
             this.Controls.Add(this.groupBox2);
@@ -568,7 +595,7 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button addChar;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ListBox lBxCharParametersFirst;
         private System.Windows.Forms.Label label9;
@@ -592,7 +619,7 @@
         private System.Windows.Forms.ListBox lBxArena;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button addCharSeond;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox lBxCharParametersSecond;
         private System.Windows.Forms.Label label12;
@@ -614,6 +641,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cBxCharSecond;
         private System.Windows.Forms.Button btnFait;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

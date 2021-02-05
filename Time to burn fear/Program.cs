@@ -9,6 +9,10 @@ namespace Time_to_burn_fear
     static class Program
     {
         /// <summary>
+        /// Свойство для хранения ссылки на форму
+        /// </summary>
+        public static Form fmMain;
+        /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]

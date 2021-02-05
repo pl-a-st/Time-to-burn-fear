@@ -63,6 +63,7 @@
       <DependentUpon>FmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="ListChar.cs" />
+    <Compile Include="Outfit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddChar.resx">

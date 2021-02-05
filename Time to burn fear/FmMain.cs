@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Time_to_burn_fear
-{
+{   
     public partial class FmMain : Form
     {
         public FmMain()
         {
+            Program.fmMain = this;
             InitializeComponent();
+
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -22,15 +17,18 @@ namespace Time_to_burn_fear
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void addChar_Click(object sender, EventArgs e)
         {
             AddChar addChar = new AddChar();
         
             addChar.ShowDialog();
-            cBxCharFirst.Items.Clear();
-            cBxCharSecond.Items.Clear();
-            LoadCharToComboBox(cBxCharFirst, ListChar);
-            LoadCharToComboBox(cBxCharSecond, ListChar);
+            ClearLoadSelectCharToCombobox(cBxCharFirst);
+        }
+        private void ClearLoadSelectCharToCombobox(ComboBox comboBox)
+        {
+            comboBox.Items.Clear();
+            LoadCharToComboBox(comboBox, ListChar);
+            comboBox.Text = comboBox.Items[comboBox.Items.Count - 1].ToString();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -47,8 +45,25 @@ namespace Time_to_burn_fear
         {
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));
             LoadCharToComboBox(cBxCharFirst, ListChar);
+            
             LoadCharToComboBox(cBxCharSecond, ListChar);
+            ChooseFirstItemInCBx(this);
         }
+        private void ChooseFirstItemInCBx(Control control)
+        {
+            foreach(Control controlPart in control.Controls)
+            {
+                if (controlPart is ComboBox)
+                {
+                    ComboBox comboBox = controlPart as ComboBox;
+                    if (comboBox.Items.Count > 0)
+                        comboBox.Text = comboBox.Items[0].ToString();
+                }
+                if (controlPart.Controls.Count>0)
+                    ChooseFirstItemInCBx(controlPart);
+            }    
+        }
+
         public void LoadCharToComboBox(ComboBox comboBox, ListChar chars)
         {
             foreach (Char character in chars.Chars)
@@ -59,6 +74,18 @@ namespace Time_to_burn_fear
         public void LoadCharToComboBox(ComboBox comboBox, string character)
         {
             comboBox.Items.Add(character.Split('\t')[0]);
+        }
+
+        private void addCharSecond_Click(object sender, EventArgs e)
+        {
+            AddChar addChar = new AddChar();
+            addChar.ShowDialog();
+            ClearLoadSelectCharToCombobox(cBxCharSecond);
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

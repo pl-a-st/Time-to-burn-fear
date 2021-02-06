@@ -76,7 +76,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.cBxCharSecond = new System.Windows.Forms.ComboBox();
             this.btnFait = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -562,25 +562,28 @@
             this.btnFait.Text = "Бой";
             this.btnFait.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // btnCreationobjectThing
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(303, 572);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
+            this.btnCreationobjectThing.Location = new System.Drawing.Point(251, 501);
+            this.btnCreationobjectThing.Name = "btnCreationobjectThing";
+            this.btnCreationobjectThing.Size = new System.Drawing.Size(298, 29);
+            this.btnCreationobjectThing.TabIndex = 2;
+            this.btnCreationobjectThing.Text = "Создать вещь";
+            this.btnCreationobjectThing.UseVisualStyleBackColor = true;
+            this.btnCreationobjectThing.Click += new System.EventHandler(this.btnCreationobjectThing_Click);
             // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
             this.Controls.Add(this.lBxArena);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "FmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Время сразиться";
             this.Load += new System.EventHandler(this.FmMain_Load);
             this.groupBox1.ResumeLayout(false);
@@ -641,7 +644,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cBxCharSecond;
         private System.Windows.Forms.Button btnFait;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnCreationobjectThing;
     }
 }
 

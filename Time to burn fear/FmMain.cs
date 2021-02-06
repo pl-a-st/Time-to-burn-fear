@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Time_to_burn_fear
@@ -9,7 +10,6 @@ namespace Time_to_burn_fear
         {
             Program.fmMain = this;
             InitializeComponent();
-
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -45,13 +45,12 @@ namespace Time_to_burn_fear
         {
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));
             LoadCharToComboBox(cBxCharFirst, ListChar);
-            
             LoadCharToComboBox(cBxCharSecond, ListChar);
             ChooseFirstItemInCBx(this);
+            AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
             Headdress headdress = new Headdress(3,2, "Деревянный шлем");
             Human human = new Human("Дагоберт");
             //Hero hero = new Hero(human, headdress);
-
         }
         private void ChooseFirstItemInCBx(Control control)
         {
@@ -89,7 +88,28 @@ namespace Time_to_burn_fear
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
-
         }
+
+        private void btnCreationobjectThing_Click(object sender, EventArgs e)
+        {
+            AddThing addThing = new AddThing();
+            addThing.ShowDialog();
+        }
+        public List<Dress> ListDress
+        { get; private set; } = new List<Dress>();
+        public void AddListDress (string strDress)
+        {
+            Dress dress = Dress.CreateTypeDressFromString(strDress);
+            ListDress.Add(dress as Dress);
+        }
+        public void AddListDress(List<string> lstDress)
+        {
+            foreach(string strDress in lstDress)
+            {
+                AddListDress(strDress);
+            }
+        }
+        
+
     }
 }

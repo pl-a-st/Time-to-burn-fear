@@ -52,6 +52,12 @@
     <Compile Include="AddChar.Designer.cs">
       <DependentUpon>AddChar.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddThing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddThing.Designer.cs">
+      <DependentUpon>AddThing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Calculate.cs" />
     <Compile Include="Parameters.cs" />
     <Compile Include="Constants.cs" />
@@ -68,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddChar.resx">
       <DependentUpon>AddChar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddThing.resx">
+      <DependentUpon>AddThing.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FmMain.resx">
       <DependentUpon>FmMain.cs</DependentUpon>

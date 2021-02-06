@@ -27,11 +27,32 @@ namespace Time_to_burn_fear
         Ведьмак = Race.Witcher,
         Элементаль = Race.Elemental
     }
+    public enum TypeDress
+    {
+        Weapon,
+        Ring,
+        Gloves,
+        Headdress,
+        Leggings,
+        BodyArmor,
+        Boots
+    }
+    public enum TypeDressInRussian
+    {
+        Оружие = TypeDress.Weapon,
+        Кольцо =  TypeDress.Ring,
+        Перчатки = TypeDress.Gloves,
+        Шлем = TypeDress.Headdress,
+        Поножи = TypeDress.Leggings,
+        Нагрудник = TypeDress.BodyArmor,
+        Обувь = TypeDress.Boots
+    }
     public class Hero : Constitution
     {
-        public Hero(Constitution constitution, Headdress headdress, Boots boots)
+        public Hero(Constitution constitution, Dress weapon, Dress headdress, Dress boots, Dress ring1, Dress ring2, Dress gloves, Dress leggings,
+            Dress bodyArmor)
         {
-            Parameters = new List<Parameters> { constitution, headdress, boots };
+            Parameters = new List<Parameters> {constitution, weapon, headdress, boots, ring1, ring2, gloves, leggings, bodyArmor};
             SetHealth();
         }
         public List<Parameters> Parameters
@@ -41,7 +62,28 @@ namespace Time_to_burn_fear
             foreach (Parameters parameters in Parameters)
             {
                 SetHealth(this.Health + parameters.Health);
+                SetLuck(this.Luck + parameters.Luck);
+                SetProtection(this.Protection + parameters.Protection);
+                SetSpeed(this.Speed + parameters.Speed);
+                SetDamage(new[] { this.Damage[0] + parameters.Damage[0], this.Damage[1] + parameters.Damage[1] });
             }
+        }
+    }
+    public class Weapon : Dress
+    {
+        public Weapon(int damage, string name)
+        {
+            SetDamage(new[] { damage, damage });
+            SetName(name);
+        }
+    }
+    public class Ring : Dress
+    {
+        public Ring(int damage, int luck, string name)
+        {
+            SetLuck(luck);
+            SetDamage(new[] { damage,damage});
+            SetName(name);
         }
     }
     public class Gloves :Dress
@@ -89,8 +131,27 @@ namespace Time_to_burn_fear
         }
     }
     
-    public class Dress : Parameters
+    public class Dress : Parameters 
     {
+        static public Dress CreateTypeDressFromString(string strDress)
+        {
+            string[] dressParts = strDress.Split('\t');
+            if (dressParts[1] == "Weapon")
+                return new Weapon(int.Parse(dressParts[2]), dressParts[0]) as Dress;
+            if (dressParts[1] == "Ring")
+                return new Ring(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+            if (dressParts[1] == "Gloves")
+                return new Gloves(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+            if (dressParts[1] == "Headdress")
+                return new Headdress(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+            if (dressParts[1] == "Leggings")
+                return new Leggings(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+            if (dressParts[1] == "BodyArmor")
+                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+            if (dressParts[1] == "Boots")
+                return new Boots(int.Parse(dressParts[2]), dressParts[0]);
+            return new Dress();
+        }
     }
     public class Human : Constitution
     {

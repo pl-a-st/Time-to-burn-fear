@@ -50,6 +50,7 @@
             this.lBxDress.Name = "lBxDress";
             this.lBxDress.Size = new System.Drawing.Size(122, 82);
             this.lBxDress.TabIndex = 0;
+            this.lBxDress.SelectedValueChanged += new System.EventHandler(this.lBxDress_SelectedValueChanged);
             // 
             // cBxType
             // 
@@ -58,6 +59,7 @@
             this.cBxType.Name = "cBxType";
             this.cBxType.Size = new System.Drawing.Size(121, 21);
             this.cBxType.TabIndex = 1;
+            this.cBxType.SelectedIndexChanged += new System.EventHandler(this.cBxType_SelectedIndexChanged);
             // 
             // tBxName
             // 
@@ -134,6 +136,7 @@
             this.btnChange_Cancel.TabIndex = 5;
             this.btnChange_Cancel.Text = "button1";
             this.btnChange_Cancel.UseVisualStyleBackColor = true;
+            this.btnChange_Cancel.Click += new System.EventHandler(this.btnChange_Cancel_Click);
             // 
             // AddThing
             // 

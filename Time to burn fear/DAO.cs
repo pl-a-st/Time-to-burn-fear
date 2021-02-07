@@ -17,9 +17,32 @@ namespace Time_to_burn_fear
         /// <param name="fileName"> имя файла</param>
         public static void AddStringToFile(string addingString,string fileName)
         {
-            StreamWriter streamWriter = new StreamWriter(fileName, true);
-            streamWriter.WriteLine(addingString);
-            streamWriter.Close();
+            try
+            {
+                StreamWriter streamWriter = new StreamWriter(fileName, true);
+                streamWriter.WriteLine(addingString);
+                streamWriter.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось произвести запись в файл: " + fileName);
+            }
+        }
+        public static void AddListToFile(List<string> list, string fileName)
+        {
+            try
+            {
+                StreamWriter streamWriter = new StreamWriter(fileName, false);
+                foreach(string addingString in list)
+                {
+                    streamWriter.WriteLine(addingString);
+                }
+                streamWriter.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось произвести запись в файл: " + fileName);
+            }
         }
         /// <summary>
         /// Возвращает лист строк созданный из файла
@@ -44,6 +67,27 @@ namespace Time_to_burn_fear
                 MessageBox.Show("Не удалось зачитать файл " + fileName);
             }
             return listString;
+        }
+        public static string GetStringsFromFile (string fileName,int numberString)
+        {
+            string stringFromFile = "";
+            List<string> allStringsFromFile = new List<string>();
+            if (File.Exists(fileName))
+            {
+                StreamReader streamReader = new StreamReader(fileName);
+                
+                while (!streamReader.EndOfStream)
+                {
+                    allStringsFromFile.Add(streamReader.ReadLine());
+                }
+                streamReader.Close();
+                stringFromFile = allStringsFromFile[numberString];
+            }
+            else
+            {
+                MessageBox.Show("Не удалось зачитать файл " + fileName);
+            }
+            return stringFromFile;
         }
     }
 }

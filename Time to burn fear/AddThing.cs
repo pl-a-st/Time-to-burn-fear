@@ -81,6 +81,7 @@ namespace Time_to_burn_fear
             {
                 lBxDress.Items.Add(strDress.Split('\t')[0]);
             }
+            if (lBxDress.Items.Count>0)
             lBxDress.SetSelected(0, true);
         }
 

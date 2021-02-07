@@ -40,17 +40,68 @@ namespace Time_to_burn_fear
         /// Список персонажей
         /// </summary>
         public static ListChar ListChar { get => listChar; set => listChar = value; }
-
+        public Hero HeroFirst
+        { get; private set;}
+       public void SetHeroFirst(Hero heroFirst)
+        {
+            HeroFirst = heroFirst;
+        }
         private void FmMain_Load(object sender, EventArgs e)
         {
-            ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));
+            ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
+            LoadCutToAllDressCombobox(this);
+            LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
             AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
             Headdress headdress = new Headdress(3,2, "Деревянный шлем");
             Human human = new Human("Дагоберт");
             //Hero hero = new Hero(human, headdress);
+        }
+        public void EquipЕheРero(GroupBox groupBox)
+        {
+
+            foreach(Control control in groupBox.Controls)
+            {
+
+            }
+        }
+        public void LoadCutToAllDressCombobox(Control control)
+        {
+            foreach (Control controlPart in control.Controls)
+            {
+                if (controlPart is ComboBox)
+                {
+                    ComboBox comboBox = controlPart as ComboBox;
+                    if (!comboBox.Name.Contains("Char"))
+                        comboBox.Items.Add("Cнято");
+                }
+                if (controlPart.Controls.Count > 0)
+                    LoadCutToAllDressCombobox(controlPart);
+            }
+        }
+        public void LoadAllThingToAllComboBox()
+        {
+            List<string> listDress = DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
+            foreach (string dress in listDress)
+            {
+                LoadThingToComboboxInControl(dress, this);
+            }
+        }
+        public void LoadThingToComboboxInControl(string dress, Control control)
+        {
+            foreach (Control controlPart in control.Controls)
+            {
+                if (controlPart is ComboBox)
+                {
+                    ComboBox comboBox = controlPart as ComboBox;
+                    if (comboBox.Name.Contains(dress.Split('\t')[1]))
+                        comboBox.Items.Add(dress.Split('\t')[0]);
+                }
+                if (controlPart.Controls.Count > 0)
+                    LoadThingToComboboxInControl(dress, controlPart);
+            }
         }
         private void ChooseFirstItemInCBx(Control control)
         {
@@ -60,7 +111,7 @@ namespace Time_to_burn_fear
                 {
                     ComboBox comboBox = controlPart as ComboBox;
                     if (comboBox.Items.Count > 0)
-                        comboBox.Text = comboBox.Items[0].ToString();
+                        comboBox.SelectedItem = comboBox.Items[0].ToString();
                 }
                 if (controlPart.Controls.Count>0)
                     ChooseFirstItemInCBx(controlPart);

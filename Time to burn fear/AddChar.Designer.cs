@@ -102,6 +102,7 @@
             this.Controls.Add(this.tBxName);
             this.Controls.Add(this.label1);
             this.Name = "AddChar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Мастерская душь";
             this.Load += new System.EventHandler(this.AddChar_Load);
             this.ResumeLayout(false);

@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.addChar = new System.Windows.Forms.Button();
+            this.gBxHeroFirst = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lBxCharParametersFirst = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -48,13 +46,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cBxArmorFirst = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cBxHelmetFirst = new System.Windows.Forms.ComboBox();
+            this.cBxHeaddressFirst = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cBxCharFirst = new System.Windows.Forms.ComboBox();
             this.lBxArena = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.addCharSeond = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.lBxCharParametersSecond = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -72,65 +68,44 @@
             this.label18 = new System.Windows.Forms.Label();
             this.cBxArmorSecond = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.cBxHelmetSecond = new System.Windows.Forms.ComboBox();
+            this.cBxHeaddressSecond = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.cBxCharSecond = new System.Windows.Forms.ComboBox();
             this.btnFait = new System.Windows.Forms.Button();
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.btnTavern = new System.Windows.Forms.Button();
+            this.gBxHeroFirst.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gBxHeroFirst
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.addChar);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.lBxCharParametersFirst);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.cBxRingBFirst);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.cBxRingAFirst);
-            this.groupBox1.Controls.Add(this.lblWeapon);
-            this.groupBox1.Controls.Add(this.cBxWeaponFirst);
-            this.groupBox1.Controls.Add(this.lblGloves);
-            this.groupBox1.Controls.Add(this.cBxGlovesFirst);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cBxBootsFirst);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.cBxLeggingsFirst);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cBxArmorFirst);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.cBxHelmetFirst);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cBxCharFirst);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 640);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Сжигающий страх";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(204, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(19, 23);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "-";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // addChar
-            // 
-            this.addChar.Location = new System.Drawing.Point(186, 41);
-            this.addChar.Name = "addChar";
-            this.addChar.Size = new System.Drawing.Size(19, 23);
-            this.addChar.TabIndex = 20;
-            this.addChar.Text = "+";
-            this.addChar.UseVisualStyleBackColor = true;
-            this.addChar.Click += new System.EventHandler(this.addChar_Click);
+            this.gBxHeroFirst.Controls.Add(this.label10);
+            this.gBxHeroFirst.Controls.Add(this.lBxCharParametersFirst);
+            this.gBxHeroFirst.Controls.Add(this.label9);
+            this.gBxHeroFirst.Controls.Add(this.cBxRingBFirst);
+            this.gBxHeroFirst.Controls.Add(this.label8);
+            this.gBxHeroFirst.Controls.Add(this.cBxRingAFirst);
+            this.gBxHeroFirst.Controls.Add(this.lblWeapon);
+            this.gBxHeroFirst.Controls.Add(this.cBxWeaponFirst);
+            this.gBxHeroFirst.Controls.Add(this.lblGloves);
+            this.gBxHeroFirst.Controls.Add(this.cBxGlovesFirst);
+            this.gBxHeroFirst.Controls.Add(this.label5);
+            this.gBxHeroFirst.Controls.Add(this.cBxBootsFirst);
+            this.gBxHeroFirst.Controls.Add(this.label4);
+            this.gBxHeroFirst.Controls.Add(this.cBxLeggingsFirst);
+            this.gBxHeroFirst.Controls.Add(this.label3);
+            this.gBxHeroFirst.Controls.Add(this.cBxArmorFirst);
+            this.gBxHeroFirst.Controls.Add(this.label2);
+            this.gBxHeroFirst.Controls.Add(this.cBxHeaddressFirst);
+            this.gBxHeroFirst.Controls.Add(this.label1);
+            this.gBxHeroFirst.Controls.Add(this.cBxCharFirst);
+            this.gBxHeroFirst.Location = new System.Drawing.Point(12, 12);
+            this.gBxHeroFirst.Name = "gBxHeroFirst";
+            this.gBxHeroFirst.Size = new System.Drawing.Size(233, 640);
+            this.gBxHeroFirst.TabIndex = 0;
+            this.gBxHeroFirst.TabStop = false;
+            this.gBxHeroFirst.Text = "Сжигающий страх";
             // 
             // label10
             // 
@@ -164,7 +139,7 @@
             this.cBxRingBFirst.FormattingEnabled = true;
             this.cBxRingBFirst.Location = new System.Drawing.Point(6, 407);
             this.cBxRingBFirst.Name = "cBxRingBFirst";
-            this.cBxRingBFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxRingBFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxRingBFirst.TabIndex = 16;
             // 
             // label8
@@ -182,7 +157,7 @@
             this.cBxRingAFirst.FormattingEnabled = true;
             this.cBxRingAFirst.Location = new System.Drawing.Point(6, 365);
             this.cBxRingAFirst.Name = "cBxRingAFirst";
-            this.cBxRingAFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxRingAFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxRingAFirst.TabIndex = 14;
             // 
             // lblWeapon
@@ -200,7 +175,7 @@
             this.cBxWeaponFirst.FormattingEnabled = true;
             this.cBxWeaponFirst.Location = new System.Drawing.Point(6, 323);
             this.cBxWeaponFirst.Name = "cBxWeaponFirst";
-            this.cBxWeaponFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxWeaponFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxWeaponFirst.TabIndex = 12;
             // 
             // lblGloves
@@ -218,7 +193,7 @@
             this.cBxGlovesFirst.FormattingEnabled = true;
             this.cBxGlovesFirst.Location = new System.Drawing.Point(6, 281);
             this.cBxGlovesFirst.Name = "cBxGlovesFirst";
-            this.cBxGlovesFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxGlovesFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxGlovesFirst.TabIndex = 10;
             // 
             // label5
@@ -236,7 +211,7 @@
             this.cBxBootsFirst.FormattingEnabled = true;
             this.cBxBootsFirst.Location = new System.Drawing.Point(6, 239);
             this.cBxBootsFirst.Name = "cBxBootsFirst";
-            this.cBxBootsFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxBootsFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxBootsFirst.TabIndex = 8;
             // 
             // label4
@@ -254,7 +229,7 @@
             this.cBxLeggingsFirst.FormattingEnabled = true;
             this.cBxLeggingsFirst.Location = new System.Drawing.Point(6, 197);
             this.cBxLeggingsFirst.Name = "cBxLeggingsFirst";
-            this.cBxLeggingsFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxLeggingsFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxLeggingsFirst.TabIndex = 6;
             // 
             // label3
@@ -273,7 +248,7 @@
             this.cBxArmorFirst.FormattingEnabled = true;
             this.cBxArmorFirst.Location = new System.Drawing.Point(6, 155);
             this.cBxArmorFirst.Name = "cBxArmorFirst";
-            this.cBxArmorFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxArmorFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxArmorFirst.TabIndex = 4;
             // 
             // label2
@@ -285,14 +260,14 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Шлем";
             // 
-            // cBxHelmetFirst
+            // cBxHeaddressFirst
             // 
-            this.cBxHelmetFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBxHelmetFirst.FormattingEnabled = true;
-            this.cBxHelmetFirst.Location = new System.Drawing.Point(6, 113);
-            this.cBxHelmetFirst.Name = "cBxHelmetFirst";
-            this.cBxHelmetFirst.Size = new System.Drawing.Size(169, 21);
-            this.cBxHelmetFirst.TabIndex = 2;
+            this.cBxHeaddressFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBxHeaddressFirst.FormattingEnabled = true;
+            this.cBxHeaddressFirst.Location = new System.Drawing.Point(6, 113);
+            this.cBxHeaddressFirst.Name = "cBxHeaddressFirst";
+            this.cBxHeaddressFirst.Size = new System.Drawing.Size(221, 21);
+            this.cBxHeaddressFirst.TabIndex = 2;
             // 
             // label1
             // 
@@ -309,7 +284,7 @@
             this.cBxCharFirst.FormattingEnabled = true;
             this.cBxCharFirst.Location = new System.Drawing.Point(6, 42);
             this.cBxCharFirst.Name = "cBxCharFirst";
-            this.cBxCharFirst.Size = new System.Drawing.Size(169, 21);
+            this.cBxCharFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxCharFirst.TabIndex = 0;
             // 
             // lBxArena
@@ -322,8 +297,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.addCharSeond);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.lBxCharParametersSecond);
             this.groupBox2.Controls.Add(this.label12);
@@ -341,7 +314,7 @@
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.cBxArmorSecond);
             this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.cBxHelmetSecond);
+            this.groupBox2.Controls.Add(this.cBxHeaddressSecond);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.cBxCharSecond);
             this.groupBox2.Location = new System.Drawing.Point(555, 12);
@@ -351,26 +324,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Сжигающий слабость";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(204, 41);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(19, 23);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "-";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // addCharSeond
-            // 
-            this.addCharSeond.Location = new System.Drawing.Point(186, 41);
-            this.addCharSeond.Name = "addCharSeond";
-            this.addCharSeond.Size = new System.Drawing.Size(19, 23);
-            this.addCharSeond.TabIndex = 20;
-            this.addCharSeond.Text = "+";
-            this.addCharSeond.UseVisualStyleBackColor = true;
-            this.addCharSeond.Click += new System.EventHandler(this.addCharSecond_Click);
             // 
             // label11
             // 
@@ -404,7 +357,7 @@
             this.cBxRingBSecond.FormattingEnabled = true;
             this.cBxRingBSecond.Location = new System.Drawing.Point(6, 407);
             this.cBxRingBSecond.Name = "cBxRingBSecond";
-            this.cBxRingBSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxRingBSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxRingBSecond.TabIndex = 16;
             // 
             // label13
@@ -420,9 +373,9 @@
             // 
             this.cBxRingASecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxRingASecond.FormattingEnabled = true;
-            this.cBxRingASecond.Location = new System.Drawing.Point(6, 365);
+            this.cBxRingASecond.Location = new System.Drawing.Point(6, 366);
             this.cBxRingASecond.Name = "cBxRingASecond";
-            this.cBxRingASecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxRingASecond.Size = new System.Drawing.Size(221, 21);
             this.cBxRingASecond.TabIndex = 14;
             // 
             // label14
@@ -440,7 +393,7 @@
             this.cBxWeaponSecond.FormattingEnabled = true;
             this.cBxWeaponSecond.Location = new System.Drawing.Point(6, 323);
             this.cBxWeaponSecond.Name = "cBxWeaponSecond";
-            this.cBxWeaponSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxWeaponSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxWeaponSecond.TabIndex = 12;
             // 
             // label15
@@ -458,7 +411,7 @@
             this.cBxGlovesSecond.FormattingEnabled = true;
             this.cBxGlovesSecond.Location = new System.Drawing.Point(6, 281);
             this.cBxGlovesSecond.Name = "cBxGlovesSecond";
-            this.cBxGlovesSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxGlovesSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxGlovesSecond.TabIndex = 10;
             // 
             // label16
@@ -476,7 +429,7 @@
             this.cBxBootsSecond.FormattingEnabled = true;
             this.cBxBootsSecond.Location = new System.Drawing.Point(6, 239);
             this.cBxBootsSecond.Name = "cBxBootsSecond";
-            this.cBxBootsSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxBootsSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxBootsSecond.TabIndex = 8;
             // 
             // label17
@@ -494,7 +447,7 @@
             this.cBxLeggingsSecond.FormattingEnabled = true;
             this.cBxLeggingsSecond.Location = new System.Drawing.Point(6, 197);
             this.cBxLeggingsSecond.Name = "cBxLeggingsSecond";
-            this.cBxLeggingsSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxLeggingsSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxLeggingsSecond.TabIndex = 6;
             // 
             // label18
@@ -513,7 +466,7 @@
             this.cBxArmorSecond.FormattingEnabled = true;
             this.cBxArmorSecond.Location = new System.Drawing.Point(6, 155);
             this.cBxArmorSecond.Name = "cBxArmorSecond";
-            this.cBxArmorSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxArmorSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxArmorSecond.TabIndex = 4;
             // 
             // label19
@@ -525,14 +478,14 @@
             this.label19.TabIndex = 3;
             this.label19.Text = "Шлем";
             // 
-            // cBxHelmetSecond
+            // cBxHeaddressSecond
             // 
-            this.cBxHelmetSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBxHelmetSecond.FormattingEnabled = true;
-            this.cBxHelmetSecond.Location = new System.Drawing.Point(6, 113);
-            this.cBxHelmetSecond.Name = "cBxHelmetSecond";
-            this.cBxHelmetSecond.Size = new System.Drawing.Size(169, 21);
-            this.cBxHelmetSecond.TabIndex = 2;
+            this.cBxHeaddressSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBxHeaddressSecond.FormattingEnabled = true;
+            this.cBxHeaddressSecond.Location = new System.Drawing.Point(6, 113);
+            this.cBxHeaddressSecond.Name = "cBxHeaddressSecond";
+            this.cBxHeaddressSecond.Size = new System.Drawing.Size(221, 21);
+            this.cBxHeaddressSecond.TabIndex = 2;
             // 
             // label20
             // 
@@ -549,7 +502,7 @@
             this.cBxCharSecond.FormattingEnabled = true;
             this.cBxCharSecond.Location = new System.Drawing.Point(6, 42);
             this.cBxCharSecond.Name = "cBxCharSecond";
-            this.cBxCharSecond.Size = new System.Drawing.Size(169, 21);
+            this.cBxCharSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxCharSecond.TabIndex = 0;
             this.cBxCharSecond.Tag = "";
             // 
@@ -568,26 +521,37 @@
             this.btnCreationobjectThing.Name = "btnCreationobjectThing";
             this.btnCreationobjectThing.Size = new System.Drawing.Size(298, 29);
             this.btnCreationobjectThing.TabIndex = 2;
-            this.btnCreationobjectThing.Text = "Создать вещь";
+            this.btnCreationobjectThing.Text = "Лаборатория артифактов";
             this.btnCreationobjectThing.UseVisualStyleBackColor = true;
             this.btnCreationobjectThing.Click += new System.EventHandler(this.btnCreationobjectThing_Click);
+            // 
+            // btnTavern
+            // 
+            this.btnTavern.Location = new System.Drawing.Point(251, 536);
+            this.btnTavern.Name = "btnTavern";
+            this.btnTavern.Size = new System.Drawing.Size(298, 29);
+            this.btnTavern.TabIndex = 2;
+            this.btnTavern.Text = "Таверна";
+            this.btnTavern.UseVisualStyleBackColor = true;
+            this.btnTavern.Click += new System.EventHandler(this.addChar_Click);
             // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.btnTavern);
             this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
             this.Controls.Add(this.lBxArena);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gBxHeroFirst);
             this.Name = "FmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Время сразиться";
             this.Load += new System.EventHandler(this.FmMain_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gBxHeroFirst.ResumeLayout(false);
+            this.gBxHeroFirst.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -596,9 +560,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button addChar;
+        private System.Windows.Forms.GroupBox gBxHeroFirst;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ListBox lBxCharParametersFirst;
         private System.Windows.Forms.Label label9;
@@ -616,13 +578,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cBxArmorFirst;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cBxHelmetFirst;
+        private System.Windows.Forms.ComboBox cBxHeaddressFirst;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cBxCharFirst;
         private System.Windows.Forms.ListBox lBxArena;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button addCharSeond;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox lBxCharParametersSecond;
         private System.Windows.Forms.Label label12;
@@ -640,11 +600,12 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox cBxArmorSecond;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.ComboBox cBxHelmetSecond;
+        private System.Windows.Forms.ComboBox cBxHeaddressSecond;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cBxCharSecond;
         private System.Windows.Forms.Button btnFait;
         private System.Windows.Forms.Button btnCreationobjectThing;
+        private System.Windows.Forms.Button btnTavern;
     }
 }
 

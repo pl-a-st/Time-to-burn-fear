@@ -169,12 +169,11 @@ namespace Time_to_burn_fear
 
         private void cBxHeaddressFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Constitution human;
+            
             try
             {
-                human = new Human(SetStringComboboxFile
-                (cBxCharFirst, Constants.CHARS_FILE_NAME).Split('\t')[0]) as Constitution;
-                //SetHeroFirst(new Hero());
+                Hero hero = HeroFirst;
+                SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
             }
             catch (Exception ex)
             {
@@ -182,7 +181,13 @@ namespace Time_to_burn_fear
                 DAO.WriteLog(ex.StackTrace);
             }
         }
-        public Constitution CreateHeroFromGroupBoxe(GroupBox groupBox, out List<Dress> allDress)
+        public Hero CreateHeroFromGroupBox(GroupBox groupBox)
+        {
+            List<Dress> allDress = new List<Dress>();
+            Constitution constitution = CreateConstitutionListDressFromGroupBoxe(groupBox, out allDress);
+            return new Hero(constitution, allDress[0], allDress[1], allDress[2], allDress[3], allDress[4], allDress[5], allDress[6], allDress[7]);
+        }
+        public Constitution CreateConstitutionListDressFromGroupBoxe(GroupBox groupBox, out List<Dress> allDress)
         {
             Constitution constitution = new Constitution();
             allDress = new List<Dress>();
@@ -225,11 +230,13 @@ namespace Time_to_burn_fear
         }
         public Dress CreateDressFromCombobox(ComboBox comboBox)// to do заменить индексы на константы
         {
-            string dressFromFile = SetStringComboboxFile(comboBox, Constants.THING_FILE_NAME);
-            string[] dressArry = dressFromFile.Split('\t');
-            Dress dress =new Dress();
+            string dressFromFile = SetStringItemFile(comboBox, Constants.THING_FILE_NAME);
+            Dress dress = new Dress();
             if (!dressFromFile.Contains("\t"))
                 return dress;
+            string[] dressArry = dressFromFile.Split('\t');
+           
+            
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.BodyArmor)
                 return new BodyArmor(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Boots)
@@ -249,7 +256,22 @@ namespace Time_to_burn_fear
         private string SetStringComboboxFile(ComboBox comboBox,string fileName)
         {
             int numberString = comboBox.SelectedIndex;
-            return DAO.GetStringsFromFile(fileName, numberString);
+            
+            return DAO.GetStringsFromFile(fileName, numberString); 
+        }
+        private string SetStringItemFile(ComboBox comboBox, string fileName)
+        {
+            List<string> listString = DAO.GetListStringsFromFile(fileName);
+            List<string> listStringAfter = new List<string>();
+            foreach (string str in listString)
+            {
+                if (comboBox.Name.Contains(str.Split('\t')[1]) && str.Split('\t')[0] == comboBox.SelectedItem.ToString())
+                    listStringAfter.Add(str);
+               
+            }
+            if (listStringAfter.Count < 1)
+                return "";
+            return listStringAfter[comboBox.SelectedIndex];
         }
     }
 }

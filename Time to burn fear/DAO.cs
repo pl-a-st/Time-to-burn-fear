@@ -89,5 +89,24 @@ namespace Time_to_burn_fear
             }
             return stringFromFile;
         }
+        public static void WriteLog(string message)
+        {
+            DateTime fixedTime = DateTime.Now;
+            string logName = GetLogName(fixedTime);
+            message = fixedTime + "\t" + message;
+            StreamWriter sr = new StreamWriter(logName, true);
+            sr.WriteLine(message);
+            sr.Flush();
+            sr.Close();
+        }
+        public static string GetLogName(DateTime fixedTime)
+        {
+            string fileName = string.Empty;
+            fileName = fixedTime.Year + "_" + fixedTime.Month + "_" + fixedTime.Day +
+                " " + fixedTime.Hour +  ".txt";
+            return fileName;
+        }
+
+
     }
 }

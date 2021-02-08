@@ -268,6 +268,7 @@
             this.cBxHeaddressFirst.Name = "cBxHeaddressFirst";
             this.cBxHeaddressFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxHeaddressFirst.TabIndex = 2;
+            this.cBxHeaddressFirst.SelectedIndexChanged += new System.EventHandler(this.cBxHeaddressFirst_SelectedIndexChanged);
             // 
             // label1
             // 

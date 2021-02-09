@@ -79,6 +79,7 @@ namespace Time_to_burn_fear
             lBxDress.Items.Clear();
             foreach (string strDress in DAO.GetListStringsFromFile(filename))
             {
+                if (strDress!=Constants.CUT_DRESS_NAME)
                 lBxDress.Items.Add(strDress.Split('\t')[0]);
             }
             if (lBxDress.Items.Count>0)
@@ -138,7 +139,7 @@ namespace Time_to_burn_fear
                 List<string> listThing =DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
                 string stringForChange = tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
                     (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value;
-                listThing[lBxDress.SelectedIndex] = stringForChange;
+                listThing[lBxDress.SelectedIndex+1] = stringForChange;
                 int i = 0;
                 foreach (string dress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
                 {
@@ -227,7 +228,9 @@ namespace Time_to_burn_fear
         {
             if (lBxDress.SelectedIndex < 0)
                 return;
-            string stringDress = DAO.GetStringsFromFile(Constants.THING_FILE_NAME, lBxDress.SelectedIndex);
+            if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME)
+                return;
+            string stringDress = DAO.GetStringsFromFile(Constants.THING_FILE_NAME, lBxDress.SelectedIndex+1);
             string[] allDressPararmetrs = stringDress.Split('\t');
             const int NAME_IN_STRING = 0;
             const int TYPE_IN_STRING = 1;

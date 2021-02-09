@@ -69,9 +69,7 @@ namespace Time_to_burn_fear
             LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
             
-            Headdress headdress = new Headdress(3, 2, "Деревянный шлем");
-            Human human = new Human("Дагоберт");
-            //Hero hero = new Hero(human, headdress);
+          
         }
         public void EquipЕheРero(GroupBox groupBox)
         {
@@ -106,7 +104,7 @@ namespace Time_to_burn_fear
         }
         public void LoadAllThingToAllComboBox()
         {
-            ClearDressComboBox(this);
+            
             List<string> listDress =ListDress;
             foreach (string dress in listDress)
             {
@@ -189,6 +187,11 @@ namespace Time_to_burn_fear
         {
             AddThing addThing = new AddThing();
             addThing.ShowDialog();
+            ClearDressComboBox(this);
+            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            LoadAllThingToAllComboBox();
+            ChooseFirstItemInCBx(this);
         }
        
         public void AddListDress(List<string> listDress)
@@ -307,6 +310,7 @@ namespace Time_to_burn_fear
             List<string> listStringAfter = new List<string>();
             foreach (string str in listString)
             {
+                if (comboBox.SelectedIndex>-1)    
                 if (str.Split('\t').Length>1)
                 if (comboBox.Name.Contains(str.Split('\t')[1]) && str.Split('\t')[0] == comboBox.SelectedItem.ToString())
                     listStringAfter.Add(str);

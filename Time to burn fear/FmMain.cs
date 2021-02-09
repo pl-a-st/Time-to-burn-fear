@@ -42,6 +42,12 @@ namespace Time_to_burn_fear
         public static ListChar ListChar { get => listChar; set => listChar = value; }
         public Hero HeroFirst
         { get; private set; }
+        public List<string> ListDress
+        { get; private set; } = new List<string>();
+        public void SetListDress(List<string> listDress)
+        {
+            ListDress =  listDress;
+        }
         public void SetHeroFirst(Hero heroFirst)
         {
             HeroFirst = heroFirst;
@@ -58,10 +64,11 @@ namespace Time_to_burn_fear
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
-           
+            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
             LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
-            AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            
             Headdress headdress = new Headdress(3, 2, "Деревянный шлем");
             Human human = new Human("Дагоберт");
             //Hero hero = new Hero(human, headdress);
@@ -74,11 +81,33 @@ namespace Time_to_burn_fear
 
             }
         }
-        
+        private void DeleteChangedDressComBox()
+        {
+            foreach(Control control in this.Controls)
+            {
+                if (control is ComboBox)
+                {
+                    ComboBox comboBox = control as ComboBox;
+                    foreach (string dress in ListDress)
+                    {
+                        if (dress!= Constants.CUT_DRESS_NAME)
+                        {
+                            if (comboBox.SelectedItem.ToString() == dress.Split('\t')[0] && comboBox.Name.Contains(dress.Split('\t')[1]))
+                            {
+                                ListDress.Remove(dress);
+                            }
+                        }
+                            
+                    }
+                }
+                
+            }
+            
+        }
         public void LoadAllThingToAllComboBox()
         {
             ClearDressComboBox(this);
-            List<string> listDress = DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
+            List<string> listDress =ListDress;
             foreach (string dress in listDress)
             {
                 LoadThingToComboboxInControl(dress, this);
@@ -161,24 +190,21 @@ namespace Time_to_burn_fear
             AddThing addThing = new AddThing();
             addThing.ShowDialog();
         }
-        public List<Dress> ListDress
-        { get; private set; } = new List<Dress>();
-        public void AddListDress(string strDress)
+       
+        public void AddListDress(List<string> listDress)
         {
-            Dress dress = Dress.CreateTypeDressFromString(strDress);
-            ListDress.Add(dress as Dress);
-        }
-        public void AddListDress(List<string> lstDress)
-        {
-            foreach (string strDress in lstDress)
+            foreach (string strDress in listDress)
             {
-                AddListDress(strDress);
+                ListDress.Add(strDress);
             }
         }
 
         private void cBxHeaddressFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
             CreateHeroFirstHeroSecondHero();
+            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            DeleteChangedDressComBox();
+            LoadAllThingToAllComboBox();
         }
         private void CreateHeroFirstHeroSecondHero()
         {
@@ -289,6 +315,14 @@ namespace Time_to_burn_fear
             if (listStringAfter.Count < 1)
                 return "";
             return listStringAfter[comboBox.SelectedIndex-1];
+        }
+
+        private void cBxWeaponFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateHeroFirstHeroSecondHero();
+            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            DeleteChangedDressComBox();
+            LoadAllThingToAllComboBox();
         }
     }
 }

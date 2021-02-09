@@ -177,6 +177,7 @@
             this.cBxWeaponFirst.Name = "cBxWeaponFirst";
             this.cBxWeaponFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxWeaponFirst.TabIndex = 12;
+            this.cBxWeaponFirst.SelectedIndexChanged += new System.EventHandler(this.cBxWeaponFirst_SelectedIndexChanged);
             // 
             // lblGloves
             // 

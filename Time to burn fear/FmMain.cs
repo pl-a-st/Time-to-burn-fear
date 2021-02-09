@@ -54,10 +54,11 @@ namespace Time_to_burn_fear
         }
         private void FmMain_Load(object sender, EventArgs e)
         {
+            DAO.LoadCutToFile();
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
-            LoadCutToAllDressCombobox(this);
+           
             LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
             AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
@@ -73,26 +74,28 @@ namespace Time_to_burn_fear
 
             }
         }
-        public void LoadCutToAllDressCombobox(Control control)
-        {
-            foreach (Control controlPart in control.Controls)
-            {
-                if (controlPart is ComboBox)
-                {
-                    ComboBox comboBox = controlPart as ComboBox;
-                    if (!comboBox.Name.Contains("Char"))
-                        comboBox.Items.Add("Cнято");
-                }
-                if (controlPart.Controls.Count > 0)
-                    LoadCutToAllDressCombobox(controlPart);
-            }
-        }
+        
         public void LoadAllThingToAllComboBox()
         {
+            ClearDressComboBox(this);
             List<string> listDress = DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
             foreach (string dress in listDress)
             {
                 LoadThingToComboboxInControl(dress, this);
+            }
+        }
+        public void ClearDressComboBox(Control control)
+        {
+            foreach (Control newControl in control.Controls)
+            {
+                if (newControl is ComboBox)
+                {
+                    ComboBox comboBox = newControl as ComboBox;
+                    if (comboBox.Name.Contains("Char"))
+                        comboBox.Items.Clear();
+                }
+                if (newControl.Controls.Count > 0)
+                    ClearDressComboBox(newControl);
             }
         }
         public void LoadThingToComboboxInControl(string dress, Control control)
@@ -102,8 +105,14 @@ namespace Time_to_burn_fear
                 if (controlPart is ComboBox)
                 {
                     ComboBox comboBox = controlPart as ComboBox;
+                    if (dress == Constants.CUT_DRESS_NAME)
+                    {
+                        comboBox.Items.Add(Constants.CUT_DRESS_NAME);
+                        return;
+                    }
                     if (comboBox.Name.Contains(dress.Split('\t')[1]))
                         comboBox.Items.Add(dress.Split('\t')[0]);
+                    
                 }
                 if (controlPart.Controls.Count > 0)
                     LoadThingToComboboxInControl(dress, controlPart);
@@ -169,17 +178,22 @@ namespace Time_to_burn_fear
 
         private void cBxHeaddressFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            try
-            {
+            CreateHeroFirstHeroSecondHero();
+        }
+        private void CreateHeroFirstHeroSecondHero()
+        {
+            //try
+            //{
                 Hero hero = HeroFirst;
+                Hero hero2 = HeroSecond;
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
-            }
-            catch (Exception ex)
-            {
-                DAO.WriteLog(ex.Message);
-                DAO.WriteLog(ex.StackTrace);
-            }
+                SetHeroSecond(CreateHeroFromGroupBox(this.gBxHeroSecond));
+            //}
+            //catch (Exception ex)
+            //{
+            //    DAO.WriteLog(ex.Message);
+            //    DAO.WriteLog(ex.StackTrace);
+            //}
         }
         public Hero CreateHeroFromGroupBox(GroupBox groupBox)
         {
@@ -214,6 +228,8 @@ namespace Time_to_burn_fear
         {
             Constitution constitution = new Constitution();
             string constitutionFromFile = SetStringComboboxFile(comboBox, Constants.CHARS_FILE_NAME);
+            if (constitutionFromFile==string.Empty)
+                return constitution;
             if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Human)
                 return new Human(constitutionFromFile.Split('\t')[0]) as Constitution;
             if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Elemental)
@@ -232,7 +248,7 @@ namespace Time_to_burn_fear
         {
             string dressFromFile = SetStringItemFile(comboBox, Constants.THING_FILE_NAME);
             Dress dress = new Dress();
-            if (!dressFromFile.Contains("\t"))
+            if (dressFromFile==string.Empty||!dressFromFile.Contains("\t"))
                 return dress;
             string[] dressArry = dressFromFile.Split('\t');
            
@@ -271,7 +287,7 @@ namespace Time_to_burn_fear
             }
             if (listStringAfter.Count < 1)
                 return "";
-            return listStringAfter[comboBox.SelectedIndex];
+            return listStringAfter[comboBox.SelectedIndex-1];
         }
     }
 }

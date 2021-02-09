@@ -81,6 +81,8 @@ namespace Time_to_burn_fear
                     allStringsFromFile.Add(streamReader.ReadLine());
                 }
                 streamReader.Close();
+                if (numberString < 0)
+                    return string.Empty;
                 stringFromFile = allStringsFromFile[numberString];
             }
             else
@@ -107,6 +109,14 @@ namespace Time_to_burn_fear
             return fileName;
         }
 
-
+        public static void LoadCutToFile()
+        {
+            if (!File.Exists(Constants.THING_FILE_NAME))
+            {
+                StreamWriter streamWriter = new StreamWriter(Constants.THING_FILE_NAME, false);
+                streamWriter.WriteLine(Constants.CUT_DRESS_NAME);
+                streamWriter.Close();
+            }
+        }
     }
 }

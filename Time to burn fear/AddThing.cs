@@ -225,6 +225,8 @@ namespace Time_to_burn_fear
 
         private void lBxDress_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (lBxDress.SelectedIndex < 0)
+                return;
             string stringDress = DAO.GetStringsFromFile(Constants.THING_FILE_NAME, lBxDress.SelectedIndex);
             string[] allDressPararmetrs = stringDress.Split('\t');
             const int NAME_IN_STRING = 0;

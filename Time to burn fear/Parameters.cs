@@ -136,6 +136,8 @@ namespace Time_to_burn_fear
         static public Dress CreateTypeDressFromString(string strDress)
         {
             string[] dressParts = strDress.Split('\t');
+            if (dressParts.Length==1)
+                return new Dress();
             if (dressParts[1] == "Weapon")
                 return new Weapon(int.Parse(dressParts[2]), dressParts[0]) as Dress;
             if (dressParts[1] == "Ring")

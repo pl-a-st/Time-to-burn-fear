@@ -50,7 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cBxCharFirst = new System.Windows.Forms.ComboBox();
             this.lBxArena = new System.Windows.Forms.ListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gBxHeroSecond = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.lBxCharParametersSecond = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.btnTavern = new System.Windows.Forms.Button();
             this.gBxHeroFirst.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gBxHeroSecond.SuspendLayout();
             this.SuspendLayout();
             // 
             // gBxHeroFirst
@@ -296,35 +296,35 @@
             this.lBxArena.Size = new System.Drawing.Size(298, 433);
             this.lBxArena.TabIndex = 1;
             // 
-            // groupBox2
+            // gBxHeroSecond
             // 
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.lBxCharParametersSecond);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.cBxRingBSecond);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.cBxRingASecond);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.cBxWeaponSecond);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.cBxGlovesSecond);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.cBxBootsSecond);
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.cBxLeggingsSecond);
-            this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.cBxArmorSecond);
-            this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.cBxHeaddressSecond);
-            this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.cBxCharSecond);
-            this.groupBox2.Location = new System.Drawing.Point(555, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(233, 640);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Сжигающий слабость";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            this.gBxHeroSecond.Controls.Add(this.label11);
+            this.gBxHeroSecond.Controls.Add(this.lBxCharParametersSecond);
+            this.gBxHeroSecond.Controls.Add(this.label12);
+            this.gBxHeroSecond.Controls.Add(this.cBxRingBSecond);
+            this.gBxHeroSecond.Controls.Add(this.label13);
+            this.gBxHeroSecond.Controls.Add(this.cBxRingASecond);
+            this.gBxHeroSecond.Controls.Add(this.label14);
+            this.gBxHeroSecond.Controls.Add(this.cBxWeaponSecond);
+            this.gBxHeroSecond.Controls.Add(this.label15);
+            this.gBxHeroSecond.Controls.Add(this.cBxGlovesSecond);
+            this.gBxHeroSecond.Controls.Add(this.label16);
+            this.gBxHeroSecond.Controls.Add(this.cBxBootsSecond);
+            this.gBxHeroSecond.Controls.Add(this.label17);
+            this.gBxHeroSecond.Controls.Add(this.cBxLeggingsSecond);
+            this.gBxHeroSecond.Controls.Add(this.label18);
+            this.gBxHeroSecond.Controls.Add(this.cBxArmorSecond);
+            this.gBxHeroSecond.Controls.Add(this.label19);
+            this.gBxHeroSecond.Controls.Add(this.cBxHeaddressSecond);
+            this.gBxHeroSecond.Controls.Add(this.label20);
+            this.gBxHeroSecond.Controls.Add(this.cBxCharSecond);
+            this.gBxHeroSecond.Location = new System.Drawing.Point(555, 12);
+            this.gBxHeroSecond.Name = "gBxHeroSecond";
+            this.gBxHeroSecond.Size = new System.Drawing.Size(233, 640);
+            this.gBxHeroSecond.TabIndex = 0;
+            this.gBxHeroSecond.TabStop = false;
+            this.gBxHeroSecond.Text = "Сжигающий слабость";
+            this.gBxHeroSecond.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // label11
             // 
@@ -545,7 +545,7 @@
             this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
             this.Controls.Add(this.lBxArena);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.gBxHeroSecond);
             this.Controls.Add(this.gBxHeroFirst);
             this.Name = "FmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -553,8 +553,8 @@
             this.Load += new System.EventHandler(this.FmMain_Load);
             this.gBxHeroFirst.ResumeLayout(false);
             this.gBxHeroFirst.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gBxHeroSecond.ResumeLayout(false);
+            this.gBxHeroSecond.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -583,7 +583,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cBxCharFirst;
         private System.Windows.Forms.ListBox lBxArena;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gBxHeroSecond;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListBox lBxCharParametersSecond;
         private System.Windows.Forms.Label label12;

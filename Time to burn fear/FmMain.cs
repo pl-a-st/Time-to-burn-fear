@@ -91,7 +91,7 @@ namespace Time_to_burn_fear
                 if (newControl is ComboBox)
                 {
                     ComboBox comboBox = newControl as ComboBox;
-                    if (comboBox.Name.Contains("Char"))
+                    if (!comboBox.Name.Contains("Char"))
                         comboBox.Items.Clear();
                 }
                 if (newControl.Controls.Count > 0)
@@ -108,8 +108,8 @@ namespace Time_to_burn_fear
                     if (dress == Constants.CUT_DRESS_NAME)
                     {
                         comboBox.Items.Add(Constants.CUT_DRESS_NAME);
-                        return;
                     }
+                    if (dress.Split('\t').Length>1)
                     if (comboBox.Name.Contains(dress.Split('\t')[1]))
                         comboBox.Items.Add(dress.Split('\t')[0]);
                     
@@ -281,6 +281,7 @@ namespace Time_to_burn_fear
             List<string> listStringAfter = new List<string>();
             foreach (string str in listString)
             {
+                if (str.Split('\t').Length>1)
                 if (comboBox.Name.Contains(str.Split('\t')[1]) && str.Split('\t')[0] == comboBox.SelectedItem.ToString())
                     listStringAfter.Add(str);
                

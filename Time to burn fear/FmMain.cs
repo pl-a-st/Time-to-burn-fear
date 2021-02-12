@@ -11,6 +11,14 @@ namespace Time_to_burn_fear
             Program.fmMain = this;
             InitializeComponent();
         }
+        public enum fmMainStatus
+        {
+            Load,
+            Working
+        }
+        public fmMainStatus FmMainStatus
+        { get; private set; } = fmMainStatus.Load;
+
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -28,7 +36,7 @@ namespace Time_to_burn_fear
         {
             comboBox.Items.Clear();
             LoadCharToComboBox(comboBox, ListChar);
-            comboBox.Text = comboBox.Items[comboBox.Items.Count - 1].ToString();
+            comboBox.SelectedIndex = comboBox.Items.Count - 1;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -48,7 +56,11 @@ namespace Time_to_burn_fear
         {
             ListDress =  listDress;
         }
-        public List<(string strDress, bool free)> ListDressTyple
+        public void SetListDress()
+        {
+            ListDress = new List<string>();
+        }
+        public List<(string strDress, bool free)> ListDressTuple
         { get; private set; } = new List<(string strDress, bool free)>();
         
         public void SetHeroFirst(Hero heroFirst)
@@ -67,50 +79,122 @@ namespace Time_to_burn_fear
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
-            LoadAllDressToListTyple();
+            LoadAllDressToListTuple();
             LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
+            FmMainStatus = fmMainStatus.Working;
+            CreateHeroFirstHeroSecondHero();
         }
-        private void LoadAllDressToListTyple()
+        private void LoadAllDressToListTuple()
         {
             foreach(string strDress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
             {
-                ListDressTyple.Add((strDress, true));
+                ListDressTuple.Add((strDress, true));
             }
         }
         
         private void DeleteChangedAddReturnedDressComBox(ComboBox chagedComboBox)
         {
+            if (FmMainStatus == fmMainStatus.Load)
+                return;
+            (string strDress, bool free) typleDress = ("", false);
             if (chagedComboBox.SelectedItem.ToString()!=Constants.CUT_DRESS_NAME)
             {
-                int index = ListDressTyple.FindIndex(x => x == (chagedComboBox.SelectedItem.ToString(), true));
-                ListDressTyple[index] = (ListDressTyple[index].strDress, false);
-
-            }
-            foreach ((string, bool) typleDress in ListDressTyple)
-            {
-
-            }
-            foreach(Control control in this.Controls)
-            {
-                if (control is ComboBox)
+                // в отдельный метод установка False для выбранно элемента одежды
+               
+                for(int i=0; i<ListDressTuple.Count;i++)
                 {
-                    ComboBox comboBox = control as ComboBox;
-                    foreach (string dress in ListDress)
+                    if (ListDressTuple[i].strDress.Split('\t')[0]== chagedComboBox.SelectedItem.ToString()
+                        && chagedComboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[1]))
                     {
-                        if (dress!= Constants.CUT_DRESS_NAME)
-                        {
-                            if (comboBox.SelectedItem.ToString() == dress.Split('\t')[0] && comboBox.Name.Contains(dress.Split('\t')[1]))
-                            {
-                                ListDress.Remove(dress);
-                            }
-                        }
-                            
+                        ListDressTuple[i] = (ListDressTuple[i].strDress, false);
+                        typleDress = ListDressTuple[i];
+                        break;
                     }
                 }
                 
+               
             }
-            
+
+            // в отдельный метод установка true для освободившегося элемента одежды
+            (string strDress, bool free) targetTuple = ("", false);
+            for (int i = 0; i < ListDressTuple.Count; i++)
+            {
+                if (typleDress != ListDressTuple[i] && !typleDress.free)
+                {
+                    for (int j = 0; j < chagedComboBox.Items.Count; j++)
+                    {
+                        if (ListDressTuple[i].free==false&&
+                            ListDressTuple[i].strDress != Constants.CUT_DRESS_NAME
+                            && chagedComboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[1]) &&
+                                ListDressTuple[i].strDress.Split('\t')[0] != chagedComboBox.SelectedItem.ToString() &&
+                            ListDressTuple[i].strDress.Split('\t')[0] == chagedComboBox.Items[j].ToString())
+                        {
+                            ListDressTuple[i] = (ListDressTuple[i].strDress, true);
+                            targetTuple = ListDressTuple[i];
+                        }
+                    }
+                }
+            }
+            DeletItem(chagedComboBox, this); 
+            //в отдельный метод добавить item если true
+           
+                if (targetTuple.free == true && targetTuple.strDress!=Constants.CUT_DRESS_NAME)
+                {
+                    AddIthem(chagedComboBox, this, targetTuple);
+                }
+          
+        }
+        public void AddIthem(ComboBox chagedComboBox, Control control,(string strDress,bool free) dress)
+        {
+            foreach (Control thisControl in control.Controls)
+            {
+                if (thisControl is ComboBox)
+                {
+                    ComboBox comboBox = thisControl as ComboBox;
+                    if (comboBox != chagedComboBox && dress.strDress != Constants.CUT_DRESS_NAME&&
+                        comboBox.Name.Contains(dress.strDress.Split('\t')[1]))
+                    {
+                        comboBox.Items.Add(dress.strDress.Split('\t')[0]);
+                    }
+                }
+                if (thisControl.Controls.Count > 1)
+                    AddIthem(chagedComboBox, thisControl, dress);
+            }
+        }
+        public void DeletItem(ComboBox chagedComboBox, Control control)
+        {
+            foreach (Control thisControl in control.Controls)
+            {
+                if (thisControl is ComboBox)
+                {
+                    ComboBox comboBox = thisControl as ComboBox;
+                    if (comboBox != chagedComboBox)
+                    {
+                        for (int i = 0; i < ListDressTuple.Count; i++)
+                        {
+                            if (ListDressTuple[i].strDress!=Constants.CUT_DRESS_NAME&&
+                                comboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[1]) &&
+                                ListDressTuple[i].free == false&& ListDressTuple[i].strDress!=Constants.CUT_DRESS_NAME)
+                            {
+                                for (int j = 0; j < comboBox.Items.Count; j++)
+                                {
+                                    if (ListDressTuple[i].strDress.Split('\t')[0] == comboBox.Items[j].ToString()&& 
+                                        comboBox.Items[j]!=comboBox.SelectedItem)
+                                        comboBox.Items.Remove(comboBox.Items[j]);
+                                }
+                            }
+
+                        }
+                    }
+
+                }
+                if (thisControl.Controls.Count>1)
+                {
+                    DeletItem(chagedComboBox,thisControl);
+                }
+
+            }
         }
         public void LoadAllThingToAllComboBox()
         {
@@ -193,13 +277,15 @@ namespace Time_to_burn_fear
 
         private void btnCreationobjectThing_Click(object sender, EventArgs e)
         {
+            FmMainStatus = fmMainStatus.Load;
             AddThing addThing = new AddThing();
             addThing.ShowDialog();
             ClearDressComboBox(this);
-            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
-            AddListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
+            SetListDress();
+            LoadAllDressToListTuple();
             LoadAllThingToAllComboBox();
             ChooseFirstItemInCBx(this);
+            FmMainStatus = fmMainStatus.Working;
         }
        
         public void AddListDress(List<string> listDress)
@@ -212,10 +298,9 @@ namespace Time_to_burn_fear
 
         private void cBxHeaddressFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
             CreateHeroFirstHeroSecondHero();
-            SetListDress(DAO.GetListStringsFromFile(Constants.THING_FILE_NAME));
-            DeleteChangedAddReturnedDressComBox();
-            
         }
         private void CreateHeroFirstHeroSecondHero()
         {
@@ -225,12 +310,32 @@ namespace Time_to_burn_fear
                 Hero hero2 = HeroSecond;
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
                 SetHeroSecond(CreateHeroFromGroupBox(this.gBxHeroSecond));
+                LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
+
             //}
             //catch (Exception ex)
             //{
             //    DAO.WriteLog(ex.Message);
             //    DAO.WriteLog(ex.StackTrace);
             //}
+        }
+        private void LoadToLBxParameters(Hero hero,ListBox listBox)
+        {
+            listBox.Items.Clear();
+            Constitution constitution= new Constitution();
+            if (hero.Parameters[0] is Constitution)
+                constitution = hero.Parameters[0] as Constitution;
+            try
+            {
+                listBox.Items.Insert(0, "Герой: " + constitution.Name+" ("+(RaceInRussian)constitution.Race + ")");
+                listBox.Items.Insert(1, "Здоровье: "+'\t' + hero.Health);
+                listBox.Items.Insert(2, "Защита: " + '\t' + '\t' + hero.Protection);
+                listBox.Items.Insert(3, "Атака: " + '\t' + '\t' + hero.Damage[0]+" - "+ hero.Damage[1]);
+                listBox.Items.Insert(4, "Скорость: " + '\t' + hero.Speed);
+                listBox.Items.Insert(5, "Удача: " + '\t' + '\t' + hero.Luck);
+            }
+            catch
+            { }
         }
         public Hero CreateHeroFromGroupBox(GroupBox groupBox)
         {
@@ -321,18 +426,112 @@ namespace Time_to_burn_fear
                 if (comboBox.SelectedIndex>-1)    
                 if (str.Split('\t').Length>1)
                 if (comboBox.Name.Contains(str.Split('\t')[1]) && str.Split('\t')[0] == comboBox.SelectedItem.ToString())
-                    listStringAfter.Add(str);
+                    return str;
                
             }
-            if (listStringAfter.Count < 1)
-                return "";
-            return listStringAfter[comboBox.SelectedIndex-1];
+            return "";
+            
         }
 
         private void cBxWeaponFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
             CreateHeroFirstHeroSecondHero();
-            
+           
+        }
+
+        private void cBxWeaponSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxRingAFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxRingASecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxHeaddressSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxArmorSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxArmorFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxLeggingsFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxLeggingsSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxBootsFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxBootsSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxGlovesFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxGlovesSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxRingBFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxRingBSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeleteChangedAddReturnedDressComBox(sender as ComboBox);
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxCharFirst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateHeroFirstHeroSecondHero();
+        }
+
+        private void cBxCharSecond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CreateHeroFirstHeroSecondHero();
         }
     }
 }

@@ -53,11 +53,11 @@ namespace Time_to_burn_fear
             Dress bodyArmor)
         {
             Parameters = new List<Parameters> {constitution, weapon, headdress, boots, ring1, ring2, gloves, leggings, bodyArmor};
-            SetHealth();
+            SetParameters();
         }
         public List<Parameters> Parameters
         { get; private set; }
-        public void SetHealth()
+        public void SetParameters()
         {
             foreach (Parameters parameters in Parameters)
             {
@@ -164,6 +164,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 5, 6 });
             SetLuck(10);
             SetSpeed(5);
+            SetRace(Race.Human);
         }
     }
     public class Elf : Constitution
@@ -175,6 +176,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 2, 4 });
             SetLuck(30);
             SetSpeed(9);
+            SetRace(Race.Elf);
         }
     }
     public class Gnome : Constitution
@@ -186,6 +188,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 6, 7 });
             SetLuck(10);
             SetSpeed(3);
+            SetRace(Race.Gnome);
         }
     }
     public class Orc : Constitution
@@ -197,6 +200,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 7, 10 });
             SetLuck(5);
             SetSpeed(2);
+            SetRace(Race.Orc);
         }
     }
     public class Witcher : Constitution
@@ -208,6 +212,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 7,7 });
             SetLuck(5);
             SetSpeed(10);
+            SetRace(Race.Witcher);
         }
     }
     public class Elemental : Constitution
@@ -219,6 +224,7 @@ namespace Time_to_burn_fear
             SetDamage(new[] { 10, 10 });
             SetLuck(0);
             SetSpeed(5);
+            SetRace(Race.Elemental);
         }
     }
     public class Constitution: Parameters

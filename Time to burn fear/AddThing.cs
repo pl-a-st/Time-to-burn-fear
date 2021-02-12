@@ -137,22 +137,23 @@ namespace Time_to_burn_fear
                     return;
                 }
                 List<string> listThing =DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
-                string stringForChange = tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
+                string modifyingString = tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
                     (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value;
-                listThing[lBxDress.SelectedIndex+1] = stringForChange;
+                listThing[lBxDress.SelectedIndex+1] = modifyingString;
                 int i = 0;
-                foreach (string dress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
+                foreach (string dress in listThing)
                 {
-                    if(lBxDress.SelectedIndex!=i)
+                    if(dress.Split('\t')[0] == tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
                     {
-                        if (dress.Split('\t')[0] == tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
+                        i++;
+                        if (i>1)
                         {
-                            MessageBox.Show("Вы чувствуете как сгущается воздух вокруг. Пространство не может позволить одинаковые артифакты. " +
+                            MessageBox.Show("Вы чувствуете как сгущается воздух вокруг. Вы понимаете, что пространство не может позволить одинаковые артифакты. " +
                                 "Хлопок, артифакт остался прежним!");
                             return;
                         }
                     }
-                    i++;
+                    
                 }
                 DAO.AddListToFile(listThing, Constants.THING_FILE_NAME);
                 MessageBox.Show("Вы вытираете пол с лица: артифакт успешно изменен!");
@@ -182,8 +183,8 @@ namespace Time_to_burn_fear
             }
             if (cBxType.Text == string.Concat(TypeDressInRussian.Перчатки))
             {
-                lblFirstParametr.Text = "Защита";
-                lblSecondParamer.Text = "Скорость";
+                lblFirstParametr.Text = "Скорость";
+                lblSecondParamer.Text = "Защита";
                 return;
             }
             if (cBxType.Text == string.Concat(TypeDressInRussian.Шлем))

@@ -141,6 +141,7 @@
             this.cBxRingBFirst.Name = "cBxRingBFirst";
             this.cBxRingBFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxRingBFirst.TabIndex = 16;
+            this.cBxRingBFirst.SelectedIndexChanged += new System.EventHandler(this.cBxRingBFirst_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -159,6 +160,7 @@
             this.cBxRingAFirst.Name = "cBxRingAFirst";
             this.cBxRingAFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxRingAFirst.TabIndex = 14;
+            this.cBxRingAFirst.SelectedIndexChanged += new System.EventHandler(this.cBxRingAFirst_SelectedIndexChanged);
             // 
             // lblWeapon
             // 
@@ -196,6 +198,7 @@
             this.cBxGlovesFirst.Name = "cBxGlovesFirst";
             this.cBxGlovesFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxGlovesFirst.TabIndex = 10;
+            this.cBxGlovesFirst.SelectedIndexChanged += new System.EventHandler(this.cBxGlovesFirst_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -214,6 +217,7 @@
             this.cBxBootsFirst.Name = "cBxBootsFirst";
             this.cBxBootsFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxBootsFirst.TabIndex = 8;
+            this.cBxBootsFirst.SelectedIndexChanged += new System.EventHandler(this.cBxBootsFirst_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -232,6 +236,7 @@
             this.cBxLeggingsFirst.Name = "cBxLeggingsFirst";
             this.cBxLeggingsFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxLeggingsFirst.TabIndex = 6;
+            this.cBxLeggingsFirst.SelectedIndexChanged += new System.EventHandler(this.cBxLeggingsFirst_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -251,6 +256,7 @@
             this.cBxArmorFirst.Name = "cBxArmorFirst";
             this.cBxArmorFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxArmorFirst.TabIndex = 4;
+            this.cBxArmorFirst.SelectedIndexChanged += new System.EventHandler(this.cBxArmorFirst_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -288,6 +294,7 @@
             this.cBxCharFirst.Name = "cBxCharFirst";
             this.cBxCharFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxCharFirst.TabIndex = 0;
+            this.cBxCharFirst.SelectedIndexChanged += new System.EventHandler(this.cBxCharFirst_SelectedIndexChanged);
             // 
             // lBxArena
             // 
@@ -361,6 +368,7 @@
             this.cBxRingBSecond.Name = "cBxRingBSecond";
             this.cBxRingBSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxRingBSecond.TabIndex = 16;
+            this.cBxRingBSecond.SelectedIndexChanged += new System.EventHandler(this.cBxRingBSecond_SelectedIndexChanged);
             // 
             // label13
             // 
@@ -379,6 +387,7 @@
             this.cBxRingASecond.Name = "cBxRingASecond";
             this.cBxRingASecond.Size = new System.Drawing.Size(221, 21);
             this.cBxRingASecond.TabIndex = 14;
+            this.cBxRingASecond.SelectedIndexChanged += new System.EventHandler(this.cBxRingASecond_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -397,6 +406,7 @@
             this.cBxWeaponSecond.Name = "cBxWeaponSecond";
             this.cBxWeaponSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxWeaponSecond.TabIndex = 12;
+            this.cBxWeaponSecond.SelectedIndexChanged += new System.EventHandler(this.cBxWeaponSecond_SelectedIndexChanged);
             // 
             // label15
             // 
@@ -415,6 +425,7 @@
             this.cBxGlovesSecond.Name = "cBxGlovesSecond";
             this.cBxGlovesSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxGlovesSecond.TabIndex = 10;
+            this.cBxGlovesSecond.SelectedIndexChanged += new System.EventHandler(this.cBxGlovesSecond_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -433,6 +444,7 @@
             this.cBxBootsSecond.Name = "cBxBootsSecond";
             this.cBxBootsSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxBootsSecond.TabIndex = 8;
+            this.cBxBootsSecond.SelectedIndexChanged += new System.EventHandler(this.cBxBootsSecond_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -451,6 +463,7 @@
             this.cBxLeggingsSecond.Name = "cBxLeggingsSecond";
             this.cBxLeggingsSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxLeggingsSecond.TabIndex = 6;
+            this.cBxLeggingsSecond.SelectedIndexChanged += new System.EventHandler(this.cBxLeggingsSecond_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -470,6 +483,7 @@
             this.cBxArmorSecond.Name = "cBxArmorSecond";
             this.cBxArmorSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxArmorSecond.TabIndex = 4;
+            this.cBxArmorSecond.SelectedIndexChanged += new System.EventHandler(this.cBxArmorSecond_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -488,6 +502,7 @@
             this.cBxHeaddressSecond.Name = "cBxHeaddressSecond";
             this.cBxHeaddressSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxHeaddressSecond.TabIndex = 2;
+            this.cBxHeaddressSecond.SelectedIndexChanged += new System.EventHandler(this.cBxHeaddressSecond_SelectedIndexChanged);
             // 
             // label20
             // 
@@ -507,6 +522,7 @@
             this.cBxCharSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxCharSecond.TabIndex = 0;
             this.cBxCharSecond.Tag = "";
+            this.cBxCharSecond.SelectedIndexChanged += new System.EventHandler(this.cBxCharSecond_SelectedIndexChanged);
             // 
             // btnFait
             // 

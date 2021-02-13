@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gBxHeroFirst = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.lBxCharParametersFirst = new System.Windows.Forms.ListBox();
@@ -74,6 +75,7 @@
             this.btnFait = new System.Windows.Forms.Button();
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.btnTavern = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.gBxHeroFirst.SuspendLayout();
             this.gBxHeroSecond.SuspendLayout();
             this.SuspendLayout();
@@ -301,7 +303,7 @@
             this.lBxArena.FormattingEnabled = true;
             this.lBxArena.Location = new System.Drawing.Point(251, 18);
             this.lBxArena.Name = "lBxArena";
-            this.lBxArena.Size = new System.Drawing.Size(298, 433);
+            this.lBxArena.Size = new System.Drawing.Size(445, 433);
             this.lBxArena.TabIndex = 1;
             // 
             // gBxHeroSecond
@@ -326,7 +328,7 @@
             this.gBxHeroSecond.Controls.Add(this.cBxHeaddressSecond);
             this.gBxHeroSecond.Controls.Add(this.label20);
             this.gBxHeroSecond.Controls.Add(this.cBxCharSecond);
-            this.gBxHeroSecond.Location = new System.Drawing.Point(555, 12);
+            this.gBxHeroSecond.Location = new System.Drawing.Point(702, 12);
             this.gBxHeroSecond.Name = "gBxHeroSecond";
             this.gBxHeroSecond.Size = new System.Drawing.Size(233, 640);
             this.gBxHeroSecond.TabIndex = 0;
@@ -526,16 +528,17 @@
             // 
             // btnFait
             // 
-            this.btnFait.Location = new System.Drawing.Point(251, 466);
+            this.btnFait.Location = new System.Drawing.Point(320, 465);
             this.btnFait.Name = "btnFait";
             this.btnFait.Size = new System.Drawing.Size(298, 29);
             this.btnFait.TabIndex = 2;
             this.btnFait.Text = "Бой";
             this.btnFait.UseVisualStyleBackColor = true;
+            this.btnFait.Click += new System.EventHandler(this.btnFait_Click);
             // 
             // btnCreationobjectThing
             // 
-            this.btnCreationobjectThing.Location = new System.Drawing.Point(251, 501);
+            this.btnCreationobjectThing.Location = new System.Drawing.Point(320, 500);
             this.btnCreationobjectThing.Name = "btnCreationobjectThing";
             this.btnCreationobjectThing.Size = new System.Drawing.Size(298, 29);
             this.btnCreationobjectThing.TabIndex = 2;
@@ -545,7 +548,7 @@
             // 
             // btnTavern
             // 
-            this.btnTavern.Location = new System.Drawing.Point(251, 536);
+            this.btnTavern.Location = new System.Drawing.Point(320, 535);
             this.btnTavern.Name = "btnTavern";
             this.btnTavern.Size = new System.Drawing.Size(298, 29);
             this.btnTavern.TabIndex = 2;
@@ -553,11 +556,16 @@
             this.btnTavern.UseVisualStyleBackColor = true;
             this.btnTavern.Click += new System.EventHandler(this.addChar_Click);
             // 
+            // timer
+            // 
+            this.timer.Interval = 1500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 664);
+            this.ClientSize = new System.Drawing.Size(1000, 664);
             this.Controls.Add(this.btnTavern);
             this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
@@ -624,6 +632,7 @@
         private System.Windows.Forms.Button btnFait;
         private System.Windows.Forms.Button btnCreationobjectThing;
         private System.Windows.Forms.Button btnTavern;
+        private System.Windows.Forms.Timer timer;
     }
 }
 

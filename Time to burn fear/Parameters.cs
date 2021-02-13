@@ -66,7 +66,21 @@ namespace Time_to_burn_fear
                 SetProtection(this.Protection + parameters.Protection);
                 SetSpeed(this.Speed + parameters.Speed);
                 SetDamage(new[] { this.Damage[0] + parameters.Damage[0], this.Damage[1] + parameters.Damage[1] });
+                if (parameters is Constitution)
+                    SetName(parameters.Name);
             }
+        }
+        public int TakeDamageDone(int opponentsProtection)
+        {
+            const int MIN_POSITION_IN_DAMAGE = 0;
+            const int MAX_POSITION_IN_DAMAGE = 1;
+            const int POINT_MIN_PROBABILITY = 1;
+            const int POINT_MAX_PROBABILITY = 101;
+            Random rnd = new Random();
+            int luckRate = 1;
+            if (rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY) <= Luck)
+                luckRate = 2;
+            return luckRate*rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE]+1)- opponentsProtection;
         }
     }
     public class Weapon : Dress

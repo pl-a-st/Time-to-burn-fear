@@ -84,6 +84,7 @@ namespace Time_to_burn_fear
             ChooseFirstItemInCBx(this);
             FmMainStatus = fmMainStatus.Working;
             CreateHeroFirstHeroSecondHero();
+            
         }
         private void LoadAllDressToListTuple()
         {
@@ -224,7 +225,7 @@ namespace Time_to_burn_fear
                 if (controlPart is ComboBox)
                 {
                     ComboBox comboBox = controlPart as ComboBox;
-                    if (dress == Constants.CUT_DRESS_NAME)
+                    if (dress == Constants.CUT_DRESS_NAME && !comboBox.Name.Contains("Char"))
                     {
                         comboBox.Items.Add(Constants.CUT_DRESS_NAME);
                     }
@@ -311,6 +312,7 @@ namespace Time_to_burn_fear
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
                 SetHeroSecond(CreateHeroFromGroupBox(this.gBxHeroSecond));
                 LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
+                LoadToLBxParameters(HeroSecond, this.lBxCharParametersSecond);
 
             //}
             //catch (Exception ex)
@@ -532,6 +534,84 @@ namespace Time_to_burn_fear
         private void cBxCharSecond_SelectedIndexChanged(object sender, EventArgs e)
         {
             CreateHeroFirstHeroSecondHero();
+        }
+
+        private void btnFait_Click(object sender, EventArgs e)
+        {
+            TimerСounter = 0;
+            SpeedCounter = 0;
+            lBxArena.Items.Clear();
+            timer.Start();
+   
+        }
+        private int TimerСounter;
+        private double SpeedCounter=0;
+       private void timer_Tick(object sender, EventArgs e)
+        {
+            TimerСounter++;
+            if (TimerСounter == 1)
+                lBxArena.Items.Add(HeroFirst.Name + ": Твоя душа познает муки в плаемени моей ярости!");
+            if (TimerСounter == 2)
+                lBxArena.Items.Add(HeroSecond.Name + ": Твоя душа сгорит в огне моего гнева!");
+            if (TimerСounter>2)
+            {
+
+                double quotientSpeeds = HeroFirst.Speed / HeroSecond.Speed;
+                const int QUOTIENT_SPEEDS_BOUNDARY = 1;
+                Hero firstAttackHero= HeroFirst;
+                Hero secondAttackHero=HeroSecond;
+                if (quotientSpeeds< QUOTIENT_SPEEDS_BOUNDARY)
+                {
+                    secondAttackHero = HeroFirst;
+                    firstAttackHero = HeroSecond;
+                    quotientSpeeds = HeroSecond.Speed/ HeroFirst.Speed;
+                }
+                SpeedCounter = SpeedCounter + quotientSpeeds;
+                int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection);
+                int damageDoneHeroSecond = secondAttackHero.TakeDamageDone(firstAttackHero.Protection);
+                do
+                {
+                    secondAttackHero.SetHealth(secondAttackHero.Health - damageDoneHeroFirst);
+                    lBxArena.Items.Add(firstAttackHero.Name + " наносит противнику" + damageDoneHeroFirst + " урона." );
+                    if (secondAttackHero.Health<=0)
+                    {
+                        KillHero(secondAttackHero);
+                        ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+                        return;
+                    }
+                    SpeedCounter--;
+                }
+                while (SpeedCounter >= 1);
+                firstAttackHero.SetHealth(firstAttackHero.Health - damageDoneHeroSecond);
+                lBxArena.Items.Add(secondAttackHero.Name + " наносит противнику" + damageDoneHeroSecond + " урона.");
+                if (firstAttackHero.Health <= 0)
+                {
+                    KillHero(secondAttackHero);
+                    ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+                    return;
+                }
+                ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+            }
+        }
+        private void KillHero(Hero hero)
+        {
+            lBxArena.Items.Add(hero.Name + " утер окровавленной рукой пот со лба.");
+            lBxArena.Items.Add("Осознание неизбежности конца пронзило центр его естества.");
+            lBxArena.Items.Add(hero.Name + " упал бездыханно в грязь.");
+            timer.Stop();
+        }
+        private void ReplaceHeroAndLoadListBoxes(Hero firstAttackHero,Hero SecondAttackHero, int quotientSpeedsBoundary)
+        {
+            int quotientSpeeds = HeroFirst.Speed / HeroSecond.Speed;
+            if (quotientSpeeds < quotientSpeedsBoundary)
+            {
+                HeroFirst = SecondAttackHero;
+                HeroSecond = firstAttackHero;
+            }
+           
+            LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
+            LoadToLBxParameters(HeroSecond, this.lBxCharParametersSecond);
+            lBxArena.SelectedIndex = lBxArena.Items.Count - 1;
         }
     }
 }

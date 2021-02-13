@@ -68,6 +68,7 @@ namespace Time_to_burn_fear
             }
             return listString;
         }
+        
         public static string GetStringsFromFile (string fileName,int numberString)
         {
             string stringFromFile = "";

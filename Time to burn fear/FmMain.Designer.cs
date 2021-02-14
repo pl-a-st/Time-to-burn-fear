@@ -76,6 +76,7 @@
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.btnTavern = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.gBxHeroFirst.SuspendLayout();
             this.gBxHeroSecond.SuspendLayout();
             this.SuspendLayout();
@@ -248,7 +249,6 @@
             this.label3.Size = new System.Drawing.Size(34, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Латы";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // cBxArmorFirst
             // 
@@ -475,7 +475,6 @@
             this.label18.Size = new System.Drawing.Size(34, 13);
             this.label18.TabIndex = 5;
             this.label18.Text = "Латы";
-            this.label18.Click += new System.EventHandler(this.label3_Click);
             // 
             // cBxArmorSecond
             // 
@@ -561,11 +560,21 @@
             this.timer.Interval = 1500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(251, 595);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "label6";
+            // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 664);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnTavern);
             this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
@@ -581,6 +590,7 @@
             this.gBxHeroSecond.ResumeLayout(false);
             this.gBxHeroSecond.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -633,6 +643,7 @@
         private System.Windows.Forms.Button btnCreationobjectThing;
         private System.Windows.Forms.Button btnTavern;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label label6;
     }
 }
 

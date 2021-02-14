@@ -6,50 +6,77 @@ namespace Time_to_burn_fear
 {
     public partial class FmMain : Form
     {
+        /// <summary>
+        /// Главное меню. Обращаться можно через Program.fmMain
+        /// </summary>
         public FmMain()
         {
             Program.fmMain = this;
             InitializeComponent();
         }
+        /// <summary>
+        /// Перечисление для организации состояния главной формы
+        /// </summary>
         public enum fmMainStatus
         {
             Load,
             Working
         }
+        /// <summary>
+        /// состояние главной формы: загружаются элементы - Load (по умолчанию), рабочий - Working
+        /// </summary>
         public fmMainStatus FmMainStatus
         { get; private set; } = fmMainStatus.Load;
-
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Открывает окно создания персонажа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addChar_Click(object sender, EventArgs e)
         {
             AddChar addChar = new AddChar();
-
             addChar.ShowDialog();
             ClearLoadSelectCharToCombobox(cBxCharFirst);
         }
+        /// <summary>
+        /// Загружает в comboBox список персонажей 
+        /// </summary>
+        /// <param name="comboBox"></param>
         private void ClearLoadSelectCharToCombobox(ComboBox comboBox)
         {
             comboBox.Items.Clear();
             LoadCharToComboBox(comboBox, ListChar);
             comboBox.SelectedIndex = comboBox.Items.Count - 1;
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Список персонажей
+        /// </summary>
         private static ListChar listChar = new ListChar();
         /// <summary>
         /// Список персонажей
         /// </summary>
-        public static ListChar ListChar { get => listChar; set => listChar = value; }
+        public static ListChar ListChar 
+        { get => listChar; set => listChar = value; }
+        /// <summary>
+        /// Герой из клана сжигающих страх
+        /// </summary>
         public Hero HeroFirst
         { get; private set; }
+        /// <summary>
+        /// Назначить героя адептом клана сигающих страх
+        /// </summary>
+        /// <param name="heroFirst"></param>
+        public void SetHeroFirst(Hero heroFirst)
+        {
+            HeroFirst = heroFirst;
+        }
+
+        public Hero HeroSecond
+        { get; private set; }
+        public void SetHeroSecond(Hero heroSecond)
+        {
+            HeroSecond = heroSecond;
+        }
         public List<string> ListDress
         { get; private set; } = new List<string>();
         public void SetListDress(List<string> listDress)
@@ -63,15 +90,10 @@ namespace Time_to_burn_fear
         public List<(string strDress, bool free)> ListDressTuple
         { get; private set; } = new List<(string strDress, bool free)>();
         
-        public void SetHeroFirst(Hero heroFirst)
+       
+        public  Label SetLable6()
         {
-            HeroFirst = heroFirst;
-        }
-        public Hero HeroSecond
-        { get; private set; }
-        public void SetHeroSecond(Hero heroSecond)
-        {
-            HeroSecond = heroSecond;
+            return label6;
         }
         private void FmMain_Load(object sender, EventArgs e)
         {
@@ -84,7 +106,6 @@ namespace Time_to_burn_fear
             ChooseFirstItemInCBx(this);
             FmMainStatus = fmMainStatus.Working;
             CreateHeroFirstHeroSecondHero();
-            
         }
         private void LoadAllDressToListTuple()
         {
@@ -535,9 +556,35 @@ namespace Time_to_burn_fear
         {
             CreateHeroFirstHeroSecondHero();
         }
-
+        private void EnabledFalseAllCombobox(Control thisControl)
+        {
+            foreach (Control control in thisControl.Controls)
+            {
+                if(control is ComboBox)
+                {
+                    ComboBox comboBox = control as ComboBox;
+                    comboBox.Enabled=false; 
+                }
+                if (control.Controls.Count > 1)
+                    EnabledFalseAllCombobox(control);
+            }
+        }
+        private void EnabledTrueAllCombobox(Control thisControl)
+        {
+            foreach (Control control in thisControl.Controls)
+            {
+                if (control is ComboBox)
+                {
+                    ComboBox comboBox = control as ComboBox;
+                    comboBox.Enabled = true;
+                }
+                if (control.Controls.Count > 1)
+                    EnabledTrueAllCombobox(control);
+            }
+        }
         private void btnFait_Click(object sender, EventArgs e)
         {
+            EnabledFalseAllCombobox(this);
             TimerСounter = 0;
             SpeedCounter = 0;
             lBxArena.Items.Clear();
@@ -567,8 +614,11 @@ namespace Time_to_burn_fear
                     quotientSpeeds = HeroSecond.Speed/ HeroFirst.Speed;
                 }
                 SpeedCounter = SpeedCounter + quotientSpeeds;
-                int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection);
-                int damageDoneHeroSecond = secondAttackHero.TakeDamageDone(firstAttackHero.Protection);
+                int rndToLuck;
+                int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection, out rndToLuck);
+                label6.Text = label6.Text + rndToLuck + " ";
+                int damageDoneHeroSecond = firstAttackHero.TakeDamageDone(firstAttackHero.Protection, out rndToLuck);
+                label6.Text = label6.Text + rndToLuck + " ";
                 do
                 {
                     secondAttackHero.SetHealth(secondAttackHero.Health - damageDoneHeroFirst);
@@ -577,6 +627,7 @@ namespace Time_to_burn_fear
                     {
                         KillHero(secondAttackHero);
                         ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+                        EnabledTrueAllCombobox(this);
                         return;
                     }
                     SpeedCounter--;
@@ -588,6 +639,7 @@ namespace Time_to_burn_fear
                 {
                     KillHero(secondAttackHero);
                     ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+                    EnabledTrueAllCombobox(this);
                     return;
                 }
                 ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);

@@ -70,17 +70,21 @@ namespace Time_to_burn_fear
                     SetName(parameters.Name);
             }
         }
-        public int TakeDamageDone(int opponentsProtection)
+        public Random rnd
+        { get; private set; } = new Random();
+        public int TakeDamageDone(int opponentsProtection, out int rndToLuck)
         {
             const int MIN_POSITION_IN_DAMAGE = 0;
             const int MAX_POSITION_IN_DAMAGE = 1;
             const int POINT_MIN_PROBABILITY = 1;
             const int POINT_MAX_PROBABILITY = 101;
-            Random rnd = new Random();
             int luckRate = 1;
-            if (rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY) <= Luck)
+            rndToLuck = rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY);
+
+            if (rndToLuck <= Luck)
                 luckRate = 2;
-            return luckRate*rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE]+1)- opponentsProtection;
+            int rndToDamage = rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE] + 1);
+            return luckRate* rndToDamage - opponentsProtection;
         }
     }
     public class Weapon : Dress

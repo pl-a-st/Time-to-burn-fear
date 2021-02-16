@@ -11,5 +11,6 @@ namespace Time_to_burn_fear
         public const string CHARS_FILE_NAME = "Chars.txt";
         public const string THING_FILE_NAME = "Thing.txt";
         public const string CUT_DRESS_NAME = "Снято";
+        public const string HERO_FILE_NAME = "Heroes.txt";
     }
 }

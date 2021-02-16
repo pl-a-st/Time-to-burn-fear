@@ -10,6 +10,13 @@ namespace Time_to_burn_fear
 {
     public class DAO
     {
+       public enum cocorrectness
+        {
+            Correctly,
+            Incorrect
+        }
+        public cocorrectness Cocorrectness
+        { get; private set; } = cocorrectness.Correctly;
         /// <summary>
         /// Записать строку в файл
         /// </summary>

@@ -76,13 +76,18 @@
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.btnTavern = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.label6 = new System.Windows.Forms.Label();
+            this.btnSaveHeroFirstAndDress = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.gBxHeroFirst.SuspendLayout();
             this.gBxHeroSecond.SuspendLayout();
             this.SuspendLayout();
             // 
             // gBxHeroFirst
             // 
+            this.gBxHeroFirst.Controls.Add(this.button2);
+            this.gBxHeroFirst.Controls.Add(this.btnSaveHeroFirstAndDress);
             this.gBxHeroFirst.Controls.Add(this.label10);
             this.gBxHeroFirst.Controls.Add(this.lBxCharParametersFirst);
             this.gBxHeroFirst.Controls.Add(this.label9);
@@ -282,7 +287,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 26);
+            this.label1.Location = new System.Drawing.Point(6, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 1;
@@ -292,7 +297,7 @@
             // 
             this.cBxCharFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxCharFirst.FormattingEnabled = true;
-            this.cBxCharFirst.Location = new System.Drawing.Point(6, 42);
+            this.cBxCharFirst.Location = new System.Drawing.Point(6, 31);
             this.cBxCharFirst.Name = "cBxCharFirst";
             this.cBxCharFirst.Size = new System.Drawing.Size(221, 21);
             this.cBxCharFirst.TabIndex = 0;
@@ -308,7 +313,9 @@
             // 
             // gBxHeroSecond
             // 
+            this.gBxHeroSecond.Controls.Add(this.button3);
             this.gBxHeroSecond.Controls.Add(this.label11);
+            this.gBxHeroSecond.Controls.Add(this.button4);
             this.gBxHeroSecond.Controls.Add(this.lBxCharParametersSecond);
             this.gBxHeroSecond.Controls.Add(this.label12);
             this.gBxHeroSecond.Controls.Add(this.cBxRingBSecond);
@@ -508,7 +515,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(6, 26);
+            this.label20.Location = new System.Drawing.Point(6, 15);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(59, 13);
             this.label20.TabIndex = 1;
@@ -518,7 +525,7 @@
             // 
             this.cBxCharSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBxCharSecond.FormattingEnabled = true;
-            this.cBxCharSecond.Location = new System.Drawing.Point(6, 42);
+            this.cBxCharSecond.Location = new System.Drawing.Point(6, 31);
             this.cBxCharSecond.Name = "cBxCharSecond";
             this.cBxCharSecond.Size = new System.Drawing.Size(221, 21);
             this.cBxCharSecond.TabIndex = 0;
@@ -560,21 +567,48 @@
             this.timer.Interval = 1500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // label6
+            // btnSaveHeroFirstAndDress
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(251, 595);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "label6";
+            this.btnSaveHeroFirstAndDress.Location = new System.Drawing.Point(6, 55);
+            this.btnSaveHeroFirstAndDress.Name = "btnSaveHeroFirstAndDress";
+            this.btnSaveHeroFirstAndDress.Size = new System.Drawing.Size(121, 35);
+            this.btnSaveHeroFirstAndDress.TabIndex = 20;
+            this.btnSaveHeroFirstAndDress.Text = "Сохранить костюм";
+            this.btnSaveHeroFirstAndDress.UseVisualStyleBackColor = true;
+            this.btnSaveHeroFirstAndDress.Click += new System.EventHandler(this.btnSaveHeroFirstAndDress_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(130, 55);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(97, 35);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Одеть костюм";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(130, 55);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(97, 35);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Одеть костюм";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 55);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(121, 35);
+            this.button4.TabIndex = 22;
+            this.button4.Text = "Сохранить костюм";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 664);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnTavern);
             this.Controls.Add(this.btnCreationobjectThing);
             this.Controls.Add(this.btnFait);
@@ -590,7 +624,6 @@
             this.gBxHeroSecond.ResumeLayout(false);
             this.gBxHeroSecond.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -643,7 +676,10 @@
         private System.Windows.Forms.Button btnCreationobjectThing;
         private System.Windows.Forms.Button btnTavern;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnSaveHeroFirstAndDress;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 

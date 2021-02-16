@@ -30,6 +30,15 @@ namespace Time_to_burn_fear
                 return;
             }
             Constitution newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
+            foreach(Parameters constitution in FmMain.ListChar.Chars)
+            {
+                if (constitution.Name== newChar.Name)
+                {
+                    MessageBox.Show("Герой с таким именем уже в игре. Позовите другого героя!");
+                    return;
+                }
+                   
+            }
             FmMain.ListChar.AddInChars(newChar);
             DAO.AddStringToFile(newChar.Name + "\t" + newChar.Race, Constants.CHARS_FILE_NAME);
            Close();

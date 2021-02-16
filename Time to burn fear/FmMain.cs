@@ -60,6 +60,7 @@ namespace Time_to_burn_fear
         /// <summary>
         /// Герой из клана сжигающих страх
         /// </summary>
+       
         public Hero HeroFirst
         { get; private set; }
         /// <summary>
@@ -89,12 +90,6 @@ namespace Time_to_burn_fear
         }
         public List<(string strDress, bool free)> ListDressTuple
         { get; private set; } = new List<(string strDress, bool free)>();
-        
-       
-        public  Label SetLable6()
-        {
-            return label6;
-        }
         private void FmMain_Load(object sender, EventArgs e)
         {
             DAO.LoadCutToFile();
@@ -386,8 +381,6 @@ namespace Time_to_burn_fear
                 }
             }
             return constitution;
-
-
         }
         public Constitution CreateConstitutionFromCombobox(ComboBox comboBox)
         {
@@ -602,7 +595,7 @@ namespace Time_to_burn_fear
                 lBxArena.Items.Add(HeroSecond.Name + ": Твоя душа сгорит в огне моего гнева!");
             if (TimerСounter>2)
             {
-
+                lBxArena.Items.Add("|");
                 double quotientSpeeds = HeroFirst.Speed / HeroSecond.Speed;
                 const int QUOTIENT_SPEEDS_BOUNDARY = 1;
                 Hero firstAttackHero= HeroFirst;
@@ -616,9 +609,7 @@ namespace Time_to_burn_fear
                 SpeedCounter = SpeedCounter + quotientSpeeds;
                 int rndToLuck;
                 int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection, out rndToLuck);
-                label6.Text = label6.Text + rndToLuck + " ";
-                int damageDoneHeroSecond = firstAttackHero.TakeDamageDone(firstAttackHero.Protection, out rndToLuck);
-                label6.Text = label6.Text + rndToLuck + " ";
+                int damageDoneHeroSecond = secondAttackHero.TakeDamageDone(firstAttackHero.Protection, out rndToLuck);
                 do
                 {
                     secondAttackHero.SetHealth(secondAttackHero.Health - damageDoneHeroFirst);
@@ -643,6 +634,7 @@ namespace Time_to_burn_fear
                     return;
                 }
                 ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
+                
             }
         }
         private void KillHero(Hero hero)
@@ -664,6 +656,69 @@ namespace Time_to_burn_fear
             LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
             LoadToLBxParameters(HeroSecond, this.lBxCharParametersSecond);
             lBxArena.SelectedIndex = lBxArena.Items.Count - 1;
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+        public enum saveOrCancel
+        {
+            Save,
+            Cancel
+        }
+        public saveOrCancel SaveOrCancel
+        { get; private set; } = saveOrCancel.Cancel;
+        private void SaveOnClick(object sender, EventArgs eventArgs)
+        {
+            SaveOrCancel = saveOrCancel.Save;
+            Button button = sender as Button;
+            Form form = button.Parent as Form;
+            form.Close();
+        }
+        private void SaveHeroFirstAndDress(GroupBox groupBox)
+        {
+            AddChar addChar = new AddChar();
+            addChar.btnAddChar.Visible = false;
+            addChar.cBxRace.Visible = false;
+            addChar.label1.Text = "Название комплекта";
+            addChar.label2.Visible = false;
+            Button save = new Button();
+            save.Text = "Сохранить";
+            save.Location = addChar.btnAddChar.Location;
+            save.Click += SaveOnClick;
+            addChar.Controls.Add(save);
+            addChar.ShowDialog();
+            if (SaveOrCancel == saveOrCancel.Save)
+                DAO.AddStringToFile(addChar.tBxName.Text + "\t" + HeroAndDressToList(groupBox as Control), Constants.HERO_FILE_NAME);
+            SaveOrCancel = saveOrCancel.Cancel;
+        }
+        private void btnSaveHeroFirstAndDress_Click(object sender, EventArgs e)
+        {
+            SaveHeroFirstAndDress(this.gBxHeroFirst);
+        }
+        private string HeroAndDressToList(Control control)
+        {
+            List<string> listHeroWithDress = new List<string>();
+            string strHeroWithDress=string.Empty;
+            foreach (Control thisControl in control.Controls)
+            {
+                if (thisControl is ComboBox)
+                {
+                    ComboBox comboBox = thisControl as ComboBox;
+                    listHeroWithDress.Add(comboBox.Name + "\t" + comboBox.SelectedItem.ToString());
+                }
+                if (thisControl.Controls.Count > 1)
+                    HeroAndDressToList(thisControl);
+            }
+            
+            foreach (string str in listHeroWithDress)
+            {
+                if (strHeroWithDress != string.Empty)
+                    strHeroWithDress = strHeroWithDress + "\t";
+                strHeroWithDress = strHeroWithDress + str;
+            }
+            return strHeroWithDress;
         }
     }
 }

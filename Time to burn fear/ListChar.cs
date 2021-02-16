@@ -38,5 +38,8 @@ namespace Time_to_burn_fear
                 AddInChars(partChar.Split('\t')[1], partChar.Split('\t')[0]);
             }
         }
+
+       
+
     }
 }

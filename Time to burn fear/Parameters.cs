@@ -71,7 +71,7 @@ namespace Time_to_burn_fear
             }
         }
         public Random rnd
-        { get; private set; } = new Random();
+        { get; private set; } = new Random(DateTime.Now.Millisecond);
         public int TakeDamageDone(int opponentsProtection, out int rndToLuck)
         {
             const int MIN_POSITION_IN_DAMAGE = 0;

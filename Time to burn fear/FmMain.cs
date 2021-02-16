@@ -678,6 +678,7 @@ namespace Time_to_burn_fear
         }
         private void SaveHeroFirstAndDress(GroupBox groupBox)
         {
+            SaveOrCancel = saveOrCancel.Cancel;
             AddChar addChar = new AddChar();
             addChar.btnAddChar.Visible = false;
             addChar.cBxRace.Visible = false;
@@ -690,7 +691,29 @@ namespace Time_to_burn_fear
             addChar.Controls.Add(save);
             addChar.ShowDialog();
             if (SaveOrCancel == saveOrCancel.Save)
-                DAO.AddStringToFile(addChar.tBxName.Text + "\t" + HeroAndDressToList(groupBox as Control), Constants.HERO_FILE_NAME);
+            {
+                if (addChar.tBxName.Text == string.Empty)
+                {
+                    MessageBox.Show("Не введено название комплекта!");
+                    SaveOrCancel = saveOrCancel.Cancel;
+                    SaveHeroFirstAndDress(groupBox);
+                }
+            }
+            if (SaveOrCancel==saveOrCancel.Save)
+            {
+                foreach (string str in DAO.GetListStringsFromFile(Constants.HERO_FILE_NAME))
+                {
+                    if (str.Split('\t')[0] == addChar.tBxName.Text)
+                    {
+                        MessageBox.Show("Комплек с таким названием уже существует, придумайте другой");
+                        SaveOrCancel = saveOrCancel.Cancel;
+                        SaveHeroFirstAndDress(groupBox);
+                        break;
+                    }
+                }
+                if (SaveOrCancel == saveOrCancel.Save)
+                    DAO.AddStringToFile(addChar.tBxName.Text + "\t" + HeroAndDressToList(groupBox as Control), Constants.HERO_FILE_NAME);
+            } 
             SaveOrCancel = saveOrCancel.Cancel;
         }
         private void btnSaveHeroFirstAndDress_Click(object sender, EventArgs e)

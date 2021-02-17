@@ -746,9 +746,9 @@ namespace Time_to_burn_fear
 
         private void btnLoadFirstHeroAndDress_Click(object sender, EventArgs e)
         {
-            LoadHeroAndDress();
+            LoadHeroAndDress(this.gBxHeroFirst);
         }
-        private void LoadHeroAndDress()
+        private void LoadHeroAndDress(GroupBox groupBox)
         {
             Form form = new Form();
             form.Text = "Гардероб";
@@ -763,6 +763,7 @@ namespace Time_to_burn_fear
             Button btnCancel = new Button();
             btnCancel.Text = "Отмена";
             btnLoad.Text = "Одеть костюм";
+            btnLoad.Tag = groupBox.Name;
             btnLoad.Width = listBox.Width / 2 - 15 / 2;
             btnCancel.Width = btnLoad.Width;
             btnLoad.Height = 35;
@@ -770,6 +771,7 @@ namespace Time_to_burn_fear
             listBox.Height = listBox.Height - btnLoad.Height - 15;
             btnLoad.Location = new System.Drawing.Point(listBox.Location.X, listBox.Location.Y + listBox.Height + 15);
             btnCancel.Location = new System.Drawing.Point(listBox.Location.X + btnLoad.Width + 15, listBox.Location.Y + listBox.Height + 15);
+            btnLoad.Click += btnLoad_Click;
             btnCancel.Click += btnCancel_Click;
             form.Controls.Add(listBox);
             form.Controls.Add(btnLoad);
@@ -786,8 +788,19 @@ namespace Time_to_burn_fear
             Form form = button.Parent as Form;
             foreach (Control control in this.Controls)
             {
-                if (control==form.gro)
+                if (control is GroupBox&& control.Name==button.Tag)
+                {
+                    foreach(Control thisControl in control.Controls)
+                    {
+                        if (thisControl is ComboBox)
+                        {
+                            ComboBox comboBox = thisControl as ComboBox;
+                            comboBox.SelectedIndex = 0;
+                        }
+                    }
+                }
             }
+            form.Close();
         } 
         private void btnCancel_Click(object sender, EventArgs e)
         {

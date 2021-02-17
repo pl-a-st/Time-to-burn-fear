@@ -743,5 +743,57 @@ namespace Time_to_burn_fear
             }
             return strHeroWithDress;
         }
+
+        private void btnLoadFirstHeroAndDress_Click(object sender, EventArgs e)
+        {
+            LoadHeroAndDress();
+        }
+        private void LoadHeroAndDress()
+        {
+            Form form = new Form();
+            form.Text = "Гардероб";
+            form.Width = 300;
+            form.Height = 300;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            ListBox listBox = new ListBox();
+            listBox.Location = new System.Drawing.Point(15, 15);
+            listBox.Width = form.ClientSize.Width - listBox.Location.X * 2;
+            listBox.Height = form.ClientSize.Height - listBox.Location.Y * 2;
+            Button btnLoad = new Button();
+            Button btnCancel = new Button();
+            btnCancel.Text = "Отмена";
+            btnLoad.Text = "Одеть костюм";
+            btnLoad.Width = listBox.Width / 2 - 15 / 2;
+            btnCancel.Width = btnLoad.Width;
+            btnLoad.Height = 35;
+            btnCancel.Height = 35;
+            listBox.Height = listBox.Height - btnLoad.Height - 15;
+            btnLoad.Location = new System.Drawing.Point(listBox.Location.X, listBox.Location.Y + listBox.Height + 15);
+            btnCancel.Location = new System.Drawing.Point(listBox.Location.X + btnLoad.Width + 15, listBox.Location.Y + listBox.Height + 15);
+            btnCancel.Click += btnCancel_Click;
+            form.Controls.Add(listBox);
+            form.Controls.Add(btnLoad);
+            form.Controls.Add(btnCancel);
+            foreach (string heroAndDress in DAO.GetListStringsFromFile(Constants.HERO_FILE_NAME))
+            {
+                listBox.Items.Add(heroAndDress.Split('\t')[0]);
+            }
+            form.ShowDialog();
+        }
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Form form = button.Parent as Form;
+            foreach (Control control in this.Controls)
+            {
+                if (control==form.gro)
+            }
+        } 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Form form = button.Parent as Form;
+            form.Close();
+        }
     }
 }

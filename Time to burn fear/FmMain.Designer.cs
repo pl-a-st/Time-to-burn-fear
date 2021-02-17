@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gBxHeroFirst = new System.Windows.Forms.GroupBox();
+            this.btnLoadFirstHeroAndDress = new System.Windows.Forms.Button();
+            this.btnSaveHeroFirstAndDress = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.lBxCharParametersFirst = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -52,7 +54,9 @@
             this.cBxCharFirst = new System.Windows.Forms.ComboBox();
             this.lBxArena = new System.Windows.Forms.ListBox();
             this.gBxHeroSecond = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.lBxCharParametersSecond = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cBxRingBSecond = new System.Windows.Forms.ComboBox();
@@ -76,17 +80,13 @@
             this.btnCreationobjectThing = new System.Windows.Forms.Button();
             this.btnTavern = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.btnSaveHeroFirstAndDress = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.gBxHeroFirst.SuspendLayout();
             this.gBxHeroSecond.SuspendLayout();
             this.SuspendLayout();
             // 
             // gBxHeroFirst
             // 
-            this.gBxHeroFirst.Controls.Add(this.button2);
+            this.gBxHeroFirst.Controls.Add(this.btnLoadFirstHeroAndDress);
             this.gBxHeroFirst.Controls.Add(this.btnSaveHeroFirstAndDress);
             this.gBxHeroFirst.Controls.Add(this.label10);
             this.gBxHeroFirst.Controls.Add(this.lBxCharParametersFirst);
@@ -114,6 +114,26 @@
             this.gBxHeroFirst.TabIndex = 0;
             this.gBxHeroFirst.TabStop = false;
             this.gBxHeroFirst.Text = "Сжигающий страх";
+            // 
+            // btnLoadFirstHeroAndDress
+            // 
+            this.btnLoadFirstHeroAndDress.Location = new System.Drawing.Point(130, 55);
+            this.btnLoadFirstHeroAndDress.Name = "btnLoadFirstHeroAndDress";
+            this.btnLoadFirstHeroAndDress.Size = new System.Drawing.Size(97, 35);
+            this.btnLoadFirstHeroAndDress.TabIndex = 21;
+            this.btnLoadFirstHeroAndDress.Text = "Одеть костюм";
+            this.btnLoadFirstHeroAndDress.UseVisualStyleBackColor = true;
+            this.btnLoadFirstHeroAndDress.Click += new System.EventHandler(this.btnLoadFirstHeroAndDress_Click);
+            // 
+            // btnSaveHeroFirstAndDress
+            // 
+            this.btnSaveHeroFirstAndDress.Location = new System.Drawing.Point(6, 55);
+            this.btnSaveHeroFirstAndDress.Name = "btnSaveHeroFirstAndDress";
+            this.btnSaveHeroFirstAndDress.Size = new System.Drawing.Size(121, 35);
+            this.btnSaveHeroFirstAndDress.TabIndex = 20;
+            this.btnSaveHeroFirstAndDress.Text = "Сохранить костюм";
+            this.btnSaveHeroFirstAndDress.UseVisualStyleBackColor = true;
+            this.btnSaveHeroFirstAndDress.Click += new System.EventHandler(this.btnSaveHeroFirstAndDress_Click);
             // 
             // label10
             // 
@@ -343,6 +363,15 @@
             this.gBxHeroSecond.Text = "Сжигающий слабость";
             this.gBxHeroSecond.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(130, 55);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(97, 35);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Одеть костюм";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -351,6 +380,15 @@
             this.label11.Size = new System.Drawing.Size(141, 13);
             this.label11.TabIndex = 19;
             this.label11.Text = "Итоговые характеристики";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 55);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(121, 35);
+            this.button4.TabIndex = 22;
+            this.button4.Text = "Сохранить костюм";
+            this.button4.UseVisualStyleBackColor = true;
             // 
             // lBxCharParametersSecond
             // 
@@ -567,43 +605,6 @@
             this.timer.Interval = 1500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // btnSaveHeroFirstAndDress
-            // 
-            this.btnSaveHeroFirstAndDress.Location = new System.Drawing.Point(6, 55);
-            this.btnSaveHeroFirstAndDress.Name = "btnSaveHeroFirstAndDress";
-            this.btnSaveHeroFirstAndDress.Size = new System.Drawing.Size(121, 35);
-            this.btnSaveHeroFirstAndDress.TabIndex = 20;
-            this.btnSaveHeroFirstAndDress.Text = "Сохранить костюм";
-            this.btnSaveHeroFirstAndDress.UseVisualStyleBackColor = true;
-            this.btnSaveHeroFirstAndDress.Click += new System.EventHandler(this.btnSaveHeroFirstAndDress_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(130, 55);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 35);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Одеть костюм";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(130, 55);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 35);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Одеть костюм";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 55);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 35);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Сохранить костюм";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // FmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -676,7 +677,7 @@
         private System.Windows.Forms.Button btnCreationobjectThing;
         private System.Windows.Forms.Button btnTavern;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLoadFirstHeroAndDress;
         private System.Windows.Forms.Button btnSaveHeroFirstAndDress;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

@@ -142,9 +142,10 @@ namespace Time_to_burn_fear
     }
     public class Boots : Dress
     {
-        public Boots(int speed,  string name)
+        public Boots(int speed, int protection, string name)
         {
             SetSpeed(speed);
+            SetProtection(protection);
             SetName(name);
         }
     }
@@ -159,17 +160,17 @@ namespace Time_to_burn_fear
             if (dressParts[1] == "Weapon")
                 return new Weapon(int.Parse(dressParts[2]), dressParts[0]) as Dress;
             if (dressParts[1] == "Ring")
-                return new Ring(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+                return new Ring(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "Gloves")
-                return new Gloves(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+                return new Gloves(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "Headdress")
-                return new Headdress(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+                return new Headdress(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "Leggings")
-                return new Leggings(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+                return new Leggings(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "BodyArmor")
-                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[2]), dressParts[0]);
+                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[23]), dressParts[0]);
             if (dressParts[1] == "Boots")
-                return new Boots(int.Parse(dressParts[2]), dressParts[0]);
+                return new Boots(int.Parse(dressParts[2]), int.Parse(dressParts[3]),dressParts[0]);
             return new Dress();
         }
     }

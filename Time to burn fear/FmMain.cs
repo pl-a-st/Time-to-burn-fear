@@ -93,6 +93,7 @@ namespace Time_to_burn_fear
         private void FmMain_Load(object sender, EventArgs e)
         {
             DAO.LoadCutToFile();
+            DAO.LoadCharToFileFirstStart();
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
@@ -104,7 +105,8 @@ namespace Time_to_burn_fear
         }
         private void LoadAllDressToListTuple()
         {
-            foreach(string strDress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
+            ListDressTuple.Clear();
+            foreach (string strDress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
             {
                 ListDressTuple.Add((strDress, true));
             }
@@ -414,7 +416,7 @@ namespace Time_to_burn_fear
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.BodyArmor)
                 return new BodyArmor(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Boots)
-                return new Boots(int.Parse(dressArry[2]), dressArry[0]) as Dress;
+                return new Boots(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Gloves)
                 return new Gloves(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
             if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Headdress)
@@ -596,7 +598,7 @@ namespace Time_to_burn_fear
             if (TimerСounter>2)
             {
                 lBxArena.Items.Add("|");
-                double quotientSpeeds = HeroFirst.Speed / HeroSecond.Speed;
+                double quotientSpeeds = Convert.ToDouble(HeroFirst.Speed) / HeroSecond.Speed;
                 const int QUOTIENT_SPEEDS_BOUNDARY = 1;
                 Hero firstAttackHero= HeroFirst;
                 Hero secondAttackHero=HeroSecond;
@@ -604,7 +606,7 @@ namespace Time_to_burn_fear
                 {
                     secondAttackHero = HeroFirst;
                     firstAttackHero = HeroSecond;
-                    quotientSpeeds = HeroSecond.Speed/ HeroFirst.Speed;
+                    quotientSpeeds = Convert.ToDouble(HeroSecond.Speed)/ HeroFirst.Speed;
                 }
                 SpeedCounter = SpeedCounter + quotientSpeeds;
                 int rndToLuck;
@@ -628,7 +630,7 @@ namespace Time_to_burn_fear
                 lBxArena.Items.Add(secondAttackHero.Name + " наносит противнику" + damageDoneHeroSecond + " урона.");
                 if (firstAttackHero.Health <= 0)
                 {
-                    KillHero(secondAttackHero);
+                    KillHero(firstAttackHero);
                     ReplaceHeroAndLoadListBoxes(firstAttackHero, secondAttackHero, QUOTIENT_SPEEDS_BOUNDARY);
                     EnabledTrueAllCombobox(this);
                     return;
@@ -786,20 +788,51 @@ namespace Time_to_burn_fear
         {
             Button button = sender as Button;
             Form form = button.Parent as Form;
-            foreach (Control control in this.Controls)
+            foreach(Control controlForm in form.Controls)
             {
-                if (control is GroupBox&& control.Name==button.Tag)
+                if (controlForm is ListBox)
                 {
-                    foreach(Control thisControl in control.Controls)
+                    ListBox listBox = controlForm as ListBox;
+                    if (listBox.SelectedIndex > -1)
                     {
-                        if (thisControl is ComboBox)
+                        foreach (Control control in this.Controls)
                         {
-                            ComboBox comboBox = thisControl as ComboBox;
-                            comboBox.SelectedIndex = 0;
+                            if (control is GroupBox && control.Name == button.Tag.ToString())
+                            {
+                                foreach (Control thisControl in control.Controls)
+                                {
+                                    if (thisControl is ComboBox)
+                                    {
+                                        ComboBox comboBox = thisControl as ComboBox;
+                                        string heroAndDress = DAO.GetListStringsFromFile(Constants.HERO_FILE_NAME)[listBox.SelectedIndex];
+                                        for (int i = 0; i < heroAndDress.Split('\t').Length; i++)
+                                        {
+                                            string str = comboBox.Name.Replace("First", "").Replace("Second", "");
+                                            if (comboBox.Name.ToString().Replace("First","").Replace("Second","") == heroAndDress.Split('\t')[i].Replace("First", "").Replace("Second", ""))
+                                            {
+                                                try
+                                                {
+                                                    comboBox.SelectedItem = heroAndDress.Split('\t')[i + 1];
+                                                    if (comboBox.SelectedItem.ToString() != heroAndDress.Split('\t')[i + 1])
+                                                        MessageBox.Show("Вы не можете найти в своем гардеробе " + heroAndDress.Split('\t')[i + 1] +
+                                                        ". Сорее всего этот проходимец, с которым предстоит дуэль, пошарился по гардеробу");
+                                                }
+                                                catch
+                                                {
+                                                    MessageBox.Show("Вы не можете найти в своем гардеробе " + heroAndDress.Split('\t')[i + 1] +
+                                                        ". Сорее всего этот проходимец, с которым предстоит дуэль, пошарился по гардеробу");
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
+               
+            
             form.Close();
         } 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -807,6 +840,16 @@ namespace Time_to_burn_fear
             Button button = sender as Button;
             Form form = button.Parent as Form;
             form.Close();
+        }
+
+        private void btnSaveHeroSecondAndDress_Click(object sender, EventArgs e)
+        {
+            SaveHeroFirstAndDress(this.gBxHeroSecond);
+        }
+
+        private void btnLoadSecondHeroAndDress_Click(object sender, EventArgs e)
+        {
+            LoadHeroAndDress(this.gBxHeroSecond);
         }
     }
 }

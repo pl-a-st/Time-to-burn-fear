@@ -126,5 +126,15 @@ namespace Time_to_burn_fear
                 streamWriter.Close();
             }
         }
+        public static void LoadCharToFileFirstStart()
+        {
+            if (!File.Exists(Constants.CHARS_FILE_NAME))
+            {
+                StreamWriter streamWriter = new StreamWriter(Constants.CHARS_FILE_NAME, false);
+                streamWriter.WriteLine("Юдин И.А.\tHuman");
+                streamWriter.WriteLine("Азовцев А.Ю.\tHuman");
+                streamWriter.Close();
+            }
+        }
     }
 }

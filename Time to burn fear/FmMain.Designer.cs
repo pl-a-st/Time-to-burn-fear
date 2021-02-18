@@ -54,9 +54,9 @@
             this.cBxCharFirst = new System.Windows.Forms.ComboBox();
             this.lBxArena = new System.Windows.Forms.ListBox();
             this.gBxHeroSecond = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnLoadSecondHeroAndDress = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnSaveHeroSecondAndDress = new System.Windows.Forms.Button();
             this.lBxCharParametersSecond = new System.Windows.Forms.ListBox();
             this.label12 = new System.Windows.Forms.Label();
             this.cBxRingBSecond = new System.Windows.Forms.ComboBox();
@@ -333,9 +333,9 @@
             // 
             // gBxHeroSecond
             // 
-            this.gBxHeroSecond.Controls.Add(this.button3);
+            this.gBxHeroSecond.Controls.Add(this.btnLoadSecondHeroAndDress);
             this.gBxHeroSecond.Controls.Add(this.label11);
-            this.gBxHeroSecond.Controls.Add(this.button4);
+            this.gBxHeroSecond.Controls.Add(this.btnSaveHeroSecondAndDress);
             this.gBxHeroSecond.Controls.Add(this.lBxCharParametersSecond);
             this.gBxHeroSecond.Controls.Add(this.label12);
             this.gBxHeroSecond.Controls.Add(this.cBxRingBSecond);
@@ -363,14 +363,15 @@
             this.gBxHeroSecond.Text = "Сжигающий слабость";
             this.gBxHeroSecond.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // button3
+            // btnLoadSecondHeroAndDress
             // 
-            this.button3.Location = new System.Drawing.Point(130, 55);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(97, 35);
-            this.button3.TabIndex = 23;
-            this.button3.Text = "Одеть костюм";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnLoadSecondHeroAndDress.Location = new System.Drawing.Point(130, 55);
+            this.btnLoadSecondHeroAndDress.Name = "btnLoadSecondHeroAndDress";
+            this.btnLoadSecondHeroAndDress.Size = new System.Drawing.Size(97, 35);
+            this.btnLoadSecondHeroAndDress.TabIndex = 23;
+            this.btnLoadSecondHeroAndDress.Text = "Одеть костюм";
+            this.btnLoadSecondHeroAndDress.UseVisualStyleBackColor = true;
+            this.btnLoadSecondHeroAndDress.Click += new System.EventHandler(this.btnLoadSecondHeroAndDress_Click);
             // 
             // label11
             // 
@@ -381,14 +382,15 @@
             this.label11.TabIndex = 19;
             this.label11.Text = "Итоговые характеристики";
             // 
-            // button4
+            // btnSaveHeroSecondAndDress
             // 
-            this.button4.Location = new System.Drawing.Point(6, 55);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 35);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Сохранить костюм";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnSaveHeroSecondAndDress.Location = new System.Drawing.Point(6, 55);
+            this.btnSaveHeroSecondAndDress.Name = "btnSaveHeroSecondAndDress";
+            this.btnSaveHeroSecondAndDress.Size = new System.Drawing.Size(121, 35);
+            this.btnSaveHeroSecondAndDress.TabIndex = 22;
+            this.btnSaveHeroSecondAndDress.Text = "Сохранить костюм";
+            this.btnSaveHeroSecondAndDress.UseVisualStyleBackColor = true;
+            this.btnSaveHeroSecondAndDress.Click += new System.EventHandler(this.btnSaveHeroSecondAndDress_Click);
             // 
             // lBxCharParametersSecond
             // 
@@ -679,8 +681,8 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Button btnLoadFirstHeroAndDress;
         private System.Windows.Forms.Button btnSaveHeroFirstAndDress;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnLoadSecondHeroAndDress;
+        private System.Windows.Forms.Button btnSaveHeroSecondAndDress;
     }
 }
 

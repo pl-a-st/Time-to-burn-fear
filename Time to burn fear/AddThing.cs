@@ -167,6 +167,11 @@ namespace Time_to_burn_fear
             foreach (Control control in this.Controls)
             {
                 control.Visible = true;
+                if (control is NumericUpDown)
+                {
+                    NumericUpDown numericUpDown = control as NumericUpDown;
+                    numericUpDown.Value = 0;
+                }
             }
             if(cBxType.Text==string.Concat(TypeDressInRussian.Оружие))
             {
@@ -207,8 +212,8 @@ namespace Time_to_burn_fear
             }
             if (cBxType.Text == string.Concat(TypeDressInRussian.Обувь))
             {
-                lblFirstParametr.Text = "Защита";
-                lblSecondParamer.Text = "Здоровье";
+                lblFirstParametr.Text = "Скорость";
+                lblSecondParamer.Text = "Защита";
                 return;
             }
         }

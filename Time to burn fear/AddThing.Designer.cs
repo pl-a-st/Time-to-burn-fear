@@ -156,7 +156,7 @@
             this.Controls.Add(this.lBxDress);
             this.Name = "AddThing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddThing";
+            this.Text = "Лаборатория артефактов";
             this.Load += new System.EventHandler(this.AddThing_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nUDFirstParametr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDSecondParametr)).EndInit();

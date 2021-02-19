@@ -170,7 +170,7 @@ namespace Time_to_burn_fear
                 if (control is NumericUpDown)
                 {
                     NumericUpDown numericUpDown = control as NumericUpDown;
-                    numericUpDown.Value = 0;
+                    numericUpDown.Value = 0;  
                 }
             }
             if(cBxType.Text==string.Concat(TypeDressInRussian.Оружие))

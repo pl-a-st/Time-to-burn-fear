@@ -47,7 +47,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cBxLeggingsFirst = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cBxArmorFirst = new System.Windows.Forms.ComboBox();
+            this.cBxBodyArmorFirst = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.cBxHeaddressFirst = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +71,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.cBxLeggingsSecond = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.cBxArmorSecond = new System.Windows.Forms.ComboBox();
+            this.cBxBodyArmorSecond = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.cBxHeaddressSecond = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -103,7 +103,7 @@
             this.gBxHeroFirst.Controls.Add(this.label4);
             this.gBxHeroFirst.Controls.Add(this.cBxLeggingsFirst);
             this.gBxHeroFirst.Controls.Add(this.label3);
-            this.gBxHeroFirst.Controls.Add(this.cBxArmorFirst);
+            this.gBxHeroFirst.Controls.Add(this.cBxBodyArmorFirst);
             this.gBxHeroFirst.Controls.Add(this.label2);
             this.gBxHeroFirst.Controls.Add(this.cBxHeaddressFirst);
             this.gBxHeroFirst.Controls.Add(this.label1);
@@ -275,15 +275,15 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Латы";
             // 
-            // cBxArmorFirst
+            // cBxBodyArmorFirst
             // 
-            this.cBxArmorFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBxArmorFirst.FormattingEnabled = true;
-            this.cBxArmorFirst.Location = new System.Drawing.Point(6, 155);
-            this.cBxArmorFirst.Name = "cBxArmorFirst";
-            this.cBxArmorFirst.Size = new System.Drawing.Size(221, 21);
-            this.cBxArmorFirst.TabIndex = 4;
-            this.cBxArmorFirst.SelectedIndexChanged += new System.EventHandler(this.cBxArmorFirst_SelectedIndexChanged);
+            this.cBxBodyArmorFirst.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBxBodyArmorFirst.FormattingEnabled = true;
+            this.cBxBodyArmorFirst.Location = new System.Drawing.Point(6, 155);
+            this.cBxBodyArmorFirst.Name = "cBxBodyArmorFirst";
+            this.cBxBodyArmorFirst.Size = new System.Drawing.Size(221, 21);
+            this.cBxBodyArmorFirst.TabIndex = 4;
+            this.cBxBodyArmorFirst.SelectedIndexChanged += new System.EventHandler(this.cBxArmorFirst_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -350,7 +350,7 @@
             this.gBxHeroSecond.Controls.Add(this.label17);
             this.gBxHeroSecond.Controls.Add(this.cBxLeggingsSecond);
             this.gBxHeroSecond.Controls.Add(this.label18);
-            this.gBxHeroSecond.Controls.Add(this.cBxArmorSecond);
+            this.gBxHeroSecond.Controls.Add(this.cBxBodyArmorSecond);
             this.gBxHeroSecond.Controls.Add(this.label19);
             this.gBxHeroSecond.Controls.Add(this.cBxHeaddressSecond);
             this.gBxHeroSecond.Controls.Add(this.label20);
@@ -523,15 +523,15 @@
             this.label18.TabIndex = 5;
             this.label18.Text = "Латы";
             // 
-            // cBxArmorSecond
+            // cBxBodyArmorSecond
             // 
-            this.cBxArmorSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBxArmorSecond.FormattingEnabled = true;
-            this.cBxArmorSecond.Location = new System.Drawing.Point(6, 155);
-            this.cBxArmorSecond.Name = "cBxArmorSecond";
-            this.cBxArmorSecond.Size = new System.Drawing.Size(221, 21);
-            this.cBxArmorSecond.TabIndex = 4;
-            this.cBxArmorSecond.SelectedIndexChanged += new System.EventHandler(this.cBxArmorSecond_SelectedIndexChanged);
+            this.cBxBodyArmorSecond.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBxBodyArmorSecond.FormattingEnabled = true;
+            this.cBxBodyArmorSecond.Location = new System.Drawing.Point(6, 155);
+            this.cBxBodyArmorSecond.Name = "cBxBodyArmorSecond";
+            this.cBxBodyArmorSecond.Size = new System.Drawing.Size(221, 21);
+            this.cBxBodyArmorSecond.TabIndex = 4;
+            this.cBxBodyArmorSecond.SelectedIndexChanged += new System.EventHandler(this.cBxArmorSecond_SelectedIndexChanged);
             // 
             // label19
             // 
@@ -648,7 +648,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cBxLeggingsFirst;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cBxArmorFirst;
+        private System.Windows.Forms.ComboBox cBxBodyArmorFirst;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cBxHeaddressFirst;
         private System.Windows.Forms.Label label1;
@@ -670,7 +670,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.ComboBox cBxLeggingsSecond;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cBxArmorSecond;
+        private System.Windows.Forms.ComboBox cBxBodyArmorSecond;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ComboBox cBxHeaddressSecond;
         private System.Windows.Forms.Label label20;

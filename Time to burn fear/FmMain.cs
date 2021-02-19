@@ -323,8 +323,8 @@ namespace Time_to_burn_fear
         }
         private void CreateHeroFirstHeroSecondHero()
         {
-            //try
-            //{
+            try
+            {
                 Hero hero = HeroFirst;
                 Hero hero2 = HeroSecond;
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
@@ -332,12 +332,12 @@ namespace Time_to_burn_fear
                 LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
                 LoadToLBxParameters(HeroSecond, this.lBxCharParametersSecond);
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    DAO.WriteLog(ex.Message);
-            //    DAO.WriteLog(ex.StackTrace);
-            //}
+            }
+            catch (Exception ex)
+            {
+                DAO.WriteLog(ex.Message);
+                DAO.WriteLog(ex.StackTrace);
+            }
         }
         private void LoadToLBxParameters(Hero hero,ListBox listBox)
         {
@@ -353,9 +353,15 @@ namespace Time_to_burn_fear
                 listBox.Items.Insert(3, "Атака: " + '\t' + '\t' + hero.Damage[0]+" - "+ hero.Damage[1]);
                 listBox.Items.Insert(4, "Скорость: " + '\t' + hero.Speed);
                 listBox.Items.Insert(5, "Удача: " + '\t' + '\t' + hero.Luck);
+                this.btnFait.Enabled = true;
+                if (hero.Health <= 0)
+                    this.btnFait.Enabled = false;
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                DAO.WriteLog(ex.Message);
+                DAO.WriteLog(ex.StackTrace);
+            }
         }
         public Hero CreateHeroFromGroupBox(GroupBox groupBox)
         {
@@ -641,8 +647,8 @@ namespace Time_to_burn_fear
         }
         private void KillHero(Hero hero)
         {
-            lBxArena.Items.Add(hero.Name + " утер окровавленной рукой пот со лба.");
-            lBxArena.Items.Add("Осознание неизбежности конца пронзило центр его естества.");
+            lBxArena.Items.Add(hero.Name + " утер немеющей рукой кровь со лба.");
+            lBxArena.Items.Add("Осознание конца застыло в стекле его глаз.");
             lBxArena.Items.Add(hero.Name + " упал бездыханно в грязь.");
             timer.Stop();
         }

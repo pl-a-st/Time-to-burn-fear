@@ -72,18 +72,20 @@ namespace Time_to_burn_fear
         }
         public Random rnd
         { get; private set; } = new Random(DateTime.Now.Millisecond);
-        public int TakeDamageDone(int opponentsProtection, out int rndToLuck)
+        public int TakeDamageDone(int opponentsProtection)
         {
             const int MIN_POSITION_IN_DAMAGE = 0;
             const int MAX_POSITION_IN_DAMAGE = 1;
             const int POINT_MIN_PROBABILITY = 1;
             const int POINT_MAX_PROBABILITY = 101;
             int luckRate = 1;
-            rndToLuck = rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY);
+            int rndToLuck = rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY);
 
             if (rndToLuck <= Luck)
                 luckRate = 2;
             int rndToDamage = rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE] + 1);
+            if ((luckRate * rndToDamage - opponentsProtection) < 0)
+                return 0;
             return luckRate* rndToDamage - opponentsProtection;
         }
     }

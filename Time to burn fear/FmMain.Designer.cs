@@ -590,7 +590,7 @@
             this.btnCreationobjectThing.TabIndex = 2;
             this.btnCreationobjectThing.Text = "Лаборатория артифактов";
             this.btnCreationobjectThing.UseVisualStyleBackColor = true;
-            this.btnCreationobjectThing.Click += new System.EventHandler(this.btnCreationobjectThing_Click);
+            this.btnCreationobjectThing.Click += new System.EventHandler(this.btnCreationObjectThing_Click);
             // 
             // btnTavern
             // 

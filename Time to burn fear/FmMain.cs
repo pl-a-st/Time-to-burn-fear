@@ -49,45 +49,49 @@ namespace Time_to_burn_fear
             comboBox.SelectedIndex = comboBox.Items.Count - 1;
         }
         /// <summary>
-        /// Список персонажей
+        /// Список персонажей (результат автоматизированной икапсуляции студии)
         /// </summary>
         private static ListChar listChar = new ListChar();
         /// <summary>
-        /// Список персонажей
+        /// Список персонажей (результат автоматизированной икапсуляции студии)
         /// </summary>
         public static ListChar ListChar 
         { get => listChar; set => listChar = value; }
         /// <summary>
         /// Герой из клана сжигающих страх
         /// </summary>
-       
         public Hero HeroFirst
         { get; private set; }
         /// <summary>
-        /// Назначить героя адептом клана сигающих страх
+        /// Назначить героя адептом клана сжигающих страх
         /// </summary>
         /// <param name="heroFirst"></param>
         public void SetHeroFirst(Hero heroFirst)
         {
             HeroFirst = heroFirst;
         }
-
+        /// <summary>
+        /// Герой из клана сжигающих слабость
+        /// </summary>
         public Hero HeroSecond
         { get; private set; }
+        /// <summary>
+        /// Назначить героя адептом клана ссжигающих слабость
+        /// </summary>
+        /// <param name="heroSecond"></param>
         public void SetHeroSecond(Hero heroSecond)
         {
             HeroSecond = heroSecond;
         }
         public List<string> ListDress
         { get; private set; } = new List<string>();
-        public void SetListDress(List<string> listDress)
-        {
-            ListDress =  listDress;
-        }
         public void SetListDress()
         {
             ListDress = new List<string>();
         }
+        /// <summary>
+        /// Лист для снаряжения, каждый элемент содержит экземпляр в виде строки из файла и доступность для выбора
+        /// </summary>
         public List<(string strDress, bool free)> ListDressTuple
         { get; private set; } = new List<(string strDress, bool free)>();
         private void FmMain_Load(object sender, EventArgs e)
@@ -111,19 +115,18 @@ namespace Time_to_burn_fear
                 ListDressTuple.Add((strDress, true));
             }
         }
-        
         private void DeleteChangedAddReturnedDressComBox(ComboBox chagedComboBox)
         {
             if (FmMainStatus == fmMainStatus.Load)
                 return;
             (string strDress, bool free) typleDress = ("", false);
+            const int POSITION_NAME_IN_STRING = 0;
             if (chagedComboBox.SelectedItem.ToString()!=Constants.CUT_DRESS_NAME)
             {
-                // в отдельный метод установка False для выбранно элемента одежды
-               
                 for(int i=0; i<ListDressTuple.Count;i++)
                 {
-                    if (ListDressTuple[i].strDress.Split('\t')[0]== chagedComboBox.SelectedItem.ToString()
+                    ;
+                    if (ListDressTuple[i].strDress.Split('\t')[POSITION_NAME_IN_STRING] == chagedComboBox.SelectedItem.ToString()
                         && chagedComboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[1]))
                     {
                         ListDressTuple[i] = (ListDressTuple[i].strDress, false);
@@ -131,11 +134,7 @@ namespace Time_to_burn_fear
                         break;
                     }
                 }
-                
-               
             }
-
-            // в отдельный метод установка true для освободившегося элемента одежды
             (string strDress, bool free) targetTuple = ("", false);
             for (int i = 0; i < ListDressTuple.Count; i++)
             {
@@ -143,11 +142,12 @@ namespace Time_to_burn_fear
                 {
                     for (int j = 0; j < chagedComboBox.Items.Count; j++)
                     {
+                        const int POSITION_TYPE_IN_STRING = 1;
                         if (ListDressTuple[i].free==false&&
                             ListDressTuple[i].strDress != Constants.CUT_DRESS_NAME
-                            && chagedComboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[1]) &&
-                                ListDressTuple[i].strDress.Split('\t')[0] != chagedComboBox.SelectedItem.ToString() &&
-                            ListDressTuple[i].strDress.Split('\t')[0] == chagedComboBox.Items[j].ToString())
+                            && chagedComboBox.Name.Contains(ListDressTuple[i].strDress.Split('\t')[POSITION_TYPE_IN_STRING]) &&
+                                ListDressTuple[i].strDress.Split('\t')[POSITION_NAME_IN_STRING] != chagedComboBox.SelectedItem.ToString() &&
+                            ListDressTuple[i].strDress.Split('\t')[POSITION_NAME_IN_STRING] == chagedComboBox.Items[j].ToString())
                         {
                             ListDressTuple[i] = (ListDressTuple[i].strDress, true);
                             targetTuple = ListDressTuple[i];
@@ -156,13 +156,10 @@ namespace Time_to_burn_fear
                 }
             }
             DeletItem(chagedComboBox, this); 
-            //в отдельный метод добавить item если true
-           
                 if (targetTuple.free == true && targetTuple.strDress!=Constants.CUT_DRESS_NAME)
                 {
                     AddIthem(chagedComboBox, this, targetTuple);
                 }
-          
         }
         public void AddIthem(ComboBox chagedComboBox, Control control,(string strDress,bool free) dress)
         {
@@ -240,6 +237,8 @@ namespace Time_to_burn_fear
         {
             foreach (Control controlPart in control.Controls)
             {
+                const int POSITION_TYPE_IN_STRING = 1;
+                const int POSITION_NAME_IN_STRING = 0;
                 if (controlPart is ComboBox)
                 {
                     ComboBox comboBox = controlPart as ComboBox;
@@ -248,8 +247,8 @@ namespace Time_to_burn_fear
                         comboBox.Items.Add(Constants.CUT_DRESS_NAME);
                     }
                     if (dress.Split('\t').Length>1)
-                    if (comboBox.Name.Contains(dress.Split('\t')[1]))
-                        comboBox.Items.Add(dress.Split('\t')[0]);
+                    if (comboBox.Name.Contains(dress.Split('\t')[POSITION_TYPE_IN_STRING]))
+                        comboBox.Items.Add(dress.Split('\t')[POSITION_NAME_IN_STRING]);
                     
                 }
                 if (controlPart.Controls.Count > 0)
@@ -280,7 +279,8 @@ namespace Time_to_burn_fear
         }
         public void LoadCharToComboBox(ComboBox comboBox, string character)
         {
-            comboBox.Items.Add(character.Split('\t')[0]);
+            const int POSITION_NAME_IN_STRING = 0;
+            comboBox.Items.Add(character.Split('\t')[POSITION_NAME_IN_STRING]);
         }
 
         private void addCharSecond_Click(object sender, EventArgs e)
@@ -294,7 +294,7 @@ namespace Time_to_burn_fear
         {
         }
 
-        private void btnCreationobjectThing_Click(object sender, EventArgs e)
+        private void btnCreationObjectThing_Click(object sender, EventArgs e)
         {
             FmMainStatus = fmMainStatus.Load;
             AddThing addThing = new AddThing();
@@ -306,15 +306,6 @@ namespace Time_to_burn_fear
             ChooseFirstItemInCBx(this);
             FmMainStatus = fmMainStatus.Working;
         }
-       
-        public void AddListDress(List<string> listDress)
-        {
-            foreach (string strDress in listDress)
-            {
-                ListDress.Add(strDress);
-            }
-        }
-
         private void cBxHeaddressFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
             DeleteChangedAddReturnedDressComBox(sender as ComboBox);
@@ -323,8 +314,8 @@ namespace Time_to_burn_fear
         }
         private void CreateHeroFirstHeroSecondHero()
         {
-            try
-            {
+            //try
+            //{
                 Hero hero = HeroFirst;
                 Hero hero2 = HeroSecond;
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
@@ -332,12 +323,12 @@ namespace Time_to_burn_fear
                 LoadToLBxParameters(HeroFirst, this.lBxCharParametersFirst);
                 LoadToLBxParameters(HeroSecond, this.lBxCharParametersSecond);
 
-            }
-            catch (Exception ex)
-            {
-                DAO.WriteLog(ex.Message);
-                DAO.WriteLog(ex.StackTrace);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    DAO.WriteLog(ex.Message);
+            //    DAO.WriteLog(ex.StackTrace);
+            //}
         }
         private void LoadToLBxParameters(Hero hero,ListBox listBox)
         {
@@ -392,47 +383,51 @@ namespace Time_to_burn_fear
         }
         public Constitution CreateConstitutionFromCombobox(ComboBox comboBox)
         {
+            const int POSITION_NAME_IN_STRING = 0;
+            const int POSITION_TYPE_IN_STRING = 1;
             Constitution constitution = new Constitution();
             string constitutionFromFile = SetStringComboboxFile(comboBox, Constants.CHARS_FILE_NAME);
             if (constitutionFromFile==string.Empty)
                 return constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Human)
-                return new Human(constitutionFromFile.Split('\t')[0]) as Constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Elemental)
-                return new Elemental(constitutionFromFile.Split('\t')[0]) as Constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Elf)
-                return new Elf(constitutionFromFile.Split('\t')[0]) as Constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Gnome)
-                return new Gnome(constitutionFromFile.Split('\t')[0]) as Constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Orc)
-                return new Orc(constitutionFromFile.Split('\t')[0]) as Constitution;
-            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[1], true) == Race.Witcher)
-                return new Witcher(constitutionFromFile.Split('\t')[0]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Human)
+                return new Human(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Elemental)
+                return new Elemental(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Elf)
+                return new Elf(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Gnome)
+                return new Gnome(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Orc)
+                return new Orc(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
+            if ((Race)Enum.Parse(typeof(Race), constitutionFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == Race.Witcher)
+                return new Witcher(constitutionFromFile.Split('\t')[POSITION_NAME_IN_STRING]) as Constitution;
             return constitution;
         }
-        public Dress CreateDressFromCombobox(ComboBox comboBox)// to do заменить индексы на константы
+        public Dress CreateDressFromCombobox(ComboBox comboBox)
         {
             string dressFromFile = SetStringItemFile(comboBox, Constants.THING_FILE_NAME);
             Dress dress = new Dress();
             if (dressFromFile==string.Empty||!dressFromFile.Contains("\t"))
                 return dress;
             string[] dressArry = dressFromFile.Split('\t');
-           
-            
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.BodyArmor)
-                return new BodyArmor(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Boots)
-                return new Boots(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Gloves)
-                return new Gloves(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Headdress)
-                return new Headdress(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Leggings)
-                return new Leggings(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Ring)
-                return new Ring(int.Parse(dressArry[2]), int.Parse(dressArry[3]), dressArry[0]) as Dress;
-            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[1], true) == TypeDress.Weapon)
-                return new Weapon(int.Parse(dressArry[2]), dressArry[0]) as Dress;
+            const int POSITION_NAME_IN_STRING = 0;
+            const int POSITION_TYPE_IN_STRING = 1;
+            const int POSITION_FIRST_PARAMETER_IN_STRING = 2;
+            const int POSITION_SECOND_PARAMETER_IN_STRING = 3;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.BodyArmor)
+                return new BodyArmor(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Boots)
+                return new Boots(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Gloves)
+                return new Gloves(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Headdress)
+                return new Headdress(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Leggings)
+                return new Leggings(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Ring)
+                return new Ring(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), int.Parse(dressArry[POSITION_SECOND_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
+            if ((TypeDress)Enum.Parse(typeof(TypeDress), dressFromFile.Split('\t')[POSITION_TYPE_IN_STRING], true) == TypeDress.Weapon)
+                return new Weapon(int.Parse(dressArry[POSITION_FIRST_PARAMETER_IN_STRING]), dressArry[POSITION_NAME_IN_STRING]) as Dress;
             return dress;
         }
         private string SetStringComboboxFile(ComboBox comboBox,string fileName)
@@ -444,24 +439,22 @@ namespace Time_to_burn_fear
         private string SetStringItemFile(ComboBox comboBox, string fileName)
         {
             List<string> listString = DAO.GetListStringsFromFile(fileName);
-            List<string> listStringAfter = new List<string>();
             foreach (string str in listString)
             {
+                const int POSITION_NAME_IN_STRING = 0;
+                const int POSITION_TYPE_IN_STRING = 1;
                 if (comboBox.SelectedIndex>-1)    
                 if (str.Split('\t').Length>1)
-                if (comboBox.Name.Contains(str.Split('\t')[1]) && str.Split('\t')[0] == comboBox.SelectedItem.ToString())
+                if (comboBox.Name.Contains(str.Split('\t')[POSITION_TYPE_IN_STRING]) 
+                            && str.Split('\t')[POSITION_NAME_IN_STRING] == comboBox.SelectedItem.ToString())
                     return str;
-               
             }
             return "";
-            
         }
-
         private void cBxWeaponFirst_SelectedIndexChanged(object sender, EventArgs e)
         {
             DeleteChangedAddReturnedDressComBox(sender as ComboBox);
             CreateHeroFirstHeroSecondHero();
-           
         }
 
         private void cBxWeaponSecond_SelectedIndexChanged(object sender, EventArgs e)
@@ -586,6 +579,7 @@ namespace Time_to_burn_fear
         private void btnFait_Click(object sender, EventArgs e)
         {
             EnabledFalseAllCombobox(this);
+            //btnFait.Enabled = false;
             TimerСounter = 0;
             SpeedCounter = 0;
             lBxArena.Items.Clear();
@@ -615,11 +609,9 @@ namespace Time_to_burn_fear
                     quotientSpeeds = Convert.ToDouble(HeroSecond.Speed)/ HeroFirst.Speed;
                 }
                 SpeedCounter = SpeedCounter + quotientSpeeds;
-                int rndToLuck;
-                int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection, out rndToLuck);
-                int damageDoneHeroSecond = secondAttackHero.TakeDamageDone(firstAttackHero.Protection, out rndToLuck);
                 do
                 {
+                    int damageDoneHeroFirst = firstAttackHero.TakeDamageDone(secondAttackHero.Protection);
                     secondAttackHero.SetHealth(secondAttackHero.Health - damageDoneHeroFirst);
                     lBxArena.Items.Add(firstAttackHero.Name + " наносит противнику" + damageDoneHeroFirst + " урона." );
                     if (secondAttackHero.Health<=0)
@@ -632,6 +624,7 @@ namespace Time_to_burn_fear
                     SpeedCounter--;
                 }
                 while (SpeedCounter >= 1);
+                int damageDoneHeroSecond = secondAttackHero.TakeDamageDone(firstAttackHero.Protection);
                 firstAttackHero.SetHealth(firstAttackHero.Health - damageDoneHeroSecond);
                 lBxArena.Items.Add(secondAttackHero.Name + " наносит противнику" + damageDoneHeroSecond + " урона.");
                 if (firstAttackHero.Health <= 0)

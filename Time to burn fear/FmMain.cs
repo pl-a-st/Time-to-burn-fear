@@ -316,6 +316,7 @@ namespace Time_to_burn_fear
         {
             //try
             //{
+            btnFait.Enabled = true;
                 Hero hero = HeroFirst;
                 Hero hero2 = HeroSecond;
                 SetHeroFirst(CreateHeroFromGroupBox(this.gBxHeroFirst));
@@ -344,9 +345,9 @@ namespace Time_to_burn_fear
                 listBox.Items.Insert(3, "Атака: " + '\t' + '\t' + hero.Damage[0]+" - "+ hero.Damage[1]);
                 listBox.Items.Insert(4, "Скорость: " + '\t' + hero.Speed);
                 listBox.Items.Insert(5, "Удача: " + '\t' + '\t' + hero.Luck);
-                this.btnFait.Enabled = true;
-                if (hero.Health <= 0)
-                    this.btnFait.Enabled = false;
+                //this.btnFait.Enabled = true;
+                //if (hero.Health <= 0)
+                //    this.btnFait.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -579,7 +580,7 @@ namespace Time_to_burn_fear
         private void btnFait_Click(object sender, EventArgs e)
         {
             EnabledFalseAllCombobox(this);
-            //btnFait.Enabled = false;
+            btnFait.Enabled = false;
             TimerСounter = 0;
             SpeedCounter = 0;
             lBxArena.Items.Clear();
@@ -849,6 +850,11 @@ namespace Time_to_burn_fear
         private void btnLoadSecondHeroAndDress_Click(object sender, EventArgs e)
         {
             LoadHeroAndDress(this.gBxHeroSecond);
+        }
+
+        private void gBxHeroFirst_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -114,6 +114,7 @@
             this.gBxHeroFirst.TabIndex = 0;
             this.gBxHeroFirst.TabStop = false;
             this.gBxHeroFirst.Text = "Сжигающий страх";
+            this.gBxHeroFirst.Enter += new System.EventHandler(this.gBxHeroFirst_Enter);
             // 
             // btnLoadFirstHeroAndDress
             // 

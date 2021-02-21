@@ -123,6 +123,20 @@ namespace Time_to_burn_fear
             {
                 StreamWriter streamWriter = new StreamWriter(Constants.THING_FILE_NAME, false);
                 streamWriter.WriteLine(Constants.CUT_DRESS_NAME);
+                streamWriter.WriteLine("Швабра Тамары\tWeapon\t3\t0");
+                streamWriter.WriteLine("Кухонный нож Валерии\tWeapon\t7\t0");
+                streamWriter.WriteLine("Баскетбольное кольцо\tRing\t2\t10");
+                streamWriter.WriteLine("Кольцо парашютное\tRing\t1\t3");
+                streamWriter.WriteLine("Перчатки Валерии\tGloves\t2\t3");
+                streamWriter.WriteLine("Ладони Иванова\tGloves\t5\t3");
+                streamWriter.WriteLine("Прическа Котова\tHeaddress\t4\t2");
+                streamWriter.WriteLine("Шляпа Верина\tHeaddress\t9\t3");
+                streamWriter.WriteLine("Трусы Саломоныча\tLeggings\t2\t5");
+                streamWriter.WriteLine("Шаровары Вячеслава\tLeggings\t6\t1");
+                streamWriter.WriteLine("Жилетка колесова\tBodyArmor\t2\t5");
+                streamWriter.WriteLine("Бюстгалтер Аллочки\tBodyArmor\t10\t10");
+                streamWriter.WriteLine("Сапоги ухода домой\tBoots\t10\t0");
+                streamWriter.WriteLine("Профит Хвостиченко\tBoots\t0\t0");
                 streamWriter.Close();
             }
         }

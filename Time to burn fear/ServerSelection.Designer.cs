@@ -31,7 +31,7 @@
             this.cBxServers = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnLoadServers = new System.Windows.Forms.Button();
             this.pBLoad = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
@@ -54,6 +54,7 @@
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -63,16 +64,17 @@
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // button1
+            // btnLoadServers
             // 
-            this.button1.Location = new System.Drawing.Point(266, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 20);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Ѻ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLoadServers.Location = new System.Drawing.Point(266, 11);
+            this.btnLoadServers.Name = "btnLoadServers";
+            this.btnLoadServers.Size = new System.Drawing.Size(30, 20);
+            this.btnLoadServers.TabIndex = 4;
+            this.btnLoadServers.Text = "Ѻ";
+            this.btnLoadServers.UseVisualStyleBackColor = true;
+            this.btnLoadServers.Click += new System.EventHandler(this.button1_Click);
             // 
             // pBLoad
             // 
@@ -87,7 +89,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 104);
             this.Controls.Add(this.pBLoad);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLoadServers);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cBxServers);
@@ -104,7 +106,7 @@
         private System.Windows.Forms.ComboBox cBxServers;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnLoadServers;
         private System.Windows.Forms.ProgressBar pBLoad;
     }
 }

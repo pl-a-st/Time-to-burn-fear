@@ -55,8 +55,6 @@ namespace Time_to_burn_fear
             Control.CheckForIllegalCrossThreadCalls = false;
             Thread myThread = new Thread(new ParameterizedThreadStart(loadServers));
             myThread.Start(objectForLoad); // запускаем поток
-           
-
         }
         public  class ObjectForLoad
         {
@@ -84,7 +82,19 @@ namespace Time_to_burn_fear
             btnCancel.Enabled = true;
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (cBxServers.SelectedIndex<0)
+            {
+                MessageBox.Show("Сервер не выбран");
+                return;
+            }
+            Constants.serverName = cBxServers.SelectedItem.ToString();
+        }
 
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Constants.serverName);
+        }
     }
 }

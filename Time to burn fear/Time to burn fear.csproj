@@ -59,6 +59,12 @@
       <DependentUpon>AddThing.cs</DependentUpon>
     </Compile>
     <Compile Include="Calculate.cs" />
+    <Compile Include="ServerSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerSelection.Designer.cs">
+      <DependentUpon>ServerSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parameters.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DAO.cs" />
@@ -80,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FmMain.resx">
       <DependentUpon>FmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerSelection.resx">
+      <DependentUpon>ServerSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -96,6 +96,8 @@ namespace Time_to_burn_fear
         { get; private set; } = new List<(string strDress, bool free)>();
         private void FmMain_Load(object sender, EventArgs e)
         {
+            ServerSelection serverSelection = new ServerSelection();
+            serverSelection.ShowDialog();
             DAO.LoadCutToFile();
             DAO.LoadCharToFileFirstStart();
             ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do

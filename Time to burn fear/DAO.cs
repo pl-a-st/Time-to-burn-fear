@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Time_to_burn_fear
 {
@@ -15,12 +16,39 @@ namespace Time_to_burn_fear
             Correctly,
             Incorrect
         }
+        /// <summary>
+        /// Записать одежду в базу
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="typeDress"></param>
+        /// <param name="fistParametr"></param>
+        /// <param name="secondParameter"></param>
+        public static void AddDressToBase(string name, string typeDress, int fistParametr, int secondParameter)
+        {
+            string connectionString =
+                "Data Source = "+ Environment.MachineName + "\\DREAM; Initial Catalog = Time-to-burn-fear; " +
+                "Integrated Security = True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+            int id = 0;
+            SqlCommand sqlCommand;
+            sqlCommand = new SqlCommand("SELECT MAX(id) as max FROM [Time-to-burn-fear].[dbo].[dress]", sqlConnection);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            sqlDataReader.Read();
+            if (!(sqlDataReader["max"] is DBNull))
+                id = Convert.ToInt32(sqlDataReader["max"])+1;
+            sqlDataReader.Close();
+            sqlCommand = new SqlCommand("insert into dress (id, name, type_dress, ferst_parametr, second_parametr" +
+                ") values ("+id+", '" +name+"', '"+ typeDress + "', " + fistParametr + ", "+ secondParameter +  ")", sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            sqlConnection.Close();
+        }
         public cocorrectness Cocorrectness
         { get; private set; } = cocorrectness.Correctly;
         /// <summary>
         /// Записать строку в файл
         /// </summary>
-        /// <param name="addingString">хаписываемая строк</param>
+        /// <param name="addingString">записываемая строка</param>
         /// <param name="fileName"> имя файла</param>
         public static void AddStringToFile(string addingString,string fileName)
         {

@@ -42,44 +42,42 @@ namespace Time_to_burn_fear
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLoad_Click(object sender, EventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
+            cBxServers.Enabled = false;
+            cBxServers.Items.Clear();
             cBxServers.Text = "Идет формирование списка серверов";
+            pBLoad.Visible = true;
             pBLoad.MarqueeAnimationSpeed = 30;
             pBLoad.Style = ProgressBarStyle.Marquee;
             btnSave.Enabled = false;
             btnCancel.Enabled = false;
-            ObjectForLoad objectForLoad = new ObjectForLoad();
-            objectForLoad.ProgressBar = pBLoad;
-            objectForLoad.ComboBox = cBxServers;
-            Control.CheckForIllegalCrossThreadCalls = false;
-            Thread myThread = new Thread(new ParameterizedThreadStart(loadServers));
-            myThread.Start(objectForLoad); // запускаем поток
+            btnLoadServers.Enabled = false;
+            Thread myThread = new Thread(new ThreadStart(loadServers));
+            myThread.Start(); // запускаем поток
         }
-        public  class ObjectForLoad
-        {
-            public ComboBox ComboBox;
-            public ProgressBar ProgressBar;
-        }
-        private  void loadServers(object objectForLoad)
+        private  void loadServers()
         {
             SqlDataSourceEnumerator instance = SqlDataSourceEnumerator.Instance;
             DataTable table = instance.GetDataSources();
-            ObjectForLoad thisObjectForLoad = objectForLoad as ObjectForLoad;
+            
             foreach (DataRow row in table.Rows)
             {
                 if (row["InstanceName"].ToString() == "")
-                    thisObjectForLoad.ComboBox.Items.Add(row["ServerName"]);
+                    cBxServers.Items.Add(row["ServerName"]);
                 else
-                    thisObjectForLoad.ComboBox.Items.Add(row["ServerName"] + "\\" + row["InstanceName"]);
+                    cBxServers.Items.Add(row["ServerName"] + "\\" + row["InstanceName"]);
             }
-            thisObjectForLoad.ComboBox.Text = "Выберите сервер";
-            thisObjectForLoad.ComboBox.Enabled = true;
-            thisObjectForLoad.ProgressBar.MarqueeAnimationSpeed = 0;
-            thisObjectForLoad.ProgressBar.Style = ProgressBarStyle.Continuous;
-            thisObjectForLoad.ProgressBar.Visible = false;
+            cBxServers.DropDownStyle = ComboBoxStyle.DropDown;
+            cBxServers.Text = "Выберите сервер";
+            cBxServers.Enabled = true;
+            pBLoad.MarqueeAnimationSpeed = 0;
+            pBLoad.Style = ProgressBarStyle.Continuous;
+            pBLoad.Visible = false;
             btnSave.Enabled = true;
             btnCancel.Enabled = true;
+            btnLoadServers.Enabled = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -90,11 +88,17 @@ namespace Time_to_burn_fear
                 return;
             }
             Constants.serverName = cBxServers.SelectedItem.ToString();
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Constants.serverName);
+            Close();
+        }
+
+        private void cBxServers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cBxServers.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

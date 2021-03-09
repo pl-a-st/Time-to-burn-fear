@@ -26,7 +26,7 @@ namespace Time_to_burn_fear
         public static void AddDressToBase(string name, string typeDress, int fistParametr, int secondParameter)
         {
             string connectionString =
-                "Data Source = "+ Environment.MachineName + "\\DREAM; Initial Catalog = Time-to-burn-fear; " +
+                "Data Source = "+ Constants.serverName+"; Initial Catalog = Time-to-burn-fear; " +
                 "Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -103,7 +103,12 @@ namespace Time_to_burn_fear
             }
             return listString;
         }
-        
+        public static List<Dress> ListDresses
+        { get; private set; }
+        public static void GetListStringsFromBase(string tableNameInBase)
+        {
+
+        }
         public static string GetStringsFromFile (string fileName,int numberString)
         {
             string stringFromFile = "";

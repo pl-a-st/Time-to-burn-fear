@@ -43,7 +43,8 @@
             this.cBxServers.Name = "cBxServers";
             this.cBxServers.Size = new System.Drawing.Size(248, 21);
             this.cBxServers.TabIndex = 0;
-            this.cBxServers.Text = "Необходимо зачитать сервера ->";
+            this.cBxServers.Text = "Необходимо загрузить сервера ->";
+            this.cBxServers.SelectedIndexChanged += new System.EventHandler(this.cBxServers_SelectedIndexChanged);
             this.cBxServers.Click += new System.EventHandler(this.cBxServers_Click);
             // 
             // btnSave
@@ -74,7 +75,7 @@
             this.btnLoadServers.TabIndex = 4;
             this.btnLoadServers.Text = "Ѻ";
             this.btnLoadServers.UseVisualStyleBackColor = true;
-            this.btnLoadServers.Click += new System.EventHandler(this.button1_Click);
+            this.btnLoadServers.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // pBLoad
             // 
@@ -93,7 +94,9 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.cBxServers);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ServerSelection";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Выбор сервера";
             this.Load += new System.EventHandler(this.ServerSelection_Load);
             this.Shown += new System.EventHandler(this.ServerSelection_Shown);

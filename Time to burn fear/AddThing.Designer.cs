@@ -48,14 +48,14 @@
             this.lBxDress.FormattingEnabled = true;
             this.lBxDress.Location = new System.Drawing.Point(138, 50);
             this.lBxDress.Name = "lBxDress";
-            this.lBxDress.Size = new System.Drawing.Size(122, 82);
+            this.lBxDress.Size = new System.Drawing.Size(176, 82);
             this.lBxDress.TabIndex = 0;
             this.lBxDress.SelectedValueChanged += new System.EventHandler(this.lBxDress_SelectedValueChanged);
             // 
             // cBxType
             // 
             this.cBxType.FormattingEnabled = true;
-            this.cBxType.Location = new System.Drawing.Point(138, 24);
+            this.cBxType.Location = new System.Drawing.Point(11, 23);
             this.cBxType.Name = "cBxType";
             this.cBxType.Size = new System.Drawing.Size(121, 21);
             this.cBxType.TabIndex = 1;
@@ -63,9 +63,9 @@
             // 
             // tBxName
             // 
-            this.tBxName.Location = new System.Drawing.Point(12, 25);
+            this.tBxName.Location = new System.Drawing.Point(138, 24);
             this.tBxName.Name = "tBxName";
-            this.tBxName.Size = new System.Drawing.Size(120, 20);
+            this.tBxName.Size = new System.Drawing.Size(176, 20);
             this.tBxName.TabIndex = 2;
             // 
             // nUDFirstParametr
@@ -85,7 +85,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(12, 8);
+            this.lblName.Location = new System.Drawing.Point(138, 7);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(57, 13);
             this.lblName.TabIndex = 4;
@@ -94,7 +94,7 @@
             // lblType
             // 
             this.lblType.AutoSize = true;
-            this.lblType.Location = new System.Drawing.Point(135, 8);
+            this.lblType.Location = new System.Drawing.Point(8, 7);
             this.lblType.Name = "lblType";
             this.lblType.Size = new System.Drawing.Size(26, 13);
             this.lblType.TabIndex = 4;
@@ -122,7 +122,7 @@
             // 
             this.btnAdd_Save.Location = new System.Drawing.Point(12, 150);
             this.btnAdd_Save.Name = "btnAdd_Save";
-            this.btnAdd_Save.Size = new System.Drawing.Size(120, 23);
+            this.btnAdd_Save.Size = new System.Drawing.Size(146, 23);
             this.btnAdd_Save.TabIndex = 5;
             this.btnAdd_Save.Text = "button1";
             this.btnAdd_Save.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // btnChange_Cancel
             // 
-            this.btnChange_Cancel.Location = new System.Drawing.Point(138, 150);
+            this.btnChange_Cancel.Location = new System.Drawing.Point(164, 150);
             this.btnChange_Cancel.Name = "btnChange_Cancel";
-            this.btnChange_Cancel.Size = new System.Drawing.Size(120, 23);
+            this.btnChange_Cancel.Size = new System.Drawing.Size(150, 23);
             this.btnChange_Cancel.TabIndex = 5;
             this.btnChange_Cancel.Text = "button1";
             this.btnChange_Cancel.UseVisualStyleBackColor = true;
@@ -142,7 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 190);
+            this.ClientSize = new System.Drawing.Size(326, 190);
             this.Controls.Add(this.btnChange_Cancel);
             this.Controls.Add(this.btnAdd_Save);
             this.Controls.Add(this.lblType);

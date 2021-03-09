@@ -29,6 +29,9 @@ namespace Time_to_burn_fear
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Формируем внешний вид формы взависимости от режима
+        /// </summary>
         public void SetFormDisplay()
         {
             if(CreateChangeСhoice==createChangeСhoice.Choice)
@@ -74,6 +77,11 @@ namespace Time_to_burn_fear
             
 
         }
+        /// <summary>
+        /// Заполняет ListBox из файла
+        /// </summary>
+        /// <param name="listBox">заполняемый ListBox</param>
+        /// <param name="filename">имя файла</param>
         public void lBxFromFileSelectFirst(ListBox listBox, string filename)
         {
             lBxDress.Items.Clear();

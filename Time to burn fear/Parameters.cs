@@ -176,6 +176,7 @@ namespace Time_to_burn_fear
             return new Dress();
         }
     }
+
     public class Human : Constitution
     {
         public Human(string name)

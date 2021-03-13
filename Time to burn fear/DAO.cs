@@ -38,7 +38,7 @@ namespace Time_to_burn_fear
             if (!(sqlDataReader["max"] is DBNull))
                 id = Convert.ToInt32(sqlDataReader["max"])+1;
             sqlDataReader.Close();
-            sqlCommand = new SqlCommand("insert into dress (id, name, type_dress, ferst_parametr, second_parametr" +
+            sqlCommand = new SqlCommand("insert into dress (id, name, type_dress, first_parameter, second_parameter" +
                 ") values ("+id+", '" +name+"', '"+ typeDress + "', " + fistParametr + ", "+ secondParameter +  ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
             sqlConnection.Close();
@@ -80,6 +80,58 @@ namespace Time_to_burn_fear
             }
         }
         /// <summary>
+        /// Возвращает строку по указаному номеру в листе
+        /// </summary>
+        /// <param name="nameBase"></param>
+        /// <param name="tableName"></param>
+        /// <param name="baseColumnName"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public static string GetStringsByNumberFromBase(string nameBase, string tableName, string[] baseColumnName, int number)
+        {
+            return GetListStringsFromBase(nameBase, tableName, baseColumnName)[number];
+        }
+        /// <summary>
+        /// Создает лист строк из указанной таблицы в базе, для совмещения с строка записывается через \t
+        /// </summary>
+        /// <param name="nameBase"></param>
+        /// <param name="tableName"></param>
+        /// <param name="baseColumnName"> необходимые поля из базы </param>
+        /// <returns></returns>
+        public static List<string> GetListStringsFromBase(string nameBase, string tableName, string []baseColumnName)
+        {
+            List<string> listStringFromBase = new List<string>();
+            string connectionString =
+            "Data Source = " + Constants.serverName + "; Initial Catalog = "+nameBase+"; Integrated Security = True";
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(connectionString);
+                SqlCommand sqlCommand = new SqlCommand("Select * from " + tableName, sqlConnection);
+                sqlConnection.Open();
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    string stringForList = string.Empty;
+                    foreach (string columnName in baseColumnName)
+                    {
+                        if (stringForList != string.Empty)
+                            stringForList = stringForList + "\t";
+                        stringForList = stringForList + sqlDataReader[columnName].ToString();
+                    }
+                    listStringFromBase.Add(stringForList);
+                }
+                sqlConnection.Close();
+            }
+            catch(Exception ex)
+            {
+                WriteLog(ex.Message);
+                WriteLog(ex.StackTrace);
+            }
+
+            return listStringFromBase;
+        }
+        /// <summary>
         /// Возвращает лист строк созданный из файла
         /// </summary>
         /// <param name="fileName"> путь к файалу</param>
@@ -105,8 +157,23 @@ namespace Time_to_burn_fear
         }
         public static List<Dress> ListDresses
         { get; private set; }
-        public static void GetListStringsFromBase(string tableNameInBase)
+        public static void GetListDressFromBase()
         {
+            string connectionString =
+            "Data Source = " + Constants.serverName + "; Initial Catalog = Time-to-burn-fear; " +
+                "Integrated Security = True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand("Select * from Dress", sqlConnection);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                Console.WriteLine(sqlDataReader["name"].ToString() + " " +
+                    sqlDataReader["surname"].ToString() + " " +
+                    sqlDataReader["patronymic_name"].ToString());
+            }
+            sqlConnection.Close();
 
         }
         public static string GetStringsFromFile (string fileName,int numberString)

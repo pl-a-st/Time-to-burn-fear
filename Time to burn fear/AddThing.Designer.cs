@@ -50,6 +50,7 @@
             this.lBxDress.Name = "lBxDress";
             this.lBxDress.Size = new System.Drawing.Size(176, 82);
             this.lBxDress.TabIndex = 0;
+            this.lBxDress.SelectedIndexChanged += new System.EventHandler(this.lBxDress_SelectedIndexChanged);
             this.lBxDress.SelectedValueChanged += new System.EventHandler(this.lBxDress_SelectedValueChanged);
             // 
             // cBxType

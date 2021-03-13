@@ -44,7 +44,7 @@ namespace Time_to_burn_fear
                     if (!(control is ListBox||control is Button|| control is Label))
                         control.Enabled = false;
                 }
-                lBxFromFileSelectFirst(lBxDress, Constants.THING_FILE_NAME);
+                lBxFromBaseSelectFirst(lBxDress, Constants.THING_FILE_NAME);
             }
             if (CreateChangeСhoice == createChangeСhoice.Create)
             {
@@ -81,11 +81,11 @@ namespace Time_to_burn_fear
         /// Заполняет ListBox из файла
         /// </summary>
         /// <param name="listBox">заполняемый ListBox</param>
-        /// <param name="filename">имя файла</param>
-        public void lBxFromFileSelectFirst(ListBox listBox, string filename)
+        /// <param  name="filename">имя файла</param>
+         public void lBxFromBaseSelectFirst(ListBox listBox, string filename)
         {
             lBxDress.Items.Clear();
-            foreach (string strDress in DAO.GetListStringsFromFile(filename))
+            foreach (string strDress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.dressColumnName))
             {
                 if (strDress!=Constants.CUT_DRESS_NAME)
                 lBxDress.Items.Add(strDress.Split('\t')[0]);
@@ -121,7 +121,7 @@ namespace Time_to_burn_fear
                     MessageBox.Show("Громкий хлопок, дым заполнил лабораторию. Вы забыли добавить необходимые ингредиенты. Предмет не создан!");
                     return;
                 }
-                foreach(string dress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
+                foreach(string dress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.dressColumnName))
                 {
                     if (dress.Split('\t')[0]==tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
                     {
@@ -130,8 +130,8 @@ namespace Time_to_burn_fear
                         return;
                     }
                 }
-                DAO.AddStringToFile(tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
-                    (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value,Constants.THING_FILE_NAME);
+                //DAO.AddStringToFile(tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
+                //    (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value,Constants.THING_FILE_NAME);
                 // вызвать запись одежды в базу
                 DAO.AddDressToBase(tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)).ToString(), (int)nUDFirstParametr.Value, (int)nUDSecondParametr.Value);
                 MessageBox.Show("Успех. Новый артифакт в вашем распоряжении.");
@@ -246,7 +246,8 @@ namespace Time_to_burn_fear
                 return;
             if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME)
                 return;
-            string stringDress = DAO.GetStringsFromFile(Constants.THING_FILE_NAME, lBxDress.SelectedIndex+1);
+            string stringDress = DAO.GetStringsByNumberFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,
+                Constants.dressColumnName, lBxDress.SelectedIndex);
             string[] allDressPararmetrs = stringDress.Split('\t');
             const int NAME_IN_STRING = 0;
             const int TYPE_IN_STRING = 1;
@@ -256,6 +257,11 @@ namespace Time_to_burn_fear
             cBxType.SelectedItem=(TypeDressInRussian)Enum.Parse(typeof(TypeDress), allDressPararmetrs[TYPE_IN_STRING], true);
             nUDFirstParametr.Value = int.Parse(allDressPararmetrs[PARM1_IN_STRING]);
             nUDSecondParametr.Value = int.Parse(allDressPararmetrs[PARAM2_IN_STRING]);
+        }
+
+        private void lBxDress_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

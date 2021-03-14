@@ -87,7 +87,7 @@ namespace Time_to_burn_fear
                 MessageBox.Show("Сервер не выбран");
                 return;
             }
-            Constants.serverName = cBxServers.SelectedItem.ToString();
+            Constants.ServerName = cBxServers.SelectedItem.ToString();
             Close();
         }
 

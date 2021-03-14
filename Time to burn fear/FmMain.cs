@@ -100,7 +100,8 @@ namespace Time_to_burn_fear
             serverSelection.ShowDialog();
             DAO.LoadCutToFile();
             DAO.LoadCharToFileFirstStart();
-            ListChar.AddInChars(DAO.GetListStringsFromFile(Constants.CHARS_FILE_NAME));// to do
+            ListChar.AddInChars(DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_CONSTITUTION,
+                Constants.ConstitutionColumnName));// to do
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
             LoadAllDressToListTuple();

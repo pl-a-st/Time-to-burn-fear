@@ -85,7 +85,7 @@ namespace Time_to_burn_fear
          public void lBxFromBaseSelectFirst(ListBox listBox, string filename)
         {
             lBxDress.Items.Clear();
-            foreach (string strDress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.dressColumnName))
+            foreach (string strDress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
             {
                 if (strDress!=Constants.CUT_DRESS_NAME)
                 lBxDress.Items.Add(strDress.Split('\t')[0]);
@@ -121,7 +121,7 @@ namespace Time_to_burn_fear
                     MessageBox.Show("Громкий хлопок, дым заполнил лабораторию. Вы забыли добавить необходимые ингредиенты. Предмет не создан!");
                     return;
                 }
-                foreach(string dress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.dressColumnName))
+                foreach(string dress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
                 {
                     if (dress.Split('\t')[0]==tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
                     {
@@ -146,10 +146,10 @@ namespace Time_to_burn_fear
                     MessageBox.Show("Громкий хлопок, дым заполнил лабораторию. Вы забыли добавить необходимые ингредиенты. Предмет не изменен!");
                     return;
                 }
-                List<string> listThing =DAO.GetListStringsFromFile(Constants.THING_FILE_NAME);
+                List<string> listThing =DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName);
                 string modifyingString = tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
                     (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value;
-                listThing[lBxDress.SelectedIndex+1] = modifyingString;
+                listThing[lBxDress.SelectedIndex] = modifyingString;
                 int i = 0;
                 foreach (string dress in listThing)
                 {
@@ -165,7 +165,8 @@ namespace Time_to_burn_fear
                     }
                     
                 }
-                DAO.AddListToFile(listThing, Constants.THING_FILE_NAME);
+                DAO.ChangeDressInBase(Constants.NAME_BASE, Constants.NAME_TABLE_DRESS, Constants.DressColumnNameType, 
+                    lBxDress.SelectedIndex, modifyingString);
                 MessageBox.Show("Вы вытираете пол с лица: артифакт успешно изменен!");
                 SetCreateChangeСhoice(createChangeСhoice.Choice);
                 SetFormDisplay();
@@ -247,7 +248,7 @@ namespace Time_to_burn_fear
             if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME)
                 return;
             string stringDress = DAO.GetStringsByNumberFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,
-                Constants.dressColumnName, lBxDress.SelectedIndex);
+                Constants.DressColumnName, lBxDress.SelectedIndex);
             string[] allDressPararmetrs = stringDress.Split('\t');
             const int NAME_IN_STRING = 0;
             const int TYPE_IN_STRING = 1;

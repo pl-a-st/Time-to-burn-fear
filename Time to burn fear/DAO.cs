@@ -32,7 +32,7 @@ namespace Time_to_burn_fear
         public static void AddDressToBase(string name, string typeDress, int fistParametr, int secondParameter)
         {
             string connectionString =
-                "Data Source = "+ Constants.serverName+"; Initial Catalog = Time-to-burn-fear; " +
+                "Data Source = "+ Constants.ServerName+"; Initial Catalog = Time-to-burn-fear; " +
                 "Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -108,7 +108,7 @@ namespace Time_to_burn_fear
         {
             List<string> listStringFromBase = new List<string>();
             string connectionString =
-            "Data Source = " + Constants.serverName + "; Initial Catalog = "+nameBase+"; Integrated Security = True";
+            "Data Source = " + Constants.ServerName + "; Initial Catalog = "+nameBase+"; Integrated Security = True";
             try
             {
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -142,20 +142,20 @@ namespace Time_to_burn_fear
         {
             List<string> listStringFromBase = new List<string>();
             string connectionString =
-            "Data Source = " + Constants.serverName + "; Initial Catalog = " + nameBase + "; Integrated Security = True";
+            "Data Source = " + Constants.ServerName + "; Initial Catalog = " + nameBase + "; Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
             for (int i=0;i<baseColumnName.Length;i++)
             {
                 if (baseColumnName[i].valueType == ValueType.String)
                 {
-                    SqlCommand sqlCommand = new SqlCommand("update" + tableName + " set " + baseColumnName[i].columnName + " = '"+ 
+                    SqlCommand sqlCommand = new SqlCommand("update " + tableName + " set " + baseColumnName[i].columnName + " = '"+ 
                         stringToBase.Split('\t')[i] + "' where id = "+ index, sqlConnection);
                     sqlCommand.ExecuteNonQuery();
                 }
                 else
                 {
-                    SqlCommand sqlCommand = new SqlCommand("update" + tableName + " set " + baseColumnName[i].columnName + " = '" +
+                    SqlCommand sqlCommand = new SqlCommand("update " + tableName + " set " + baseColumnName[i].columnName + " = '" +
                         stringToBase.Split('\t')[i] + "' where id = " + index, sqlConnection);
                     sqlCommand.ExecuteNonQuery();
                 }
@@ -191,7 +191,7 @@ namespace Time_to_burn_fear
         public static void GetListDressFromBase()
         {
             string connectionString =
-            "Data Source = " + Constants.serverName + "; Initial Catalog = Time-to-burn-fear; " +
+            "Data Source = " + Constants.ServerName + "; Initial Catalog = Time-to-burn-fear; " +
                 "Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();

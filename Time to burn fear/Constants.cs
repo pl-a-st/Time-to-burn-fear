@@ -16,6 +16,9 @@ namespace Time_to_burn_fear
         public const string NAME_TABLE_DRESS = "dress";
         public static string[] dressColumnName
         { get; private set; } = { "name", "type_dress", "first_parameter", "second_parameter"};
+        public static (string value, ValueType valueType)[] dressColumnNameType
+        { get; private set; } = { ("name", ValueType.String), ("type_dress", ValueType.String), ("first_parameter", ValueType.Int),
+            ("second_parameter", ValueType.Int) };
         public static string serverName;
     }
 }

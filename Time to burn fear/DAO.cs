@@ -9,6 +9,12 @@ using System.Data.SqlClient;
 
 namespace Time_to_burn_fear
 {
+    public enum ValueType
+    {
+        Int,
+        String,
+        Bool
+    }
     public class DAO
     {
        public enum cocorrectness
@@ -125,11 +131,36 @@ namespace Time_to_burn_fear
             }
             catch(Exception ex)
             {
+                MessageBox.Show("не удалось обратиться к таблице: " + tableName + " в базе " + nameBase);
                 WriteLog(ex.Message);
                 WriteLog(ex.StackTrace);
             }
-
             return listStringFromBase;
+        }
+        public static void ChangeDressInBase(string nameBase, string tableName, (string columnName, ValueType valueType) [] baseColumnName, 
+            int index, string stringToBase)
+        {
+            List<string> listStringFromBase = new List<string>();
+            string connectionString =
+            "Data Source = " + Constants.serverName + "; Initial Catalog = " + nameBase + "; Integrated Security = True";
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            sqlConnection.Open();
+            for (int i=0;i<baseColumnName.Length;i++)
+            {
+                if (baseColumnName[i].valueType == ValueType.String)
+                {
+                    SqlCommand sqlCommand = new SqlCommand("update" + tableName + " set " + baseColumnName[i].columnName + " = '"+ 
+                        stringToBase.Split('\t')[i] + "' where id = "+ index, sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                else
+                {
+                    SqlCommand sqlCommand = new SqlCommand("update" + tableName + " set " + baseColumnName[i].columnName + " = '" +
+                        stringToBase.Split('\t')[i] + "' where id = " + index, sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            sqlConnection.Close();
         }
         /// <summary>
         /// Возвращает лист строк созданный из файла

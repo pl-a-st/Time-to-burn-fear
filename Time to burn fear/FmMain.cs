@@ -101,7 +101,7 @@ namespace Time_to_burn_fear
             DAO.LoadCutToFile();
             DAO.LoadCharToFileFirstStart();
             ListChar.AddInChars(DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_CONSTITUTION,
-                Constants.ConstitutionColumnName));// to do
+                Constants.ConstitutionColumnName));
             LoadCharToComboBox(cBxCharFirst, ListChar);
             LoadCharToComboBox(cBxCharSecond, ListChar);
             LoadAllDressToListTuple();
@@ -113,7 +113,7 @@ namespace Time_to_burn_fear
         private void LoadAllDressToListTuple()
         {
             ListDressTuple.Clear();
-            foreach (string strDress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
+            foreach (string strDress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
             {
                 ListDressTuple.Add((strDress, true));
             }
@@ -217,7 +217,7 @@ namespace Time_to_burn_fear
         }
         public void LoadAllThingToAllComboBox()
         {
-            foreach (string dress in DAO.GetListStringsFromFile(Constants.THING_FILE_NAME))
+            foreach (string dress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
             {
                 LoadThingToComboboxInControl(dress, this);
             }

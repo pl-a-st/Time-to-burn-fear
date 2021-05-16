@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using DALs;
 
 namespace Time_to_burn_fear
 {
@@ -32,7 +33,7 @@ namespace Time_to_burn_fear
         public static void AddDressToBase(string name, string typeDress, int fistParametr, int secondParameter)
         {
             string connectionString =
-                "Data Source = "+ Constants.ServerName+"; Initial Catalog = Time-to-burn-fear; " +
+                "Data Source = "+ DB.ServerName+"; Initial Catalog = Time-to-burn-fear; " +
                 "Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
@@ -108,7 +109,7 @@ namespace Time_to_burn_fear
         {
             List<string> listStringFromBase = new List<string>();
             string connectionString =
-            "Data Source = " + Constants.ServerName + "; Initial Catalog = "+nameBase+"; Integrated Security = True";
+            "Data Source = " + DB.ServerName + "; Initial Catalog = "+nameBase+"; Integrated Security = True";
             try
             {
                 SqlConnection sqlConnection = new SqlConnection(connectionString);
@@ -142,7 +143,7 @@ namespace Time_to_burn_fear
         {
             List<string> listStringFromBase = new List<string>();
             string connectionString =
-            "Data Source = " + Constants.ServerName + "; Initial Catalog = " + nameBase + "; Integrated Security = True";
+            "Data Source = " + DB.ServerName + "; Initial Catalog = " + nameBase + "; Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();
             for (int i=0;i<baseColumnName.Length;i++)
@@ -191,7 +192,7 @@ namespace Time_to_burn_fear
         public static void GetListDressFromBase()
         {
             string connectionString =
-            "Data Source = " + Constants.ServerName + "; Initial Catalog = Time-to-burn-fear; " +
+            "Data Source = " + DB.ServerName + "; Initial Catalog = Time-to-burn-fear; " +
                 "Integrated Security = True";
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             sqlConnection.Open();

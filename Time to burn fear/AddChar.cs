@@ -22,12 +22,13 @@ namespace Time_to_burn_fear
 
         private void label1_Click(object sender, EventArgs e)
         {
-            DALs.TablesName tablesName
+            TablesName tablesName = TablesName.heroes;
         }
 
         private void btnAddChar_Click(object sender, EventArgs e)
         {
-            
+            string str=WhithEnume.EnumeToString(TablesName.dress);
+
             if (tBxName.Text == "")
             {
                 MessageBox.Show("Не выбрано имя!");

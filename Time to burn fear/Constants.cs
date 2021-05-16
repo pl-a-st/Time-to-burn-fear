@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Time_to_burn_fear
 {
     public static class Constants
@@ -22,6 +23,6 @@ namespace Time_to_burn_fear
         public static (string value, ValueType valueType)[] DressColumnNameType
         { get; private set; } = { ("name", ValueType.String), ("type_dress", ValueType.String), ("first_parameter", ValueType.Int),
             ("second_parameter", ValueType.Int) };
-        public static string ServerName;
+        
     }
 }

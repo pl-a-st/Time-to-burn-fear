@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Threading;
+using DALs;
 
 namespace Time_to_burn_fear
 {
@@ -87,7 +88,7 @@ namespace Time_to_burn_fear
                 MessageBox.Show("Сервер не выбран");
                 return;
             }
-            Constants.ServerName = cBxServers.SelectedItem.ToString();
+            DB.ServerName = cBxServers.SelectedItem.ToString();
             Close();
         }
 

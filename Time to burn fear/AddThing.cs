@@ -21,6 +21,10 @@ namespace Time_to_burn_fear
         }
         public createChangeСhoice CreateChangeСhoice
         { get;private set;}
+        /// <summary>
+        /// Присваивает свойству CreateChangeСhoice значение передаваемого enum
+        /// </summary>
+        /// <param name="createOrChange"></param>
         public void SetCreateChangeСhoice(createChangeСhoice createOrChange)
         {
             CreateChangeСhoice = createOrChange;

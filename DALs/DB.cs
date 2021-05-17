@@ -50,14 +50,41 @@ namespace DALs
         {
             sqlConnection.Close();
         }
-        public void InsertDataToDB(TablesName tableType, List<string> listStringNameColumn, string weaponName, int damage)
+        /// <summary>
+        /// Записывает данные в базу
+        /// </summary>
+        /// <param name="tablesName"></param>
+        /// <param name="listStringNameColumn"></param>
+        /// <param name="listStringValue"></param>
+        public void InsertDataToDB(TablesName tablesName, List<string> listStringNameColumn, List<string> listStringValue)
         {
-            SqlCommand sqlCommand = new SqlCommand("insert into " + tableType.ToString() +
-                " (" + stringFromListToBase(listStringNameColumn) + ") values ('" + weaponName + "'," + damage + ")", sqlConnection);
+
+            SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
+                " (" + stringWihtCommaFromList(listStringNameColumn) + ") values ('" + stringWihtCommaFromList(listStringValue) + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
         }
+        public void InsertDataToDB(TablesName tablesName, string weaponName, int damage)
+        {
+            List<string> listStringNameColumn = listStringFromEnumColumnName(tablesName);
+            SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
+                " (" + stringWihtCommaFromList(listStringNameColumn) + ") values ('" + weaponName + "'," + damage + ")", sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+        }
+        public List<string> listStringFromEnumColumnName(TablesName tablesName)
+        { 
+           if (tablesName==TablesName.dress)
+                return Enum.GetValues(typeof(DressColumnName)).Cast<DressColumnName>().Select(v => v.ToString()).ToList();
+           if (tablesName==TablesName.constitution)
+                return Enum.GetValues(typeof(ConstitutionColumnName)).Cast<ConstitutionColumnName>().Select(v => v.ToString()).ToList();
 
-        public string stringFromListToBase(List<string> listString)
+            return new List<string>();
+        }
+        /// <summary>
+        /// Делает строчку из листа строк в формате "string1, string2, string3 ..." 
+        /// </summary>
+        /// <param name="listString">лист строк</param>
+        /// <returns></returns>
+        public string stringWihtCommaFromList(List<string> listString)
         {
             string stringToBase=string.Empty;
             foreach(string stringInList in listString)

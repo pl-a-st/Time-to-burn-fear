@@ -70,7 +70,7 @@ namespace Time_to_burn_fear
                     SetName(parameters.Name);
             }
         }
-        public Random rnd
+        public Random Rnd
         { get; private set; } = new Random(DateTime.Now.Millisecond);
         public int TakeDamageDone(int opponentsProtection)
         {
@@ -79,11 +79,11 @@ namespace Time_to_burn_fear
             const int POINT_MIN_PROBABILITY = 1;
             const int POINT_MAX_PROBABILITY = 101;
             int luckRate = 1;
-            int rndToLuck = rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY);
+            int rndToLuck = Rnd.Next(POINT_MIN_PROBABILITY, POINT_MAX_PROBABILITY);
 
             if (rndToLuck <= Luck)
                 luckRate = 2;
-            int rndToDamage = rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE] + 1);
+            int rndToDamage = Rnd.Next(Damage[MIN_POSITION_IN_DAMAGE], Damage[MAX_POSITION_IN_DAMAGE] + 1);
             if ((luckRate * rndToDamage - opponentsProtection) < 0)
                 return 0;
             return luckRate* rndToDamage - opponentsProtection;
@@ -309,6 +309,50 @@ namespace Time_to_burn_fear
         public void SetName(string name)
         {
             Name = name;
+        }
+        public List<string> ParametersToListForDB()
+        {
+            List<string> listSttring = new List<string>
+            {
+                "'" + Name + "'",
+                Convert.ToString(Protection),
+                Convert.ToString(Luck),
+                Convert.ToString(Speed),
+                Convert.ToString(Health),
+                Convert.ToString(Damage)
+            };
+            if (this is BodyArmor)
+                listSttring.Add(TypeDress.BodyArmor.ToString());
+            if (this is Boots)
+                listSttring.Add(TypeDress.Boots.ToString());
+            if (this is Gloves)
+                listSttring.Add(TypeDress.Gloves.ToString());
+            if (this is Headdress)
+                listSttring.Add(TypeDress.Headdress.ToString());
+            if (this is Leggings)
+                listSttring.Add(TypeDress.Leggings.ToString());
+            if (this is Ring)
+                listSttring.Add(TypeDress.Ring.ToString());
+            if (this is Weapon)
+                listSttring.Add(TypeDress.Weapon.ToString());
+            if (!(this is Hero) && this is Elemental)
+                listSttring.Add(Race.Elemental.ToString());
+            if (!(this is Hero) && this is Elf)
+                listSttring.Add(Race.Elf.ToString());
+            if (!(this is Hero) && this is Human)
+                listSttring.Add(Race.Human.ToString());
+            if (!(this is Hero) && this is Orc)
+                listSttring.Add(Race.Orc.ToString());
+            if (!(this is Hero) && this is Witcher)
+                listSttring.Add(Race.Witcher.ToString());
+            return listSttring;
+        }
+        public void InsertTisToDB()
+        {
+            if ( this is  Dress)
+            {
+
+            }
         }
     }
 }

@@ -123,7 +123,7 @@ namespace Time_to_burn_fear
                     foreach (string columnName in baseColumnName)
                     {
                         if (stringForList != string.Empty)
-                            stringForList = stringForList + "\t";
+                            stringForList += "\t";
                         stringForList = stringForList + sqlDataReader[columnName].ToString();
                     }
                     listStringFromBase.Add(stringForList);

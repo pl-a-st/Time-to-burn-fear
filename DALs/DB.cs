@@ -50,27 +50,34 @@ namespace DALs
         {
             sqlConnection.Close();
         }
+        public List<string> GetListStringNameColumn(TablesName tablesName)
+        {
+            if (tablesName==TablesName.dress)
+                return new List<string>{"name","protection","luck","speed","health","damage","type"};
+            return new List<string>();
+        }
+        
         /// <summary>
         /// Записывает данные в базу
         /// </summary>
-        /// <param name="tablesName"></param>
-        /// <param name="listStringNameColumn"></param>
-        /// <param name="listStringValue"></param>
-        public void InsertDataToDB(TablesName tablesName, List<string> listStringNameColumn, List<string> listStringValue)
+        /// <param name="tablesName">Имя таблицы</param>
+        /// <param name="listStringNameColumn">Лист названий имен столцов таблицы</param>
+        /// <param name="listStringValue">Лист с данными, текст должен быть в одинарных кавычках</param>
+        public void InsertDataToDB(TablesName tablesName, List<string> listStringValue)
         {
-
+            List<string> listStringNameColumn = GetListStringNameColumn(tablesName);
             SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
-                " (" + stringWihtCommaFromList(listStringNameColumn) + ") values ('" + stringWihtCommaFromList(listStringValue) + ")", sqlConnection);
+                " (" + StringWihtCommaFromList(listStringNameColumn) + ") values (" + StringWihtCommaFromList(listStringValue) + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
         }
         public void InsertDataToDB(TablesName tablesName, string weaponName, int damage)
         {
-            List<string> listStringNameColumn = listStringFromEnumColumnName(tablesName);
+            List<string> listStringNameColumn = ListStringFromEnumColumnName(tablesName);
             SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
-                " (" + stringWihtCommaFromList(listStringNameColumn) + ") values ('" + weaponName + "'," + damage + ")", sqlConnection);
+                " (" + StringWihtCommaFromList(listStringNameColumn) + ") values ('" + weaponName + "'," + damage + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
         }
-        public List<string> listStringFromEnumColumnName(TablesName tablesName)
+        public List<string> ListStringFromEnumColumnName(TablesName tablesName)
         { 
            if (tablesName==TablesName.dress)
                 return Enum.GetValues(typeof(DressColumnName)).Cast<DressColumnName>().Select(v => v.ToString()).ToList();
@@ -84,7 +91,7 @@ namespace DALs
         /// </summary>
         /// <param name="listString">лист строк</param>
         /// <returns></returns>
-        public string stringWihtCommaFromList(List<string> listString)
+        public string StringWihtCommaFromList(List<string> listString)
         {
             string stringToBase=string.Empty;
             foreach(string stringInList in listString)

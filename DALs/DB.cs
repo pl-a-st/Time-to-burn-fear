@@ -50,13 +50,22 @@ namespace DALs
         {
             sqlConnection.Close();
         }
+        /// <summary>
+        /// Возвращает лист строк имен колонок указанной таблицы
+        /// </summary>
+        /// <param name="tablesName"></param>
+        /// <returns></returns>
         public List<string> GetListStringNameColumn(TablesName tablesName)
         {
             if (tablesName==TablesName.dress)
                 return new List<string>{"name","protection","luck","speed","health","damage","type"};
             return new List<string>();
         }
-        
+        public List<string> GetListNamesFromBase(TablesName tablesName)
+        {
+            SqlCommand sqlCommand = new SqlCommand(
+                sqlCommand.ExecuteNonQuery();
+        }
         /// <summary>
         /// Записывает данные в базу
         /// </summary>

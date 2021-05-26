@@ -7,28 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DALs;
 
 namespace Time_to_burn_fear
 {
     public partial class AddChar : Form
     {
-        DB db;
         public AddChar()
         {
             InitializeComponent();
-           db = new DB();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            TablesName tablesName = TablesName.heroes;
         }
 
         private void btnAddChar_Click(object sender, EventArgs e)
         {
-            string str=WhithEnume.EnumeToString(TablesName.dress);
-
             if (tBxName.Text == "")
             {
                 MessageBox.Show("Не выбрано имя!");

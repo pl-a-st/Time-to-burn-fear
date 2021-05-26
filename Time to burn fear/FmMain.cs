@@ -803,7 +803,7 @@ namespace Time_to_burn_fear
                             if (control is GroupBox && control.Name == button.Tag.ToString())
                             {
                                 foreach (Control thisControl in control.Controls)
-                                {
+                                {          
                                     if (thisControl is ComboBox)
                                     {
                                         ComboBox comboBox = thisControl as ComboBox;
@@ -833,9 +833,7 @@ namespace Time_to_burn_fear
                         }
                     }
                 }
-            }
-               
-            
+            }        
             form.Close();
         } 
         private void btnCancel_Click(object sender, EventArgs e)

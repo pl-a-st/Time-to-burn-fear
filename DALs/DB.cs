@@ -61,10 +61,24 @@ namespace DALs
                 return new List<string>{"name","protection","luck","speed","health","damage","type"};
             return new List<string>();
         }
-        public List<string> GetListNamesFromBase(TablesName tablesName)
+        /// <summary>
+        /// Зачитываем лист строк из поля базы данных
+        /// </summary>
+        /// <param name="tablesName">имя таблицы</param>
+        /// <param name="rowName">название поля, значения которого будут записаны в лист</param>
+        /// <returns></returns>
+        public List<string> GetListNamesFromBase(TablesName tablesName, string rowName)
         {
-            SqlCommand sqlCommand = new SqlCommand(
-                sqlCommand.ExecuteNonQuery();
+            Connect();
+            List<string> listRowNameValue = new List<string>();
+            SqlCommand sqlCommand = new SqlCommand("Select * from human", sqlConnection);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                listRowNameValue.Add(sqlDataReader["name"].ToString());
+            }
+            Disconnect();
+            return listRowNameValue;
         }
         /// <summary>
         /// Записывает данные в базу

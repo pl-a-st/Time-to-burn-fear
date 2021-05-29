@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DALs;
 
 namespace Time_to_burn_fear
 {
@@ -112,6 +113,7 @@ namespace Time_to_burn_fear
 
         private void btnAdd_Save_Click(object sender, EventArgs e)
         {
+            DB db = new DB();
             if(CreateChangeСhoice == createChangeСhoice.Choice)
             {
                 SetCreateChangeСhoice(createChangeСhoice.Create);
@@ -125,9 +127,9 @@ namespace Time_to_burn_fear
                     MessageBox.Show("Громкий хлопок, дым заполнил лабораторию. Вы забыли добавить необходимые ингредиенты. Предмет не создан!");
                     return;
                 }
-                foreach(string dress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
+                foreach(string dress in db.GetListNamesFromBase(TablesName.dress, DressColumnName.name.ToString()))
                 {
-                    if (dress.Split('\t')[0]==tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
+                    if (dress==tBxName.Text)
                     {
                         MessageBox.Show("Вы чувствуете как сгущается воздух вокруг. Пространство не может позволить одинаковые артифакты. " +
                             "Хлопок, артифакт рассыпается у вас в руках!");
@@ -137,7 +139,8 @@ namespace Time_to_burn_fear
                 //DAO.AddStringToFile(tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
                 //    (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value,Constants.THING_FILE_NAME);
                 // вызвать запись одежды в базу
-                DAO.AddDressToBase(tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)).ToString(), (int)nUDFirstParametr.Value, (int)nUDSecondParametr.Value);
+                //DAO.AddDressToBase(tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)).ToString(), (int)nUDFirstParametr.Value, (int)nUDSecondParametr.Value);
+                
                 MessageBox.Show("Успех. Новый артифакт в вашем распоряжении.");
                 SetCreateChangeСhoice(createChangeСhoice.Choice);
                 SetFormDisplay();

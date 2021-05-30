@@ -38,7 +38,7 @@ namespace DALs
         public string ConnectionString
         {
             get;
-        } = "Data Source = "+ ServerName+" ; Initial Catalog = TimeToBurnFear; Integrated Security = True";
+        } = "Data Source = "+ ServerName+ " ; Initial Catalog = Time-to-burn-fear; Integrated Security = True";
         private SqlConnection sqlConnection;
         public static string ServerName;
         public void Connect()
@@ -58,7 +58,7 @@ namespace DALs
         public List<string> GetListStringNameColumn(TablesName tablesName)
         {
             if (tablesName==TablesName.dress)
-                return new List<string>{"name","protection","luck","speed","health","damage","type"};
+                return new List<string>{"name","protection","luck","speed","health","damage0", "damage1", "type" ,"id"};
             return new List<string>();
         }
         /// <summary>
@@ -71,7 +71,7 @@ namespace DALs
         {
             Connect();
             List<string> listRowNameValue = new List<string>();
-            SqlCommand sqlCommand = new SqlCommand("Select * from human", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("Select * from "+ tablesName.ToString(), sqlConnection);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
@@ -88,10 +88,32 @@ namespace DALs
         /// <param name="listStringValue">Лист с данными, текст должен быть в одинарных кавычках</param>
         public void InsertDataToDB(TablesName tablesName, List<string> listStringValue)
         {
+            
             List<string> listStringNameColumn = GetListStringNameColumn(tablesName);
+            listStringValue.Add((GetMaxID(TablesName.dress)+1).ToString());
+            Connect();
             SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
                 " (" + StringWihtCommaFromList(listStringNameColumn) + ") values (" + StringWihtCommaFromList(listStringValue) + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
+            Disconnect();
+        }
+        /// <summary>
+        /// Возвращает максимальный ID  в интах
+        /// </summary>
+        /// <param name="tablesName">имя таблицы</param>
+        /// <returns></returns>
+        public int GetMaxID(TablesName tablesName)
+        {
+            int maxId=0;
+            Connect();
+            SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE Id=(SELECT MAX(Id) from " + tablesName.ToString()+")", sqlConnection);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                maxId=int.Parse(sqlDataReader["id"].ToString());
+            }            
+            Disconnect();
+            return maxId;
         }
         public void InsertDataToDB(TablesName tablesName, string weaponName, int damage)
         {

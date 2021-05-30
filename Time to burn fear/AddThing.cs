@@ -136,11 +136,11 @@ namespace Time_to_burn_fear
                         return;
                     }
                 }
-                //DAO.AddStringToFile(tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
-                //    (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value,Constants.THING_FILE_NAME);
-                // вызвать запись одежды в базу
-                //DAO.AddDressToBase(tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)).ToString(), (int)nUDFirstParametr.Value, (int)nUDSecondParametr.Value);
-                
+                string[] string1 = {tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian),cBxType.Text, true)).ToString(), 
+                    nUDFirstParametr.Value.ToString(), nUDSecondParametr.Value.ToString() };
+                Dress dressForBase = Dress.CreateTypeDressFromArryString(string1);
+                List<string> listParaametersForDb= dressForBase.ParametersToListForDB();
+                db.InsertDataToDB(TablesName.dress, listParaametersForDb);
                 MessageBox.Show("Успех. Новый артифакт в вашем распоряжении.");
                 SetCreateChangeСhoice(createChangeСhoice.Choice);
                 SetFormDisplay();

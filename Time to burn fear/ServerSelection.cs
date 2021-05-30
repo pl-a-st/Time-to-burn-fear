@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,17 @@ namespace Time_to_burn_fear
 
         private void ServerSelection_Load(object sender, EventArgs e)
         {
-
+            if (File.Exists(Constants.SERVER_NAME))
+            {
+                StreamReader streamReader = new StreamReader(Constants.SERVER_NAME);
+                while (!streamReader.EndOfStream)
+                {
+                    cBxServers.Items.Add(streamReader.ReadLine());
+                    cBxServers.SelectedIndex=0;
+                }
+                streamReader.Close();
+                cBxServers.Enabled = true;
+            }
         }
 
         private void ServerSelection_Shown(object sender, EventArgs e)
@@ -89,6 +100,10 @@ namespace Time_to_burn_fear
                 return;
             }
             DB.ServerName = cBxServers.SelectedItem.ToString();
+            StreamWriter streamWriter = new StreamWriter(Constants.SERVER_NAME, false);
+
+            streamWriter.WriteLine(cBxServers.SelectedItem.ToString());
+            streamWriter.Close();
             Close();
         }
 

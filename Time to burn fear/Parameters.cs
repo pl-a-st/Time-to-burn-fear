@@ -170,9 +170,34 @@ namespace Time_to_burn_fear
             if (dressParts[1] == "Leggings")
                 return new Leggings(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "BodyArmor")
-                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[23]), dressParts[0]);
+                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             if (dressParts[1] == "Boots")
                 return new Boots(int.Parse(dressParts[2]), int.Parse(dressParts[3]),dressParts[0]);
+            return new Dress();
+        }
+        /// <summary>
+        /// Создает экземпляр одежды соответствующего типа 
+        /// </summary>
+        /// <param name="dressParts"> массив {имя,тип,первый параметр, второй параметр} </param>
+        /// <returns></returns>
+        static public Dress CreateTypeDressFromArryString(string [] dressParts)
+        {
+            if (dressParts.Length == 1)
+                return new Dress();
+            if (dressParts[1] == "Weapon")
+                return new Weapon(int.Parse(dressParts[2]), dressParts[0]) as Dress;
+            if (dressParts[1] == "Ring")
+                return new Ring(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
+            if (dressParts[1] == "Gloves")
+                return new Gloves(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
+            if (dressParts[1] == "Headdress")
+                return new Headdress(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
+            if (dressParts[1] == "Leggings")
+                return new Leggings(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
+            if (dressParts[1] == "BodyArmor")
+                return new BodyArmor(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
+            if (dressParts[1] == "Boots")
+                return new Boots(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             return new Dress();
         }
     }
@@ -319,32 +344,33 @@ namespace Time_to_burn_fear
                 Convert.ToString(Luck),
                 Convert.ToString(Speed),
                 Convert.ToString(Health),
-                Convert.ToString(Damage)
+                Convert.ToString(Damage[0]),
+                Convert.ToString(Damage[1]),
             };
             if (this is BodyArmor)
-                listSttring.Add(TypeDress.BodyArmor.ToString());
+                listSttring.Add("'"+TypeDress.BodyArmor.ToString() + "'");
             if (this is Boots)
-                listSttring.Add(TypeDress.Boots.ToString());
+                listSttring.Add("'" + TypeDress.Boots.ToString() + "'");
             if (this is Gloves)
-                listSttring.Add(TypeDress.Gloves.ToString());
+                listSttring.Add("'" + TypeDress.Gloves.ToString() + "'");
             if (this is Headdress)
-                listSttring.Add(TypeDress.Headdress.ToString());
+                listSttring.Add("'" + TypeDress.Headdress.ToString() + "'");
             if (this is Leggings)
-                listSttring.Add(TypeDress.Leggings.ToString());
+                listSttring.Add("'" + TypeDress.Leggings.ToString() + "'");
             if (this is Ring)
-                listSttring.Add(TypeDress.Ring.ToString());
+                listSttring.Add("'" + TypeDress.Ring.ToString() + "'");
             if (this is Weapon)
-                listSttring.Add(TypeDress.Weapon.ToString());
+                listSttring.Add("'" + TypeDress.Weapon.ToString() + "'");
             if (!(this is Hero) && this is Elemental)
-                listSttring.Add(Race.Elemental.ToString());
+                listSttring.Add("'" + Race.Elemental.ToString() + "'");
             if (!(this is Hero) && this is Elf)
-                listSttring.Add(Race.Elf.ToString());
+                listSttring.Add("'" + Race.Elf.ToString() + "'");
             if (!(this is Hero) && this is Human)
-                listSttring.Add(Race.Human.ToString());
+                listSttring.Add("'" + Race.Human.ToString() + "'");
             if (!(this is Hero) && this is Orc)
-                listSttring.Add(Race.Orc.ToString());
+                listSttring.Add("'" + Race.Orc.ToString() + "'");
             if (!(this is Hero) && this is Witcher)
-                listSttring.Add(Race.Witcher.ToString());
+                listSttring.Add("'" + Race.Witcher.ToString() + "'");
             return listSttring;
         }
         public void InsertTisToDB()

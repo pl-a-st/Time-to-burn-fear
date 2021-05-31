@@ -62,12 +62,12 @@ namespace DALs
             return new List<string>();
         }
         /// <summary>
-        /// Зачитываем лист строк из поля базы данных
+        /// Зачитываем лист строк-значений из указанной колонки базы данных
         /// </summary>
         /// <param name="tablesName">имя таблицы</param>
         /// <param name="rowName">название поля, значения которого будут записаны в лист</param>
         /// <returns></returns>
-        public List<string> GetListNamesFromBase(TablesName tablesName, string rowName)
+        public List<string> GetListNamesFromBase(TablesName tablesName, string columnName)
         {
             Connect();
             List<string> listRowNameValue = new List<string>();
@@ -75,7 +75,7 @@ namespace DALs
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
-                listRowNameValue.Add(sqlDataReader["name"].ToString());
+                listRowNameValue.Add(sqlDataReader[columnName].ToString());
             }
             Disconnect();
             return listRowNameValue;

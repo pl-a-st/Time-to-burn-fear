@@ -35,7 +35,7 @@ namespace Time_to_burn_fear
             InitializeComponent();
         }
         /// <summary>
-        /// Формируем внешний вид формы взависимости от режима
+        /// Формируем внешний вид формы в зависимости от режима
         /// </summary>
         public void SetFormDisplay()
         {
@@ -49,7 +49,7 @@ namespace Time_to_burn_fear
                     if (!(control is ListBox||control is Button|| control is Label))
                         control.Enabled = false;
                 }
-                lBxFromBaseSelectFirst(lBxDress, Constants.THING_FILE_NAME);
+                lBxFromBaseSelectFirst(lBxDress, TablesName.dress, DressColumnName.name.ToString());
             }
             if (CreateChangeСhoice == createChangeСhoice.Create)
             {
@@ -83,20 +83,21 @@ namespace Time_to_burn_fear
 
         }
         /// <summary>
-        /// Заполняет ListBox из файла
+        /// Заполняет ListBox строками значений из указанной колонки указанной таблицы
         /// </summary>
         /// <param name="listBox">заполняемый ListBox</param>
         /// <param  name="filename">имя файла</param>
-         public void lBxFromBaseSelectFirst(ListBox listBox, string filename)
+         public void lBxFromBaseSelectFirst(ListBox listBox, TablesName tablesName, string columnName)
         {
-            lBxDress.Items.Clear();
-            foreach (string strDress in DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName))
+            DB db = new DB();
+            listBox.Items.Clear();
+            foreach (string strDress in db.GetListNamesFromBase(tablesName, columnName))
             {
                 if (strDress!=Constants.CUT_DRESS_NAME)
-                lBxDress.Items.Add(strDress.Split('\t')[0]);
+                    listBox.Items.Add(strDress);
             }
             if (lBxDress.Items.Count>0)
-            lBxDress.SetSelected(0, true);
+                listBox.SetSelected(0, true);
         }
 
         private void AddThing_Load(object sender, EventArgs e)

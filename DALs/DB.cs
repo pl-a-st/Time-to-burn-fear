@@ -16,9 +16,13 @@ namespace DALs
     public enum DressColumnName
     {
         name,
-        type_dress,
-        first_parameter,
-        second_parameter
+        type,
+        protection,
+        luck,
+        speed,
+        health,
+        damage0,
+        damage1
     }
     public enum ConstitutionColumnName
     {
@@ -88,7 +92,6 @@ namespace DALs
         /// <param name="listStringValue">Лист с данными, текст должен быть в одинарных кавычках</param>
         public void InsertDataToDB(TablesName tablesName, List<string> listStringValue)
         {
-            
             List<string> listStringNameColumn = GetListStringNameColumn(tablesName);
             listStringValue.Add((GetMaxID(TablesName.dress)+1).ToString());
             Connect();
@@ -96,6 +99,27 @@ namespace DALs
                 " (" + StringWihtCommaFromList(listStringNameColumn) + ") values (" + StringWihtCommaFromList(listStringValue) + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
             Disconnect();
+        }
+       /// <summary>
+       /// Возвращает значени поля базы данных по заданному содержанию поля этой же записи
+       /// </summary>
+       /// <param name="tablesName"> имя таблицы </param>
+       /// <param name="columnName"> имя параметра по которому будем искать</param>
+       /// <param name="targetValueKey"> содержание параметра для поиска</param>
+       /// <param name="targetParametrsName">Имя параметра содержание которго нужно вернуть</param>
+       /// <returns></returns>
+        public string GetValueFromDBWhere(TablesName tablesName,string columnName, string targetValueKey,string targetParametrsName)
+        {
+            string returnsString=string.Empty;
+            Connect();
+            SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE "+ columnName+ "="+ targetValueKey, sqlConnection);
+            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+            while (sqlDataReader.Read())
+            {
+                returnsString = sqlDataReader[targetParametrsName].ToString();
+            }
+            Disconnect();
+            return returnsString;
         }
         /// <summary>
         /// Возвращает максимальный ID  в интах

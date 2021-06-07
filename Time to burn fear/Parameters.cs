@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DALs;
 
 namespace Time_to_burn_fear
 {
@@ -154,6 +155,47 @@ namespace Time_to_burn_fear
     
     public class Dress : Parameters 
     {
+        public TypeDress TypeDressEnum
+        { get; private set; }
+        public Dress()
+        {
+            new Dress();
+        }
+        /// <summary>
+        /// возвращает Dress
+        /// </summary>
+        /// <param name="typeDress">тип Dress</param>
+        /// <param name="name">имя</param>
+        /// <param name="speed">скорость</param>
+        /// <param name="protection">броня</param>
+        /// <param name="health">жизнь</param>
+        /// <param name="damage">урон</param>
+        /// <param name="luck">удача</param>
+        public Dress (TypeDress typeDress, string name,  int speed, int protection, int health, int damage, int luck)
+        {
+            TypeDressEnum = typeDress;
+            SetSpeed(speed);
+            SetProtection(protection);
+            SetName(name);
+            SetDamage(new[] { damage, damage });
+            SetHealth(health);
+            SetLuck(luck);
+        }
+       /// <summary>
+       /// Создает Dress из базы данных по имени
+       /// </summary>
+       /// <param name="name"></param>
+        public Dress(string name)
+        {
+            DB db = new DB();
+            new Dress((TypeDress)Enum.Parse(typeof(TypeDress), db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.type.ToString()), true),
+                db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.name.ToString()),
+                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.speed.ToString())),
+                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.protection.ToString())),
+                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.health.ToString())),
+                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.damage0.ToString())),
+                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.luck.ToString())));
+        }
         static public Dress CreateTypeDressFromString(string strDress)
         {
             string[] dressParts = strDress.Split('\t');
@@ -176,7 +218,7 @@ namespace Time_to_burn_fear
             return new Dress();
         }
         /// <summary>
-        /// Создает экземпляр одежды соответствующего типа 
+        /// Создает экземпляр одежды соответствующего типа из двух параметров 
         /// </summary>
         /// <param name="dressParts"> массив {имя,тип,первый параметр, второй параметр} </param>
         /// <returns></returns>
@@ -200,6 +242,12 @@ namespace Time_to_burn_fear
                 return new Boots(int.Parse(dressParts[2]), int.Parse(dressParts[3]), dressParts[0]);
             return new Dress();
         }
+        //static public Dress CreateTypeDressFromDB(string nameDress)
+        //{
+        //    DB db = new DB();
+        //    string[] dressParametrs =
+            
+        //}
     }
 
     public class Human : Constitution

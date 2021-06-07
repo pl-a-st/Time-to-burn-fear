@@ -255,17 +255,19 @@ namespace Time_to_burn_fear
                 return;
             if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME)
                 return;
-            string stringDress = DAO.GetStringsByNumberFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,
-                Constants.DressColumnName, lBxDress.SelectedIndex);
-            string[] allDressPararmetrs = stringDress.Split('\t');
-            const int NAME_IN_STRING = 0;
-            const int TYPE_IN_STRING = 1;
-            const int PARM1_IN_STRING = 2;
-            const int PARAM2_IN_STRING = 3;
-            tBxName.Text = allDressPararmetrs[NAME_IN_STRING];
-            cBxType.SelectedItem=(TypeDressInRussian)Enum.Parse(typeof(TypeDress), allDressPararmetrs[TYPE_IN_STRING], true);
+            Dress dress = new Dress(lBxDress.SelectedItem.ToString());
+            //string stringDress = DAO.GetStringsByNumberFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,
+            //    Constants.DressColumnName, lBxDress.SelectedIndex);
+            //string[] allDressPararmetrs = stringDress.Split('\t');
+            //const int NAME_IN_STRING = 0;
+            //const int TYPE_IN_STRING = 1;
+            //const int PARM1_IN_STRING = 2;
+            //const int PARAM2_IN_STRING = 3;
+            tBxName.Text = dress.Name;
+            cBxType.SelectedItem=(TypeDressInRussian)Enum.Parse(typeof(TypeDress), dress.TypeDressEnum.ToString(), true);// to do
             nUDFirstParametr.Value = int.Parse(allDressPararmetrs[PARM1_IN_STRING]);
             nUDSecondParametr.Value = int.Parse(allDressPararmetrs[PARAM2_IN_STRING]);
+            
         }
 
         private void lBxDress_SelectedIndexChanged(object sender, EventArgs e)

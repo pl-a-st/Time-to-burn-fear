@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
@@ -63,6 +64,16 @@ namespace DALs
         {
             if (tablesName==TablesName.dress)
                 return new List<string>{"name","protection","luck","speed","health","damage0", "damage1", "type" ,"id"};
+            if (tablesName == TablesName.constitution)
+                return new List<string> { "name", "race", "id" };
+            return new List<string>();
+        }
+        public List<string> GetListStringNameColumnOutId(TablesName tablesName)
+        {
+            if (tablesName == TablesName.dress)
+                return new List<string> { "name", "protection", "luck", "speed", "health", "damage0", "damage1", "type" };
+            if (tablesName == TablesName.constitution)
+                return new List<string> { "name", "race", "id" };
             return new List<string>();
         }
         /// <summary>
@@ -85,7 +96,7 @@ namespace DALs
             return listRowNameValue;
         }
         /// <summary>
-        /// Записывает данные в базу
+        /// Записывает данные в базу 
         /// </summary>
         /// <param name="tablesName">Имя таблицы</param>
         /// <param name="listStringNameColumn">Лист названий имен столцов таблицы</param>
@@ -93,26 +104,67 @@ namespace DALs
         public void InsertDataToDB(TablesName tablesName, List<string> listStringValue)
         {
             List<string> listStringNameColumn = GetListStringNameColumn(tablesName);
-            listStringValue.Add((GetMaxID(TablesName.dress)+1).ToString());
+            listStringValue.Add((GetMaxID(tablesName) +1).ToString());
             Connect();
             SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
                 " (" + StringWihtCommaFromList(listStringNameColumn) + ") values (" + StringWihtCommaFromList(listStringValue) + ")", sqlConnection);
             sqlCommand.ExecuteNonQuery();
             Disconnect();
         }
-       /// <summary>
-       /// Возвращает значени поля базы данных по заданному содержанию поля этой же записи
-       /// </summary>
-       /// <param name="tablesName"> имя таблицы </param>
-       /// <param name="columnName"> имя параметра по которому будем искать</param>
-       /// <param name="targetValueKey"> содержание параметра для поиска</param>
-       /// <param name="targetParametrsName">Имя параметра содержание которго нужно вернуть</param>
-       /// <returns></returns>
+        /// <summary>
+        /// Меняе данные в БД
+        /// </summary>
+        /// <param name="tablesName">имя таблицы</param>
+        /// <param name="listStringValue">лист данных на которые происходит замена</param>
+        /// <param name="columnName">имя столбца по которому выбирается строка для замены</param>
+        /// <param name="targetData">искомое значение в columnName </param>
+        public void ChangeDataInDB(TablesName tablesName, List<string> listStringValue, string columnName, string targetData)
+        {
+            List<string> listStringNameColumn = GetListStringNameColumnOutId(tablesName);
+            
+            Connect();
+            //SqlCommand sqlCommand = new SqlCommand("update " + tablesName.ToString() +
+            //    " set (" + StringWihtCommaFromList(listStringNameColumn) + ") values (" + StringWihtCommaFromList(listStringValue) +  ") where "+ columnName + " = '"+ targetData + "'", sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("update " + tablesName.ToString() +
+                " set " + StringForChangeFrom2Lists(listStringValue, listStringNameColumn) + " where " + columnName + " = '" + targetData + "'", sqlConnection);
+            sqlCommand.ExecuteNonQuery();
+            Disconnect();
+        }
+        /// <summary>
+        /// Создает строку из двух листов для изменений данных в БД
+        /// </summary>
+        /// <param name="listStringValue">лист данных на которые происходит замена</param>
+        /// <param name="listStringNameColumn">лист имен столбцов в которых будут менятся значения в БД</param>
+        /// <returns></returns>
+        public string StringForChangeFrom2Lists(List<string> listStringValue, List<string> listStringNameColumn)
+        {
+            string stringForChangeDB = string.Empty;
+            for (int i = 0; i<listStringValue.Count();i++)
+            {
+                if (string.IsNullOrEmpty(stringForChangeDB))
+                {
+                    stringForChangeDB = listStringNameColumn[i]+" = "+listStringValue[i];
+                }
+                else
+                {
+                    stringForChangeDB = stringForChangeDB + ", "+ listStringNameColumn[i] + " = " + listStringValue[i];
+                }
+            }
+            return stringForChangeDB;
+        }
+        /// <summary>
+        /// Возвращает значение поля базы данных по заданному содержанию поля этой же записи
+        /// </summary>
+        /// <param name="tablesName"> имя таблицы </param>
+        /// <param name="columnName"> имя параметра по которому будем искать</param>
+        /// <param name="targetValueKey"> содержание параметра для поиска</param>
+        /// <param name="targetParametrsName">Имя параметра содержание которго нужно вернуть</param>
+        /// <returns></returns>
         public string GetValueFromDBWhere(TablesName tablesName,string columnName, string targetValueKey,string targetParametrsName)
         {
             string returnsString=string.Empty;
             Connect();
-            SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE "+ columnName+ "="+ targetValueKey, sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE "+ columnName+ "='"+ targetValueKey+"'", sqlConnection);
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             while (sqlDataReader.Read())
             {
@@ -128,24 +180,30 @@ namespace DALs
         /// <returns></returns>
         public int GetMaxID(TablesName tablesName)
         {
-            int maxId=0;
-            Connect();
-            SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE Id=(SELECT MAX(Id) from " + tablesName.ToString()+")", sqlConnection);
-            SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-            while (sqlDataReader.Read())
+            int maxId=-1;
+            try
             {
-                maxId=int.Parse(sqlDataReader["id"].ToString());
-            }            
-            Disconnect();
+                Connect();
+                SqlCommand sqlCommand = new SqlCommand("SELECT * from " + tablesName.ToString() + " WHERE Id=(SELECT MAX(Id) from " + tablesName.ToString() + ")", sqlConnection);
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                while (sqlDataReader.Read())
+                {
+                    maxId = int.Parse(sqlDataReader["id"].ToString());
+                }
+                Disconnect();
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+                WriteLog(ex.StackTrace);
+            }
             return maxId;
         }
-        public void InsertDataToDB(TablesName tablesName, string weaponName, int damage)
-        {
-            List<string> listStringNameColumn = ListStringFromEnumColumnName(tablesName);
-            SqlCommand sqlCommand = new SqlCommand("insert into " + tablesName.ToString() +
-                " (" + StringWihtCommaFromList(listStringNameColumn) + ") values ('" + weaponName + "'," + damage + ")", sqlConnection);
-            sqlCommand.ExecuteNonQuery();
-        }
+        /// <summary>
+        /// Возвращает лист экземпляров Enum
+        /// </summary>
+        /// <param name="tablesName"></param>
+        /// <returns></returns>
         public List<string> ListStringFromEnumColumnName(TablesName tablesName)
         { 
            if (tablesName==TablesName.dress)
@@ -175,6 +233,23 @@ namespace DALs
                 }
             }
             return stringToBase;
+        }
+        public static void WriteLog(string message)
+        {
+            DateTime fixedTime = DateTime.Now;
+            string logName = GetLogName(fixedTime);
+            message = fixedTime + "\t" + message;
+            StreamWriter sr = new StreamWriter(logName, true);
+            sr.WriteLine(message);
+            sr.Flush();
+            sr.Close();
+        }
+        public static string GetLogName(DateTime fixedTime)
+        {
+            string fileName = string.Empty;
+            fileName = fixedTime.Year + "_" + fixedTime.Month + "_" + fixedTime.Day +
+                " " + fixedTime.Hour + ".txt";
+            return fileName;
         }
     }
 }

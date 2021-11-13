@@ -248,7 +248,9 @@ namespace Time_to_burn_fear
                 " " + fixedTime.Hour +  ".txt";
             return fileName;
         }
-
+        /// <summary>
+        /// Загружает пустой файл
+        /// </summary>
         public static void LoadCutToFile()
         {
             if (!File.Exists(Constants.THING_FILE_NAME))
@@ -265,13 +267,16 @@ namespace Time_to_burn_fear
                 streamWriter.WriteLine("Шляпа Верина\tHeaddress\t9\t3");
                 streamWriter.WriteLine("Трусы Саломоныча\tLeggings\t2\t5");
                 streamWriter.WriteLine("Шаровары Вячеслава\tLeggings\t6\t1");
-                streamWriter.WriteLine("Жилетка колесова\tBodyArmor\t2\t5");
+                streamWriter.WriteLine("Жилетка Колесова\tBodyArmor\t2\t5");
                 streamWriter.WriteLine("Бюстгалтер Аллочки\tBodyArmor\t10\t10");
                 streamWriter.WriteLine("Сапоги ухода домой\tBoots\t10\t0");
                 streamWriter.WriteLine("Профит Хвостиченко\tBoots\t0\t0");
                 streamWriter.Close();
             }
         }
+        /// <summary>
+        /// загружает начальных персонажей
+        /// </summary>
         public static void LoadCharToFileFirstStart()
         {
             if (!File.Exists(Constants.CHARS_FILE_NAME))

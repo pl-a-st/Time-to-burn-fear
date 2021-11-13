@@ -159,7 +159,7 @@ namespace Time_to_burn_fear
         { get; private set; }
         public Dress()
         {
-            new Dress();
+            
         }
         /// <summary>
         /// возвращает Dress
@@ -167,7 +167,7 @@ namespace Time_to_burn_fear
         /// <param name="typeDress">тип Dress</param>
         /// <param name="name">имя</param>
         /// <param name="speed">скорость</param>
-        /// <param name="protection">броня</param>
+        /// <param name="protection">защита</param>
         /// <param name="health">жизнь</param>
         /// <param name="damage">урон</param>
         /// <param name="luck">удача</param>
@@ -181,6 +181,25 @@ namespace Time_to_burn_fear
             SetHealth(health);
             SetLuck(luck);
         }
+        public int[] GetFirstSecondParameters()
+        {
+            int[] firstSecondParameters =new int[] { Damage[0], Damage[1] };
+            if (TypeDressEnum == TypeDress.BodyArmor)
+                return firstSecondParameters = new int [] { Protection, Health};
+            if (TypeDressEnum == TypeDress.Boots)
+                return firstSecondParameters = new int[] { Speed, Protection};
+            if (TypeDressEnum == TypeDress.Gloves)
+                return firstSecondParameters = new int[] { Protection, Speed};
+            if (TypeDressEnum == TypeDress.Headdress)
+                return firstSecondParameters = new int[] { Protection, Health};
+            if (TypeDressEnum == TypeDress.Leggings)
+                return firstSecondParameters = new int[] { Speed, Protection};
+            if (TypeDressEnum == TypeDress.Ring)
+                return firstSecondParameters = new int[] { Damage[0], Luck};
+            if (TypeDressEnum == TypeDress.Weapon)
+                return firstSecondParameters = new int[] { Damage[0], Damage[1]};
+            return firstSecondParameters;
+        }
        /// <summary>
        /// Создает Dress из базы данных по имени
        /// </summary>
@@ -188,13 +207,21 @@ namespace Time_to_burn_fear
         public Dress(string name)
         {
             DB db = new DB();
-            new Dress((TypeDress)Enum.Parse(typeof(TypeDress), db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.type.ToString()), true),
-                db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.name.ToString()),
-                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.speed.ToString())),
-                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.protection.ToString())),
-                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.health.ToString())),
-                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.damage0.ToString())),
-                int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.luck.ToString())));
+            TypeDressEnum = (TypeDress)Enum.Parse(typeof(TypeDress), db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.type.ToString()), true);
+            Name = db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.name.ToString());
+            Speed = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.speed.ToString()));
+            Protection = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.protection.ToString()));
+            Health = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.health.ToString()));
+            Damage[0] = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.damage0.ToString()));
+            Damage[1] = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.damage0.ToString()));
+            Luck = int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.luck.ToString()));
+            //new Dress((TypeDress)Enum.Parse(typeof(TypeDress), db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.type.ToString()), true),
+            //    db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.name.ToString()),
+            //    int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.speed.ToString())),
+            //    int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.protection.ToString())),
+            //    int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.health.ToString())),
+            //    int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.damage0.ToString())),
+            //    int.Parse(db.GetValueFromDBWhere(TablesName.dress, DressColumnName.name.ToString(), name, DressColumnName.luck.ToString())));
         }
         static public Dress CreateTypeDressFromString(string strDress)
         {
@@ -344,7 +371,7 @@ namespace Time_to_burn_fear
     public class Parameters
     {
         public int[] Damage
-        { get; private set; } = new[] { 0, 0 };
+        { get; protected set; } = new int[2] { 0, 0 };
         /// <summary>
         /// Устаноть урон
         /// </summary>
@@ -354,31 +381,31 @@ namespace Time_to_burn_fear
             Damage = damage;
         }
         public int Health
-        { get; private set; } = 0;
+        { get; protected set; } = 0;
         public void SetHealth(int helth)
         {
             Health = helth;
         }
         public int Speed
-        { get; private set; } = 0;
+        { get; protected set; } = 0;
         public void SetSpeed(int speed)
         {
             Speed = speed;
         }
         public int Luck
-        { get; private set; } = 0;
+        { get; protected set; } = 0;
         public void SetLuck(int luck)
         {
             Luck = luck;
         }
         public int Protection
-        { get; private set; } = 0;
+        { get; protected set; } = 0;
         public void SetProtection(int protection)
         {
             Protection = protection;
         }
         public string Name
-        { get; private set; } 
+        { get; protected set; } 
         public void SetName(string name)
         {
             Name = name;

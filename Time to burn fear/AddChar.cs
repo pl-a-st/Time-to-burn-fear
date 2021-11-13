@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DALs;
 
 namespace Time_to_burn_fear
 {
@@ -16,26 +17,25 @@ namespace Time_to_burn_fear
         {
             InitializeComponent();
         }
-
         private void btnAddChar_Click(object sender, EventArgs e)
         {
+            DB db = new DB();
             if (tBxName.Text == "")
             {
                 MessageBox.Show("Не выбрано имя!");
                 return;
             }
             Constitution newChar = Calculate.ChangeRaceAndCreate((Race)Enum.Parse(typeof(RaceInRussian), cBxRace.Text, true), tBxName.Text);
-            foreach(Parameters constitution in FmMain.ListChar.Chars)
+            foreach (string dress in db.GetListNamesFromBase(TablesName.constitution, ConstitutionColumnName.name.ToString()))
             {
-                if (constitution.Name== newChar.Name)
+                if (dress == tBxName.Text)
                 {
                     MessageBox.Show("Герой с таким именем уже в игре. Позовите другого героя!");
                     return;
                 }
-                   
             }
             FmMain.ListChar.AddInChars(newChar);
-            DAO.AddStringToFile(newChar.Name + "\t" + newChar.Race, Constants.CHARS_FILE_NAME);
+            db.InsertDataToDB(TablesName.constitution, new List<string> {"'" + newChar.Name + "'", "'" + newChar.Race.ToString() + "'" });
            Close();
         }
 

@@ -154,27 +154,19 @@ namespace Time_to_burn_fear
                     MessageBox.Show("Громкий хлопок, дым заполнил лабораторию. Вы забыли добавить необходимые ингредиенты. Предмет не изменен!");
                     return;
                 }
-                List<string> listThing =DAO.GetListStringsFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,Constants.DressColumnName);
-                string modifyingString = tBxName.Text + '\t' + (TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true) + '\t' +
-                    (int)nUDFirstParametr.Value + '\t' + (int)nUDSecondParametr.Value;
-                listThing[lBxDress.SelectedIndex] = modifyingString;
-                int i = 0;
-                foreach (string dress in listThing)
+                string[] string1 = {tBxName.Text, ((TypeDress)Enum.Parse(typeof(TypeDressInRussian),cBxType.Text, true)).ToString(),
+                    nUDFirstParametr.Value.ToString(), nUDSecondParametr.Value.ToString() };
+                Dress dressForBase = Dress.CreateTypeDressFromArryString(string1);
+                List<string> listParaametersForDb = dressForBase.ParametersToListForDB();
+                List<string> listDresesName = db.GetListNamesFromBase(TablesName.dress, DressColumnName.name.ToString());
+                listDresesName.Remove(lBxDress.SelectedItem.ToString());
+                if (listDresesName.Contains(dressForBase.Name))
                 {
-                    if(dress.Split('\t')[0] == tBxName.Text && dress.Split('\t')[1] == Convert.ToString((TypeDress)Enum.Parse(typeof(TypeDressInRussian), cBxType.Text, true)))
-                    {
-                        i++;
-                        if (i>1)
-                        {
-                            MessageBox.Show("Вы чувствуете как сгущается воздух вокруг. Вы понимаете, что пространство не может позволить одинаковые артифакты. " +
-                                "Хлопок, артифакт остался прежним!");
-                            return;
-                        }
-                    }
-                    
+                    MessageBox.Show("Вы чувствуете как сгущается воздух вокруг. Вы понимаете, что пространство не может позволить одинаковые артифакты. " +
+                               "Хлопок, артифакт остался прежним!");
+                    return;
                 }
-                DAO.ChangeDressInBase(Constants.NAME_BASE, Constants.NAME_TABLE_DRESS, Constants.DressColumnNameType, 
-                    lBxDress.SelectedIndex, modifyingString);
+                db.ChangeDataInDB(TablesName.dress, listParaametersForDb,DressColumnName.name.ToString(), lBxDress.SelectedItem.ToString());
                 MessageBox.Show("Вы вытираете пол с лица: артифакт успешно изменен!");
                 SetCreateChangeСhoice(createChangeСhoice.Choice);
                 SetFormDisplay();
@@ -253,8 +245,9 @@ namespace Time_to_burn_fear
         {
             if (lBxDress.SelectedIndex < 0)
                 return;
-            if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME)
+            if (lBxDress.SelectedItem.ToString() == Constants.CUT_DRESS_NAME|| lBxDress.SelectedItem.ToString() =="")
                 return;
+
             Dress dress = new Dress(lBxDress.SelectedItem.ToString());
             //string stringDress = DAO.GetStringsByNumberFromBase(Constants.NAME_BASE,Constants.NAME_TABLE_DRESS,
             //    Constants.DressColumnName, lBxDress.SelectedIndex);
@@ -265,8 +258,8 @@ namespace Time_to_burn_fear
             //const int PARAM2_IN_STRING = 3;
             tBxName.Text = dress.Name;
             cBxType.SelectedItem=(TypeDressInRussian)Enum.Parse(typeof(TypeDress), dress.TypeDressEnum.ToString(), true);// to do
-            nUDFirstParametr.Value = int.Parse(allDressPararmetrs[PARM1_IN_STRING]);
-            nUDSecondParametr.Value = int.Parse(allDressPararmetrs[PARAM2_IN_STRING]);
+            nUDFirstParametr.Value = dress.GetFirstSecondParameters()[0];
+            nUDSecondParametr.Value = dress.GetFirstSecondParameters()[1];
             
         }
 
